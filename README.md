@@ -4,31 +4,42 @@
 
 **자율 UGV로 5분짜리 3:3 연합전을 치르는 ROS 2 팀 프로그램**
 
-본선 10팀 중 **1위 · 최우수상(국방부 장관상)**
-
 ![ROS 2 Humble](https://img.shields.io/badge/ROS_2-Humble-22314E?logo=ros&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)
 ![Jetson Orin Nano](https://img.shields.io/badge/Jetson-Orin_Nano_8GB-76B900?logo=nvidia&logoColor=white)
-![YOLO OBB](https://img.shields.io/badge/Ultralytics-YOLO_OBB-111F68)
-![본선 결과](https://img.shields.io/badge/본선-6전_6승_·_502%2F600-F5B301)
+![YOLO OBB](https://img.shields.io/badge/Ultralytics-YOLO11_OBB-111F68)
+
+<br>
+
+<table>
+<tr>
+<td align="center"><b>🏆 종합 1위</b><br><sub>최우수상 · 국방부 장관상</sub></td>
+<td align="center"><b>6전 6승</b><br><sub>팀당 6경기 전승</sub></td>
+<td align="center"><b>502 / 600</b><br><sub>2위 팀 330점</sub></td>
+<td align="center"><b>M3 만점 4회</b><br><sub>6경기 중</sub></td>
+</tr>
+</table>
+
+<img src="docs/assets/award.jpg" height="235" alt="최우수상 국방부 장관상 상금 보드">
+&nbsp;
+<img src="docs/assets/leaderboard.jpg" height="235" alt="본선 최종 랭킹 리더보드, 에어타이거 1위">
+
+<sub>최우수상 · 국방부 장관상 (2026-11-20) &nbsp;|&nbsp; 본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub>
 
 </div>
-
-<p align="center">
-  <img src="docs/assets/award.jpg" height="250" alt="최우수상 국방부 장관상 상금 보드">
-  &nbsp;
-  <img src="docs/assets/leaderboard.jpg" height="250" alt="본선 최종 랭킹 리더보드, 에어타이거 1위">
-  <br>
-  <sub>최우수상 · 국방부 장관상 (2026-11-20) &nbsp;|&nbsp; 본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub>
-</p>
 
 - **성격:** 5명 팀 프로젝트. 2026-11-18 ~ 11-20 3일 오프라인 합숙 본선
 - **주요 작업:** 경기 흐름·임무 판단(supervisor), 라이다 SLAM과 주행, 드론 화면·카메라 인식과 조준, 경기 서버·LLM 연동
 - **기술:** ROS 2 Humble (rclpy), Jetson Orin Nano 8GB, LiDAR ICP 정합, Ultralytics YOLO11 OBB, Anthropic/OpenAI 텍스트 LLM API
 
-## 본선 결과
+## 본선 성적
 
-팀당 6경기(BLUE 3 · RED 3)를 모두 이겼다. 아래는 대회 방송 결과 화면을 옮겨 적은 팀 기록이다.
+<p align="center"><img src="docs/assets/mission_scores.png" width="680" alt="임무별 평균 득점률: 에어타이거와 다른 9팀 평균 비교"></p>
+
+<sub>본선 10경기 방송 결과 화면을 옮겨 적은 팀 기록으로 계산했다. 팀마다 출전한 경기의 임무별 평균을 배점으로 나눴고, 회색 막대는 나머지 9팀 평균의 평균이다. 배점이 가장 큰 <b>M3 객체 인식에서 우리 87% · 다른 팀 12%</b>로 점수 차를 가장 크게 벌렸다.</sub>
+
+<details>
+<summary>경기별 점수 표 (6경기 전승)</summary>
 
 | 경기 | 진영 · 자리 | M1 명령 해석 | M2 지정표적 | M3 객체 인식 | M4 UGV 타격 | M5 거점 진입 | M6 위험도 | 연합 승리 | 합계 |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -40,27 +51,33 @@
 | 10 | BLUE B-2 | 10 | 10 | **30** | 15 | 10 | 0 | 5 | 80 |
 | | **배점** | 10 | 15 | 30 | 15 | 10 | 15 | 5 | **누적 502 / 600** |
 
-2위 팀의 누적 점수는 330점이었다. 배점이 가장 큰 M3(전장객체 인식)에서 6경기 중 4경기를 만점으로 받은 것이 점수 차를 가장 크게 벌렸다.
+</details>
 
-<p align="center"><img src="docs/assets/mission_scores.png" width="640" alt="임무별 평균 득점률: 에어타이거와 다른 9팀 평균 비교"></p>
+### 현장에서 올린 완성도
 
-<sub>본선 10경기 방송 결과 화면을 옮겨 적은 팀 기록으로 계산했다. 팀마다 출전한 경기의 임무별 평균을 배점으로 나눴고, 회색 막대는 나머지 9팀 평균의 평균이다. M3는 우리 87%, 다른 팀 12%다.</sub>
+<p align="center"><img src="docs/assets/field_runs_progress.png" width="820" alt="현장 연습·팀 테스트 33판의 M3 점수와 M5 진입 성공 추이"></p>
 
-## 프로젝트 개요
+<sub>본선 3일 동안 돌린 연습·팀 테스트 33판의 기록이다. 자료는 팀 경기 기록 도구에서 받았다. 둘째 날 저녁(11-19 21:53) 무렵 인식이 자리를 잡은 뒤로는 <b>15판 중 14판이 M3 만점</b>이었고, M5 거점 진입도 거의 매 판 성공했다. 점수는 경기 뒤 팀이 만든 정답표와 맞춘 값이며, 공식 채점이 아니다.</sub>
+
+## 무엇을 하는가
 
 대회 측이 지급한 WINGBOT-UGV 한 대가 경기장 안에서 스스로 움직인다. 경기가 시작되면 사람은 개입할 수 없다.
-로봇은 `standby` 신호 때 `~/team/team_node.py` 하나만 실행하고, 이 프로그램이 나머지 노드를 띄워 최대 5분 경기와 30초 보고 시간을 처리한다.
+로봇은 `standby` 신호 때 `~/team/team_node.py` 하나만 실행하고, 이 프로그램이 나머지 노드를 띄워 최대 5분 경기와 30초 보고 시간을 처리한다. 경기 중 연산은 모두 Jetson 안에서 하고, 외부로 나가는 통신은 운영팀이 발급한 LLM API 호출뿐이다.
 
 | 임무 | 하는 일 | 맡은 노드 |
 |---|---|---|
-| M1 전술명령 해석 | 자연어 명령에서 지정표적·탐색 섹터·목표거점을 뽑아 보고 | `llm_worker` → `server_bridge` |
-| M2 지정표적 타격 | 상대 진영의 지정표적을 찾아 레이저로 맞힘 | `supervisor` · `perception` · `navigation` |
-| M3 전장객체 인식 | 섹터별 객체 종류·개수를 인식해 보고 | `perception` → `supervisor` |
-| M4 상대 UGV 타격 | 상대 UGV를 찾아 맞히고 우리 피격은 줄임 | `supervisor` · `perception` |
-| M5 목표거점 진입 | 4:00에 공개되는 거점에 먼저 들어감 | `navigation` |
-| M6 전장 위험도 | 상대 3팀의 위험도 순위를 보고 | `supervisor` → `server_bridge` |
+| **M1** 전술명령 해석 | 자연어 명령에서 지정표적·탐색 섹터·목표거점을 뽑아 보고 | `llm_worker` → `server_bridge` |
+| **M2** 지정표적 타격 | 상대 진영의 지정표적을 찾아 레이저로 맞힘 | `supervisor` · `perception` · `navigation` |
+| **M3** 전장객체 인식 | 섹터별 객체 종류·개수를 인식해 보고 | `perception` → `supervisor` |
+| **M4** 상대 UGV 타격 | 상대 UGV를 찾아 맞히고 우리 피격은 줄임 | `supervisor` · `perception` |
+| **M5** 목표거점 진입 | 4:00에 공개되는 거점에 먼저 들어감 | `navigation` |
+| **M6** 전장 위험도 | 상대 3팀의 위험도 순위를 보고 | `supervisor` → `server_bridge` |
 
-경기 중 연산은 모두 Jetson 안에서 한다. 외부로 나가는 통신은 운영팀이 발급한 LLM API 호출뿐이다.
+### 한 판은 이렇게 흘러간다
+
+<p align="center"><img src="docs/assets/real_match_trajectory.png" width="760" alt="연습 경기장에서 R-1 자리로 돈 한 판의 실제 주행 궤적. 정찰, 지정표적 사격, 목표거점 단계별로 색을 나눴다"></p>
+
+<sub><b>실제 주행 궤적</b> · 2026-11-20 아침 연습 경기장 1, R-1 자리로 돈 한 판이다 (연습 경기). 로봇이 남긴 위치 기록(약 0.5초 간격)을 단계별로 색을 나눠 그렸다. <b>정찰(파랑)</b>로 섹터를 돌며 상자 면을 찍어 객체를 보고하고, <b>지정표적 사격(주황)</b> 뒤, 4:00에 거점이 공개되면 <b>목표거점(초록)</b>으로 돌진한다. 흰 점은 정찰 사진을 찍은 자리다.</sub>
 
 ## 시스템 구성
 
@@ -88,11 +105,11 @@ flowchart LR
   LW <--> LLM["운영팀 LLM API"]
 ```
 
-<p align="center"><img src="docs/assets/ros2_node_graph.jpg" width="860" alt="노드_관리/architecture.html 화면: 노드 11개, 토픽 22 · 서비스 7 · 액션 3의 연결 그래프와 변경 이력 103건"></p>
+팀 노드 6개가 메시지로만 주고받는다. 토픽·서비스·액션 계약은 팀이 만든 구성 화면으로 관리했다.
 
-<sub>팀이 만든 ROS 2 구성 화면(<code>노드_관리/architecture.html</code>). 팀 노드 6개와 대회 제공 노드 5개, 토픽 22 · 서비스 7 · 액션 3의 연결과 계약 변경 이력 103건을 보여 준다. 본선 마지막 날 계약 기준이다.</sub>
+<p align="center"><img src="docs/assets/ros2_node_graph.jpg" width="820" alt="노드_관리/architecture.html 화면: 노드 11개, 토픽 22 · 서비스 7 · 액션 3의 연결 그래프와 변경 이력 103건"></p>
 
-노드 사이의 토픽·서비스·액션 계약은 [`노드_관리/interfaces.yaml`](노드_관리/interfaces.yaml)에서 관리하고, 메시지 정의 원본은 [`개발/src/team_interfaces/`](개발/src/team_interfaces/)에 있다.
+<sub>팀이 만든 ROS 2 구성 화면(<code>노드_관리/architecture.html</code>, 저장소에 포함). 팀 노드 6개와 대회 제공 노드 5개, 토픽 22 · 서비스 7 · 액션 3의 연결과 계약 변경 이력 103건을 보여 준다. 계약 원본은 <a href="노드_관리/interfaces.yaml"><code>노드_관리/interfaces.yaml</code></a>, 메시지 정의는 <a href="개발/src/team_interfaces/"><code>개발/src/team_interfaces/</code></a>에 있다.</sub>
 
 ## 구현 내용
 
@@ -105,14 +122,7 @@ flowchart LR
 | [`llm_worker`](개발/src/llm_worker/) | 낱말 규칙으로 명령문을 먼저 풀고, LLM 답이 제한 시간 안에 오면 검증된 항목만 덮어쓴다. LLM이 늦거나 실패해도 M1 보고가 나간다 |
 | [`개발/robot`](개발/robot/) | `team_node.py`가 `programs.json`에 적힌 프로그램을 자식으로 띄우고, `stop` 뒤 1.5초 안에 함께 끝낸다. 실행할 때마다 코드 지문(`version.json`)과 함께 기록 폴더를 남긴다 |
 
-## 검증 현황
-
-| 구분 | 내용 | 기록 |
-|---|---|---|
-| 실차 | UGV 정지·직진 센서 bag, `cmd_vel` 개방루프 주행 (2026-11-18) | [`navigation/시험기록`](개발/src/navigation/시험기록/) |
-| 실경기장 기록 재생 | 본선 경기장 기록의 스캔을 실제 노드 코드에 다시 넣어 위치 재탐색 검증 (2026-11-19 ~ 20) | 같은 폴더의 `2026-11-19_*`, `2026-11-20_*` |
-| 팀 테스트 | 경기장 1, R2 자리에서 세 번 실행한 전체 로그 (2026-11-18) | [`로그_파일/`](로그_파일/) |
-| 컨테이너 | 가짜 경기 서버·가짜 상대와 한 경기 흐름 시험, Spark에서 ROS 2 빌드 스모크 (2026-11-15) | [`임시_테스트_파일/`](임시_테스트_파일/) · [`result/`](result/) |
+## 실물·시뮬레이션 검증
 
 <table>
   <tr>
@@ -125,29 +135,12 @@ flowchart LR
   </tr>
 </table>
 
-<p align="center"><img src="docs/assets/real_match_trajectory.png" width="760" alt="연습 경기장 1에서 R-1 자리로 돈 한 판의 실제 주행 궤적. 정찰, 지정표적 사격, 목표거점 단계별로 색을 나눴다"></p>
-
-<sub><b>실제 주행 궤적</b> · 본선 마지막 날 아침(2026-11-20 07:40) 연습 경기장 1에서 R-1 자리로 돈 한 판이다. 공식 채점 경기가 아니라 연습 경기다. 로봇이 남긴 위치 기록(약 0.5초 간격)을 단계별로 나눠 그렸다. 이 판에서 M1 해석, 지정표적 발사 2회, M5 진입이 기록됐고, 경기 뒤 팀이 만든 정답표와 맞춰 보면 M3는 30/30이었다. 자료는 팀 경기 기록 도구에서 받았다.</sub>
-
-본선 경기 영상과 경기별 로봇 로그 전체는 이 저장소에 없다. 위 점수는 대회 공식 결과 화면 기준이다.
-
-## 시작하기
-
-실행하려면 대회 지급 UGV(ROS 2 Humble 컨테이너)와 대회 측 `mil_msgs`가 필요하다. 자세한 절차는 [`개발/robot/README.md`](개발/robot/README.md)에 있다.
-
-```bash
-# 1) 저장소가 있는 PC에서 묶음 만들기 (어느 커밋인지 VERSION 파일로 같이 들어간다)
-bash 개발/robot/make_bundle.sh
-
-# 2) team_bundle.tgz를 로봇으로 옮긴 뒤, 로봇 컨테이너 안에서
-mkdir -p ~/team && tar xzf team_bundle.tgz -C ~/team
-cp ~/team/secrets.example.json ~/team/secrets.json   # 서버 주소·임무코드·LLM 키를 직접 채운다
-cd ~/team/ws && colcon build
-```
-
-- `secrets.json`은 저장소에 올리지 않는다. 임무코드와 키는 로그에 찍지 않는다
-- 경기 신호 없이 흐름만 보려면 `~/team/supervisor.json`에 `{"force_start": true, "slot": "B-1"}`을 둔다
-- 노드 구성 화면: 저장소 루트에서 `python3 -m http.server 8767 --bind 127.0.0.1` 실행 후 `http://127.0.0.1:8767/노드_관리/architecture.html`을 연다
+| 구분 | 내용 | 기록 |
+|---|---|---|
+| 실차 | UGV 정지·직진 센서 bag, `cmd_vel` 개방루프 주행 (2026-11-18) | [`navigation/시험기록`](개발/src/navigation/시험기록/) |
+| 실경기장 기록 재생 | 본선 경기장 기록의 스캔을 실제 노드 코드에 다시 넣어 위치 재탐색 검증 (2026-11-19 ~ 20) | 같은 폴더의 `2026-11-19_*`, `2026-11-20_*` |
+| 팀 테스트 | 경기장 1, R2 자리에서 세 번 실행한 전체 로그 (2026-11-18) | [`로그_파일/`](로그_파일/) |
+| 컨테이너 | 가짜 경기 서버·가짜 상대와 한 경기 흐름 시험, Spark에서 ROS 2 빌드 스모크 (2026-11-15) | [`임시_테스트_파일/`](임시_테스트_파일/) · [`result/`](result/) |
 
 ## 저장소 구성
 
@@ -160,6 +153,8 @@ cd ~/team/ws && colcon build
 result/             팀 공유 문서와 빌드 검증 결과
 작업_규칙.md          대회 기간 팀이 쓴 저장소 작업 규칙 (원문 그대로)
 ```
+
+로봇에 올리고 빌드하는 절차는 [`개발/robot/README.md`](개발/robot/README.md)에, 구성 화면 여는 법은 [`노드_관리/README.md`](노드_관리/README.md)에 있다.
 
 ## 팀
 
