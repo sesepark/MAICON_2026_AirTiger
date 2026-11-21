@@ -14,16 +14,13 @@
 
 </div>
 
-<table>
-  <tr>
-    <td width="50%"><img src="docs/assets/award.jpg" alt="최우수상 국방부 장관상 상금 보드"></td>
-    <td width="50%"><img src="docs/assets/leaderboard.jpg" alt="본선 최종 랭킹 리더보드, 에어타이거 1위"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>최우수상 · 국방부 장관상 (2026-11-20)</sub></td>
-    <td align="center"><sub>본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/assets/award.jpg" height="250" alt="최우수상 국방부 장관상 상금 보드">
+  &nbsp;
+  <img src="docs/assets/leaderboard.jpg" height="250" alt="본선 최종 랭킹 리더보드, 에어타이거 1위">
+  <br>
+  <sub>최우수상 · 국방부 장관상 (2026-11-20) &nbsp;|&nbsp; 본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub>
+</p>
 
 - **성격:** 5명 팀 프로젝트. 2026-11-18 ~ 11-20 3일 오프라인 합숙 본선
 - **주요 작업:** 경기 흐름·임무 판단(supervisor), 라이다 SLAM과 주행, 드론 화면·카메라 인식과 조준, 경기 서버·LLM 연동
@@ -44,6 +41,10 @@
 | | **배점** | 10 | 15 | 30 | 15 | 10 | 15 | 5 | **누적 502 / 600** |
 
 2위 팀의 누적 점수는 330점이었다. 배점이 가장 큰 M3(전장객체 인식)에서 6경기 중 4경기를 만점으로 받은 것이 점수 차를 가장 크게 벌렸다.
+
+<p align="center"><img src="docs/assets/mission_scores.png" width="640" alt="임무별 평균 득점률: 에어타이거와 다른 9팀 평균 비교"></p>
+
+<sub>본선 10경기 방송 결과 화면을 옮겨 적은 팀 기록으로 계산했다. 팀마다 출전한 경기의 임무별 평균을 배점으로 나눴고, 회색 막대는 나머지 9팀 평균의 평균이다. M3는 우리 87%, 다른 팀 12%다.</sub>
 
 ## 프로젝트 개요
 
@@ -87,6 +88,10 @@ flowchart LR
   LW <--> LLM["운영팀 LLM API"]
 ```
 
+<p align="center"><img src="docs/assets/ros2_node_graph.jpg" width="860" alt="노드_관리/architecture.html 화면: 노드 11개, 토픽 22 · 서비스 7 · 액션 3의 연결 그래프와 변경 이력 103건"></p>
+
+<sub>팀이 만든 ROS 2 구성 화면(<code>노드_관리/architecture.html</code>). 팀 노드 6개와 대회 제공 노드 5개, 토픽 22 · 서비스 7 · 액션 3의 연결과 계약 변경 이력 103건을 보여 준다. 본선 마지막 날 계약 기준이다.</sub>
+
 노드 사이의 토픽·서비스·액션 계약은 [`노드_관리/interfaces.yaml`](노드_관리/interfaces.yaml)에서 관리하고, 메시지 정의 원본은 [`개발/src/team_interfaces/`](개발/src/team_interfaces/)에 있다.
 
 ## 구현 내용
@@ -109,7 +114,18 @@ flowchart LR
 | 팀 테스트 | 경기장 1, R2 자리에서 세 번 실행한 전체 로그 (2026-11-18) | [`로그_파일/`](로그_파일/) |
 | 컨테이너 | 가짜 경기 서버·가짜 상대와 한 경기 흐름 시험, Spark에서 ROS 2 빌드 스모크 (2026-11-15) | [`임시_테스트_파일/`](임시_테스트_파일/) · [`result/`](result/) |
 
-본선 경기의 영상과 경기별 로봇 로그 전체는 이 저장소에 없다. 위 점수는 대회 공식 결과 화면 기준이다.
+<table>
+  <tr>
+    <td width="50%"><img src="docs/assets/real_lidar_scan.png" alt="실차 LD19 LiDAR 스캔 20장을 겹친 그림. 경기장 상자와 벽이 선으로 보인다"></td>
+    <td width="50%"><img src="docs/assets/sim_arena.jpg" alt="사전 준비용 2D 가상 경기장: 6대의 UGV, 섹터, 점수판"></td>
+  </tr>
+  <tr>
+    <td><sub><b>실차 LiDAR</b> · UGV-08이 멈춘 상태에서 받은 <code>/scan</code> 20장을 로봇 기준 좌표로 겹쳤다. 주변 상자 면과 벽이 선으로 찍힌다. 원본은 <code>시험기록/2026-11-18_실차_주행/lidar_stationary</code>의 bag이다</sub></td>
+    <td><sub><b>가상 경기장</b> · 본선 전 경기 규칙·서버 API·주행 전략을 미리 시험하려고 만든 2D 시뮬레이터. 6대의 UGV를 봇이나 팀 코드가 몰고, 점수와 규정 위반을 같이 계산한다. 시뮬레이터 코드는 사전 준비 저장소(비공개)에 있다</sub></td>
+  </tr>
+</table>
+
+본선 경기 영상과 경기별 로봇 로그 전체는 이 저장소에 없다. 위 점수는 대회 공식 결과 화면 기준이다.
 
 ## 시작하기
 
@@ -157,6 +173,8 @@ result/             팀 공유 문서와 빌드 검증 결과
 
 - 대회 측이 배포한 사전교육 자료·API 문서·공식 뼈대·Q&A는 **외부 공유가 금지된 자료라 이 공개본에서 뺐다.** 코드와 문서에 남은 `공식_자료/…` 경로는 원래 비공개 저장소의 위치다
 - 이 공개본은 본선 마지막 날(2026-11-20) 팀 저장소 `main`의 스냅숏이다. 이전 커밋 이력과 작업 브랜치는 포함하지 않는다
+- `노드_관리/interfaces.yaml`의 변경 이력 26건에 빠져 있던 빈 `service_ids` · `action_ids` 배열을 공개본에서 채웠다. 이 배열이 없으면 구성 화면이 열리지 않는다. 내용은 바꾸지 않았다
+- 인식 모델의 학습 그래프와 예측 예시는 학습 서버에만 있어 이 저장소에 없다
 - 경기장·로봇 사양 값 일부는 현장 실측 전 추정치다. 각 패키지 README에 「확인 필요」로 표시돼 있다
 - `perception/training/drone_boxes/trained/`의 가중치는 Ultralytics YOLO11 사전학습 모델에서 학습했다. Ultralytics는 AGPL-3.0이다
 - 대회 지급 UGV와 경기 서버 없이 전체를 그대로 실행할 수는 없다

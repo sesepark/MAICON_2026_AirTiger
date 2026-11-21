@@ -2136,6 +2136,8 @@ changes:
     reason: "사용자 지시(2026-11-20). 보이는 것은 그 UGV 의 한 면이고 몸통은 그 뒤로 이어지는데 0.03 m 만 막아, 그 옆을 실제보다 넓게 보고 길을 짰다. 로봇에서는 아직 돌려 보지 않았다."
     node_ids: ["navigation"]
     topic_ids: ["perception-ugvs"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-near-goal-accept-20261120"
     date: "2026-11-20T01:35:00+09:00"
     category: "주행 노드 구현 · 결과의 뜻"
@@ -2145,6 +2147,8 @@ changes:
     reason: "사용자 결정(2026-11-20): 실차 두 판에서 서 있는 UGV 에서 0.35 m 안의 자리를 목표로 받은 것이 10번 — 목표 바로 앞에서 BLOCKED 로 끝내느니 그 자리에서 도착으로 끝내 임무를 잇게 한다. supervisor 쪽에는 개발/src/supervisor/docs/서_있는_UGV_곁_목표_제안_2026-11-20.md 에 적었다. 로봇에서는 아직 돌려 보지 않았다."
     node_ids: ["navigation", "supervisor"]
     topic_ids: ["navigate"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-detour-pass-self-20261120"
     date: "2026-11-20T01:40:00+09:00"
     category: "주행 · 위치 노드 구현"
@@ -2154,6 +2158,8 @@ changes:
     reason: "사용자 지시(2026-11-20). 00:00 실차 판: 21번 목표가 4.6 m 돌아가는 길을 3.1 m 간 8.0 s 에 NO_PROGRESS, 11번 목표가 서 있는 UGV 를 0.45 m/s 로 스침 (사용자 방향: 뚫고 가되 속도는 되는 만큼 빠르게). 목표가 서 있는 UGV 곁으로 오는 것은 supervisor 쪽에 제안을 적었다 (개발/src/supervisor/docs/서_있는_UGV_곁_목표_제안_2026-11-20.md). 로봇에서는 아직 돌려 보지 않았다."
     node_ids: ["navigation", "navigation-slam"]
     topic_ids: ["perception-ugvs", "navigation-debug"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-drone-ugv-lost-parked-20261120"
     date: "2026-11-20T01:00:00+09:00"
     category: "주행 노드 구현"
@@ -2163,6 +2169,8 @@ changes:
     reason: "2026-11-20 00:00 실차(이 기능이 처음 돈 판): 거점에 76 s 서 있던 UGV 를 드론이 50 s 동안 31장 중 1장만 잡았다 (라이다는 계속 봤다). 그 사이 우리가 등을 돌리자 그 곁의 기억 칸 40개를 지웠고, 다시 잡은 뒤에는 0 s 부터 세었다. 사용자 지시(2026-11-20)로 고침. 로봇에서는 아직 돌려 보지 않았다."
     node_ids: ["navigation"]
     topic_ids: ["perception-ugvs", "navigation-debug"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-drone-ugv-doubt-relocate-20261120"
     date: "2026-11-20T01:30:00+09:00"
     category: "주행 · 위치 노드 구현"
@@ -2172,6 +2180,8 @@ changes:
     reason: "사용자 지시(2026-11-20): 드론 UGV 자리를 얹은 뒤의 로직을 다시 조사해 고친다. 공식 테스트 경기 6판의 드론 검출 778장과 2026-11-20 00:00 실차 판(이 기능이 처음 돈 판)으로 다시 따져, 근거가 있는 것만 고쳤다 (개발/src/navigation/README.md 「드론이 본 UGV 자리 쓰기」 · 「잃은 위치 다시 찾기」). 로봇에서는 아직 돌려 보지 않았다."
     node_ids: ["navigation", "navigation-slam"]
     topic_ids: ["perception-ugvs", "navigation-pose", "navigation-debug"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-ugv-hold-20261120"
     date: "2026-11-20T00:35:00+09:00"
     category: "주행 노드 구현"
@@ -2390,6 +2400,8 @@ changes:
     reason: "포털의 팀 테스트 안내와 경기장 그림 스크립트(서버의 구역 판정과 같은 값), 팀 테스트 기본 명령문. 개발/src/supervisor/docs/포털에서_확인한_것.md"
     node_ids: ["supervisor", "server_bridge", "llm_worker", "perception", "navigation"]
     topic_ids: ["server-state", "control", "navigation-map"]
+    service_ids: []
+    action_ids: []
   - id: "supervisor-ready-condition"
     date: "2026-11-18"
     category: "구현"
@@ -2399,6 +2411,8 @@ changes:
     reason: "주행 노드는 node_name을 'navigation'으로 보내고 지도가 오기 전에는 INITIALIZING인데, 지도(드론 사진)는 경기 시작 뒤에야 온다 → 기존 조건으로는 준비완료를 영영 못 보냄. API 문서: 준비완료를 안 보내면 그 팀을 빼고 시작할 수 있다"
     node_ids: ["supervisor", "navigation", "perception", "server_bridge"]
     topic_ids: ["health"]
+    service_ids: []
+    action_ids: []
   - id: "server-bridge-llm-worker-implemented"
     date: "2026-11-18"
     category: "구현"
@@ -2408,6 +2422,8 @@ changes:
     reason: "팀장 결정(2026-11-18)으로 supervisor 쪽에서 구현. 앞선 저장소에서 시험해 둔 서버 통신·M1 해석 코드를 옮김"
     node_ids: ["server_bridge", "llm_worker", "supervisor"]
     topic_ids: ["server-state", "command", "uav", "health", "mission"]
+    service_ids: []
+    action_ids: []
   - id: "navigation-slam-slot-start"
     date: "2026-11-18"
     category: "구현"
@@ -3184,45 +3200,85 @@ sources:
     path: "../공식_자료/텍스트/prestudy2_PDF_전문.md"
     original: "../공식_자료/원본/PDF/prestudy(2)_2026MAICON.pdf"
     description: "공식 ROS 2 인터페이스 규격의 출처. 현재 구현·실행 여부를 나타내지 않음."
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "video"
     label: "공식 교육영상 · ROS 2 예제"
     path: "../공식_자료/교육영상_API_정리.md"
     original: "../공식_자료/이미지_목록.md"
     description: "공식 ROS 2 인터페이스 규격의 출처. 현재 구현·실행 여부를 나타내지 않음."
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "robot"
     label: "UGV-08 실측·로봇 내장 소스 (2026-11-18)"
     path: "../공식_자료/로봇_사양.md"
     original: null
     description: "로봇에서 ros2 node/topic info로 실측하고 컨테이너의 mil_base 소스를 읽어 확인. 정리 문서는 docs/robot-spec 브랜치에 있음(main에 병합 전이면 링크가 열리지 않음)."
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
 reference_equipment:
   - id: "ugv-system"
     label: "UGV 상태·경기 시스템"
     subtitle: "HP · 배터리 · 경기 신호"
     sources: ["p2|9~12쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "pan-camera"
     label: "팬틸트 RGB 카메라"
     subtitle: "팬틸트 장착 카메라 · Depth와 별개"
     sources: ["p2|4·17쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "imu-sensor"
     label: "IMU 센서"
     subtitle: "자세 · 각속도 · 가속도"
     sources: ["p2|4·17쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "drive-unit"
     label: "UGV 주행부"
     subtitle: "6WD · 속도 명령 / 위치 추정"
     sources: ["p2|3~4·15쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "oled-display"
     label: "OLED 디스플레이"
     subtitle: "4줄 문자 표시"
     sources: ["p2|13쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "pan-tilt"
     label: "2축 팬틸트"
     subtitle: "ST3215 서보 · 좌우 / 상하 위치 제어"
     sources: ["p2|4·14쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "laser-device"
     label: "레이저 장치"
     subtitle: "대회용 모의타격 · 장치 응답"
     sources: ["p2|16쪽"]
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
 official_references:
   - id: "ros-state"
     equipment: "ugv-system"
@@ -3239,6 +3295,10 @@ official_references:
     notes: ["공식 제어 가능 계산 예: mode == practice 또는 cmd가 start/resume", "피격 잠금·재장전 등 장치별 제한은 별도 적용", "전체 .msg 필드의 자료형·정의 파일은 OT 확인"]
     sources: ["p2|11~12쪽", "video|상태와 제어 가능 여부"]
     use: "구독"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-match"
     equipment: "ugv-system"
     name: "/mil/match"
@@ -3254,6 +3314,10 @@ official_references:
     notes: ["경기 모드는 참가팀이 직접 변경할 수 없음", "pause는 경기 종료가 아님", "resume 후 주행·팬틸트 명령 재전송", "report 단계에도 팀 프로그램 유지; stop 수신 시 종료", "전체 .msg 정의와 추가 필드·자료형은 미공개"]
     sources: ["p2|11~12·18쪽", "video|API 목록"]
     use: "구독"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-oled"
     equipment: "oled-display"
     name: "/mil/oled"
@@ -3269,6 +3333,10 @@ official_references:
     notes: ["마지막 출력 10초 후 기본 화면으로 복귀", "전체 타입 경로를 mil_msgs/msg/OledLine으로 추정해 확정하지 않음"]
     sources: ["p2|13쪽", "video|API 목록"]
     use: "발행"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-cmdvel"
     equipment: "drive-unit"
     name: "/cmd_vel"
@@ -3284,6 +3352,10 @@ official_references:
     notes: ["여러 노드가 동시에 발행하는 것을 공식 자료에서 금지", "명령이 0.5초 끊기면 자동 정지", "정지 명령은 Twist() (속도 0)", "종료·예외 시 정지; resume 후 명령 재전송", "실제 주행 전 충전 케이블 분리·저속 시험 안내"]
     sources: ["p2|15·18쪽", "video|주행과 위치"]
     use: "발행"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-odom"
     equipment: "drive-unit"
     name: "/odom"
@@ -3299,6 +3371,10 @@ official_references:
     notes: ["frame_id·child_frame_id·TF 트리 구성은 자료에 미명시"]
     sources: ["p2|15쪽", "video|API 목록·IMU"]
     use: "구독"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-image"
     equipment: "pan-camera"
     name: "/image_raw"
@@ -3314,6 +3390,10 @@ official_references:
     notes: ["팬틸트 카메라 영상이며 Depth 카메라는 이 토픽이 아님", "CPU 부담으로 10 FPS 이하 권장; AI 추론은 별도 스레드", "교육영상 예제는 단일 프레임 출력이며 스트리밍 예제 아님"]
     sources: ["p2|17~18쪽", "video|카메라"]
     use: "구독"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-imu"
     equipment: "imu-sensor"
     name: "/imu/data"
@@ -3329,6 +3409,10 @@ official_references:
     notes: ["Roll/Pitch: 기울기, Yaw: 진행 방향", "기울기·충격 감지 시 주행 정지 예제 안내"]
     sources: ["p2|10·17쪽", "video|IMU"]
     use: "구독"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-gimbal"
     equipment: "pan-tilt"
     name: "/mil/gimbal"
@@ -3345,6 +3429,10 @@ official_references:
     notes: ["pan/tilt 요청값은 각도가 아닌 위치값", "ok는 목표 위치 도착을 뜻하지 않음", "call_async 예제; 응답 대기 timeout_sec=3.0은 예제값", "응답의 전체 필드명·자료형은 .srv 원본 확인 필요"]
     sources: ["p2|14쪽", "video|팬틸트"]
     use: "서비스 호출"
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
   - id: "ros-fire"
     equipment: "laser-device"
     name: "/mil/fire"
@@ -3361,3 +3449,8 @@ official_references:
     notes: ["1회 5초 발광; 발사 시작 10초 후 재발사 가능", "fired는 장치 발사 응답이며 표적의 유효타격 판정과 별개", "피격 후 조준·발사 10초 제한; 대기·일시정지·보고·종료 시 잠금", "PDF 2차 안내: HP 0이어도 탄약과 다른 제한 조건에 따라 발사 가능; 최종 규정 대조", "공식 안내: 사람 눈 방향 발사 금지"]
     sources: ["p2|16쪽", "video|레이저"]
     use: "서비스 호출"
+
+    node_ids: []
+    topic_ids: []
+    service_ids: []
+    action_ids: []
