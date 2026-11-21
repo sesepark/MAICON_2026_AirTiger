@@ -1,0 +1,9 @@
+std_msgs/Header header
+string run_id
+bool connected
+bool team_assigned
+string slot
+string camp
+string phase
+bool ready
+string detail

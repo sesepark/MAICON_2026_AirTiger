@@ -1,0 +1,23 @@
+라이다: 켠다 (ros2 launch ldlidar ld19.launch.py)
+[INFO] [launch]: All log files can be found below /home/ws/team/log/20261118_220919/ros/2026-11-18-22-09-23-269314-ubuntu-20415
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ldlidar_node-1]: process started with pid [20591]
+[ldlidar_node-1] [INFO] [1795007363.487990805] [LD19]: LDLiDAR SDK Pack Version is: v3.0.3
+[ldlidar_node-1] [INFO] [1795007363.488503419] [LD19]: <product_name>: LDLiDAR_LD19
+[ldlidar_node-1] [INFO] [1795007363.488527644] [LD19]: <topic_name>: scan
+[ldlidar_node-1] [INFO] [1795007363.488537372] [LD19]: <frame_id>: base_lidar_link
+[ldlidar_node-1] [INFO] [1795007363.488545596] [LD19]: <port_name>: /dev/ttyACM0
+[ldlidar_node-1] [INFO] [1795007363.488552988] [LD19]: <port_baudrate>: 230400
+[ldlidar_node-1] [INFO] [1795007363.488560924] [LD19]: <laser_scan_dir>: Counterclockwise
+[ldlidar_node-1] [INFO] [1795007363.488569404] [LD19]: <enable_angle_crop_func>: true
+[ldlidar_node-1] [INFO] [1795007363.488577084] [LD19]: <angle_crop_min>: 225.000000
+[ldlidar_node-1] [INFO] [1795007363.488595676] [LD19]: <angle_crop_max>: 315.000000
+[ldlidar_node-1] [INFO] [1795007363.490385361] [LD19]: ldlidar node start is success
+[ldlidar_node-1] [INFO] [1795007363.494709603] [LD19]: ldlidar communication is normal.
+[ldlidar_node-1] [INFO] [1795007363.499031413] [LD19]: Publish topic message:ldlidar scan data.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [ldlidar_node-1]: sending signal 'SIGINT' to process[ldlidar_node-1]
+[ldlidar_node-1] [INFO] [1795007804.674662646] [rclcpp]: signal_handler(signum=2)
+[ldlidar_node-1] [INFO] [1795007804.685445431] [LD19]: ldlidar_published is end
+[ldlidar_node-1] [LDS][INFO][1795007363.490181839][Actual BaudRate reported:230400]
+[INFO] [ldlidar_node-1]: process has finished cleanly [pid 20591]

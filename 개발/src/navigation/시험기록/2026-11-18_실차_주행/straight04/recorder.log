@@ -1,0 +1,21 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1794996096.472830677] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1794996096.477879329] [rosbag2_storage]: Opened database 'bag/bag_0.db3' for READ_WRITE.
+[INFO] [1794996096.489162484] [rosbag2_recorder]: Listening for topics...
+[INFO] [1794996096.489297110] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1794996096.489537468] [rosbag2_recorder]: Recording...
+[INFO] [1794996096.600396778] [rosbag2_recorder]: Subscribed to topic '/cmd_vel'
+[INFO] [1794996096.606402347] [rosbag2_recorder]: Subscribed to topic '/image_raw'
+[INFO] [1794996096.611632763] [rosbag2_recorder]: Subscribed to topic '/imu/data'
+[INFO] [1794996096.619015482] [rosbag2_recorder]: Subscribed to topic '/slam_trial/cmd_vel'
+[INFO] [1794996096.626929764] [rosbag2_recorder]: Subscribed to topic '/slam_trial/map'
+[INFO] [1794996096.631486758] [rosbag2_recorder]: Subscribed to topic '/odom'
+[INFO] [1794996096.637044413] [rosbag2_recorder]: Subscribed to topic '/slam_trial/pose'
+[INFO] [1794996096.641910982] [rosbag2_recorder]: Subscribed to topic '/tf'
+[INFO] [1794996096.645450738] [rosbag2_recorder]: Subscribed to topic '/tf_static'
+[INFO] [1794996096.865415976] [rosbag2_recorder]: Subscribed to topic '/scan'
+[INFO] [1794996100.786107846] [rosbag2_recorder]: Subscribed to topic '/slam_trial/control'
+[INFO] [1794996100.790671304] [rosbag2_recorder]: Subscribed to topic '/slam_trial/field'
+[INFO] [1794996100.790800619] [rosbag2_recorder]: All requested topics are subscribed. Stopping discovery...
+[INFO] [1794996104.747451740] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1794996104.753675906] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1794996104.753898855] [rosbag2_recorder]: Recording stopped

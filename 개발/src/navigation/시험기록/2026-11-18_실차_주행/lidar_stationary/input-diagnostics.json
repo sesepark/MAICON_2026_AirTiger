@@ -1,0 +1,76 @@
+{
+  "/scan": {
+    "count": 105,
+    "frames": {
+      "base_lidar_link": 105
+    },
+    "zero_stamps": 0,
+    "duplicate_or_reversed_stamps": 0,
+    "receive_minus_header_ms": {
+      "min": 0.233892,
+      "median": 0.593291,
+      "max": 3.693097
+    },
+    "median_valid_beams": 334,
+    "beam_counts": [
+      503,
+      504,
+      505,
+      506
+    ],
+    "geometry": [
+      [
+        0.0,
+        6.2831854820251465,
+        0.012441951781511307,
+        0.019999999552965164,
+        25.0
+      ],
+      [
+        0.0,
+        6.2831854820251465,
+        0.012466637417674065,
+        0.019999999552965164,
+        25.0
+      ],
+      [
+        0.0,
+        6.2831854820251465,
+        0.012491422705352306,
+        0.019999999552965164,
+        25.0
+      ],
+      [
+        0.0,
+        6.2831854820251465,
+        0.012516305781900883,
+        0.019999999552965164,
+        25.0
+      ]
+    ],
+    "nearest_odometry_header_ms": {
+      "median": 38.376432,
+      "max": 61.535409,
+      "over_100_ms": 0
+    }
+  },
+  "/odom": {
+    "count": 106,
+    "frames": {
+      "odom": 106
+    },
+    "zero_stamps": 0,
+    "duplicate_or_reversed_stamps": 0,
+    "receive_minus_header_ms": {
+      "min": 0.428681,
+      "median": 0.682302,
+      "max": 3.444547
+    }
+  },
+  "/team/perception/field_map": {
+    "count": 0
+  },
+  "/team/server/state": {
+    "count": 0
+  }
+}

@@ -1,0 +1,17 @@
+
+Files:             bag_0.db3
+Bag size:          374.4 MiB
+Storage id:        sqlite3
+Duration:          14.351464343s
+Start:             Nov 18 2026 18:22:04.664577440 (1794993724.664577440)
+End:               Nov 18 2026 18:22:19.016041783 (1794993739.016041783)
+Messages:          1301
+Topic information: Topic: /image_raw | Type: sensor_msgs/msg/Image | Count: 425 | Serialization Format: cdr
+                   Topic: /camera_info | Type: sensor_msgs/msg/CameraInfo | Count: 163 | Serialization Format: cdr
+                   Topic: /tf_static | Type: tf2_msgs/msg/TFMessage | Count: 1 | Serialization Format: cdr
+                   Topic: /tf | Type: tf2_msgs/msg/TFMessage | Count: 288 | Serialization Format: cdr
+                   Topic: /cmd_vel | Type: geometry_msgs/msg/Twist | Count: 0 | Serialization Format: cdr
+                   Topic: /imu/data | Type: sensor_msgs/msg/Imu | Count: 280 | Serialization Format: cdr
+                   Topic: /slam_trial/map | Type: team_interfaces/msg/FieldMap | Count: 0 | Serialization Format: cdr
+                   Topic: /odom | Type: nav_msgs/msg/Odometry | Count: 144 | Serialization Format: cdr
+                   Topic: /slam_trial/pose | Type: geometry_msgs/msg/PoseStamped | Count: 0 | Serialization Format: cdr

@@ -1,0 +1,9 @@
+uint8 M1=1
+uint8 M3=3
+uint8 M6=6
+string report_id
+uint32 revision
+uint8 kind
+team_interfaces/ParsedCommand command
+team_interfaces/SectorCount[] sectors
+team_interfaces/ThreatAssessment assessment

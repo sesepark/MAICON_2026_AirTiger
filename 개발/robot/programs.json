@@ -1,0 +1,11 @@
+{
+  "_설명": "team_node.py 가 켜는 프로그램 목록. supervisor 는 team_node.py 안에서 돌므로 여기 적지 않는다. 각 담당이 자기 줄을 맞게 고친다. enabled 를 false 로 두면 켜지 않는다. args 는 실행 파일 뒤에 그대로 붙는다 (ROS 파라미터는 \"--ros-args\", \"-p\", \"이름:=값\").",
+  "programs": [
+    {"name": "lidar", "cmd": ["bash", "lidar.sh"], "enabled": true},
+    {"name": "navigation_slam", "package": "navigation", "executable": "navigation_slam", "enabled": true},
+    {"name": "navigation", "package": "navigation", "executable": "navigation_drive", "enabled": true},
+    {"name": "perception", "package": "perception", "executable": "perception_node", "enabled": true},
+    {"name": "server_bridge", "package": "server_bridge", "executable": "server_bridge_node", "enabled": true},
+    {"name": "llm_worker", "package": "llm_worker", "executable": "llm_worker_node", "enabled": true}
+  ]
+}

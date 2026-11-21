@@ -1,0 +1,14 @@
+{
+  "nonzero_commands": 119,
+  "peak_linear_mps": 0.1,
+  "peak_angular_rad_s": 0.01121614564553175,
+  "command_window_s": 1.500410296,
+  "stop_command_observed": true,
+  "forward_odom_m": 0.06589413643814623,
+  "lateral_odom_m": -0.10026160161942244,
+  "slam_pose_count": 22,
+  "last_slam_xy": [
+    3.0658941364381462,
+    2.8997383983805776
+  ]
+}

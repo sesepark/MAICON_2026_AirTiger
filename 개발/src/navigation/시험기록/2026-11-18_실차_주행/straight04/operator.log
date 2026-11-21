@@ -1,0 +1,6 @@
+feedback accepted 0.0
+feedback straight 0.09308063983917236
+feedback straight 0.07668859511613846
+feedback settling 0.0336805135011673
+outcome=5 detail=제어 허용 꺼짐: 사유 없음
+odom_delta=(0.0632, -0.0960)

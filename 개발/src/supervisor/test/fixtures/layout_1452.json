@@ -1,0 +1,24 @@
+{
+  "format": "maicon-layout-1",
+  "name": "team-test-20261119_145217-B1",
+  "note": "2026-11-19 14:52 팀 테스트(B-1)의 perception 지도 그대로의 상자 자리와 그 판의 구역 · 거점 치수. 면의 종류: 그 판에서 적은 16면은 경기 기록대로(정답표와 모두 일치), 못 찍은 10면은 maicon-match 의 정답표 (practice1_20261119_1440.json — 사람이 확인한 배치, truth.missing)대로: 객체 7면 2N 미사일 · 3E 전차 · 3N 박격포 · 13N 군용트럭 · 13S 탄약상자 · 4N 탄약상자 · 9W 탄약상자, 나머지 4E · 9N · 12S 는 객체 아님. BLUE 쪽 상자의 면은 모두 빈 면으로 두었다.",
+  "arena": {"width": 6.12, "height": 4.8, "box": 0.4, "base_w": 1.2, "base_d": 0.4, "end_strip": 0.821, "cm_width": 1.2374},
+  "bases": {"BLUE": ["MAINTENANCE", "COMMAND_POST", "SUPPLY_DEPOT"], "RED": ["MAINTENANCE", "COMMAND_POST", "SUPPLY_DEPOT"]},
+  "starts": {},
+  "boxes": [
+    {"x": 1.425, "y": 4.035, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 1.8563, "y": 3.9966, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 4.27, "y": 4.0051, "faces": {"E": "blank", "N": "object:missile", "W": "target:RED_COMMS", "S": "object:missile"}},
+    {"x": 4.6657, "y": 4.0158, "faces": {"E": "object:tank", "N": "object:mortar", "W": "blank", "S": "blank"}},
+    {"x": 3.0537, "y": 3.4096, "faces": {"E": "blank", "N": "object:ammo_box", "W": "blank", "S": "object:drum"}},
+    {"x": 1.448, "y": 2.4043, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 1.8521, "y": 2.3915, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 4.2491, "y": 2.3872, "faces": {"E": "blank", "N": "blank", "W": "target:RED_OUTPOST", "S": "blank"}},
+    {"x": 4.6322, "y": 2.3701, "faces": {"E": "object:mortar", "N": "object:military_truck", "W": "blank", "S": "blank"}},
+    {"x": 3.0412, "y": 1.5056, "faces": {"E": "object:drum", "N": "blank", "W": "object:ammo_box", "S": "blank"}},
+    {"x": 1.4648, "y": 0.8162, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 1.8709, "y": 0.8354, "faces": {"E": "blank", "N": "blank", "W": "blank", "S": "blank"}},
+    {"x": 4.27, "y": 0.7991, "faces": {"E": "blank", "N": "object:tank", "W": "target:RED_RADAR", "S": "blank"}},
+    {"x": 4.6385, "y": 0.8205, "faces": {"E": "object:drum", "N": "object:military_truck", "W": "blank", "S": "object:ammo_box"}}
+  ]
+}

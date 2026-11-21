@@ -1,0 +1,8 @@
+string run_id
+---
+uint8 ACCEPTED=1
+uint8 REJECTED=2
+uint8 UNKNOWN=3
+uint8 outcome
+uint16 http_status
+string detail

@@ -1,0 +1,51 @@
+ROS 2 Spark 검증 결과 — 2026-11-15
+
+결론: 현재 패키지·자료형 뼈대가 ROS 2 Humble에서 빌드되고 통신에 사용됨을 확인했다.
+실제 미션 노드 로직이나 로봇 동작을 검증한 것은 아니다.
+
+대상
+- 브랜치: pre-competition-prep_sehwan
+- 커밋: 07ffa80fd0b433b076ad43f9c39ca458204b46b8
+- 접속: sehwan_spark@100.118.183.50 (Tailscale SSH)
+- Spark 작업 폴더: /home/sehwan_spark/maicon_validation/07ffa80
+- 호스트: Ubuntu 24.04.4, aarch64
+- 컨테이너: Ubuntu 22.04.5, ROS 2 Humble, Python 3.10.12, GCC 11.4.0
+- 이미지: ros:humble-ros-base-jammy
+- 이미지 digest: sha256:d9f14e84747bea639a65e00cf871d2c68ae55385d2acf6239614de0cadb41dcc
+- CPU 전용: runc, GPU 장치 미노출, CPU 4개/메모리 8 GiB 한도, 컴파일 병렬도 2
+
+검증 결과
+1. colcon build --symlink-install: 6/6 패키지 성공 (21.1초).
+   supervisor, navigation, perception, server_bridge, llm_worker, team_interfaces
+   빌드 로그에서 warning/error 없음. BUILD_TESTING=OFF로 빌드 후 별도 통신 검사 수행.
+2. ros2 interface show: 메시지 13개·서비스 2개·액션 3개, 전체 18개 등록 확인.
+3. 5개 담당 패키지의 설치 후 Python import 성공.
+4. 전체 18개 타입 직렬화·역직렬화 성공.
+   서비스는 Request/Response, 액션은 Goal/Result/Feedback 각각 검사.
+5. 메시지 타입 13종으로 발행·구독 수신 값 일치 확인.
+6. 서비스 2종으로 요청·응답 값 일치 확인.
+7. 액션 3종 모두 목표 수락·피드백·성공 결과 및 별도 목표 취소 성공.
+8. 총 44개 별도 Python 검사 통과. 빌드/CLI 검사는 이 숫자와 별도.
+9. 6개 패키지에 실행 프로그램이 없음을 확인: 의도한 껍데기 상태 유지.
+10. 소스·관리 파일 62개의 SHA-256이 로컬 원본과 일치. 실제 코드/YAML/HTML 수정 없음.
+
+통신 검사 범위
+- 같은 컨테이너의 임시 제공자/클라이언트 노드 2개 사이에서 실행.
+- RMW: rmw_fastrtps_cpp, ROS_DOMAIN_ID=217, ROS_LOCALHOST_ONLY=1.
+- 테스트 전용 /maicon_validation/* 이름 사용. 실제 /cmd_vel, /mil/fire 등 호출하지 않음.
+- 토픽 검사는 기본 reliable/volatile, depth 10 사용.
+- 액션의 상태/취소 전송 검사이며 실제 주행·추적·LLM 작업 완료/취소 정책 검사가 아님.
+- YAML은 문서 계약이다. 이번 검사로 YAML 전체 QoS/주기/타임아웃이 자동 적용되거나 검증된 것은 아니다.
+
+남은 검증 (실제 구현·장비 확보 후)
+- 5개 실제 실행 노드의 시작/종료 및 YAML과 실행 그래프 일치 여부.
+- 담당 노드 간 통합 동작, 실제 QoS 호환, 주기/지연/데이터 만료 및 실패 처리.
+- 주최측 mil_msgs, OLED 미확정 타입, 경기 서버와 로봇 장치 연동.
+- 센서·좌표계·주행·짐벌·발사 및 실제 미션 수행.
+
+보관 및 재현
+- Spark 폴더에 run.sh, smoke.py, source_manifest.json, source/, ws/, logs/ 보관.
+- 소스는 git archive로 추출한 현재 커밋의 개발/노드_관리만 사용, 컨테이너에서 읽기 전용 마운트.
+- 검증 컨테이너는 --rm으로 종료/제거됨. 호스트 설정·기존 컨테이너·sparkq 작업 변경 없음.
+- 임시 테스트는 개발 패키지에 추가하지 않음. 로컬 사본: 임시_테스트_파일/spark_ros2_07ffa80/.
+- 이 폴더의 build.log, smoke.log, smoke_results.json, session.log, source_integrity.txt 참조.

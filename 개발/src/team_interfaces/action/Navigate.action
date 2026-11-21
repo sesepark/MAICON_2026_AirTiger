@@ -1,0 +1,34 @@
+# 경기장 좌표(arena: x BLUE 벽→RED 벽, y 아래→위, m)로 이동한다. 의미·정책은 노드_관리/interfaces.yaml 의 navigate 항목.
+string run_id
+# header.frame_id = "arena". pose.orientation = 도착해서 바라볼 방향 (ignore_yaw 참고)
+geometry_msgs/PoseStamped goal
+# 주행 방식
+uint8 MODE_NORMAL=0
+uint8 MODE_STRAIGHT=1
+uint8 MODE_ASSAULT=2
+uint8 mode
+# true 이거나 yaw_tolerance_rad >= π(3.1416) 이면 도착 방향을 맞추지 않는다. false 면 goal.pose.orientation 방향으로 선다
+bool ignore_yaw
+float32 position_tolerance_m
+float32 yaw_tolerance_rad
+uint32 execution_timeout_ms
+---
+uint8 REACHED=1
+uint8 CANCELED=2
+uint8 BLOCKED=3
+uint8 TIMED_OUT=4
+uint8 CONTROL_LOST=5
+uint8 INVALID_GOAL=6
+uint8 LOCALIZATION_LOST=7
+uint8 outcome
+string detail
+geometry_msgs/PoseStamped final_pose
+---
+string phase
+geometry_msgs/PoseStamped current_pose
+bool distance_valid
+float32 remaining_distance_m
+# 목표에 blocked_report_s(기본 3 s) 동안 가까워지지 못함. 주행 노드는 계속 시도한다 — 다만 지도에 없는 물체를 지나야만 갈 수 있는
+# 목표에서 obstacle_give_up_s(기본 8 s) 동안 못 나아가면 제한 시간 전에 BLOCKED 로 끝낸다 (2026-11-19)
+bool blocked
+float32 blocked_duration_s

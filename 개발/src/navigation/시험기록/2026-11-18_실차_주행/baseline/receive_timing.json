@@ -1,0 +1,44 @@
+{
+  "/camera_info": {
+    "count": 163,
+    "first_receive_ns": 1794993724901184897,
+    "last_receive_ns": 1794993738881022308,
+    "receive_hz": 11.588117603752009,
+    "max_receive_gap_s": 4.291614947
+  },
+  "/image_raw": {
+    "count": 425,
+    "first_receive_ns": 1794993724914837126,
+    "last_receive_ns": 1794993739001747781,
+    "receive_hz": 30.098863433162023,
+    "max_receive_gap_s": 0.057905485
+  },
+  "/imu/data": {
+    "count": 280,
+    "first_receive_ns": 1794993724666873095,
+    "last_receive_ns": 1794993739016041783,
+    "receive_hz": 19.443635102939698,
+    "max_receive_gap_s": 0.154909329
+  },
+  "/odom": {
+    "count": 144,
+    "first_receive_ns": 1794993724714893452,
+    "last_receive_ns": 1794993739015519022,
+    "receive_hz": 9.999562557597962,
+    "max_receive_gap_s": 0.104072596
+  },
+  "/tf": {
+    "count": 288,
+    "first_receive_ns": 1794993724686894166,
+    "last_receive_ns": 1794993739015572111,
+    "receive_hz": 20.029761370981806,
+    "max_receive_gap_s": 0.07564082
+  },
+  "/tf_static": {
+    "count": 1,
+    "first_receive_ns": 1794993724664577440,
+    "last_receive_ns": 1794993724664577440,
+    "receive_hz": null,
+    "max_receive_gap_s": null
+  }
+}

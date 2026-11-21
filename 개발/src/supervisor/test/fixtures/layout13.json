@@ -1,0 +1,203 @@
+{
+  "format": "maicon-layout-1",
+  "name": "generated-13",
+  "seed": 13,
+  "jitter_m": 0.0,
+  "arena": {
+    "width": 6.12,
+    "height": 5.0,
+    "wall_h": 0.4,
+    "grid": 0.2,
+    "box": 0.4,
+    "base_w": 1.2,
+    "base_d": 0.4,
+    "end_strip": 0.46,
+    "cm_width": 1.6,
+    "clearance": 0.4
+  },
+  "bases": {
+    "BLUE": [
+      "SUPPLY_DEPOT",
+      "MAINTENANCE",
+      "COMMAND_POST"
+    ],
+    "RED": [
+      "MAINTENANCE",
+      "COMMAND_POST",
+      "SUPPLY_DEPOT"
+    ]
+  },
+  "starts": {},
+  "boxes": [
+    {
+      "x": 2.06,
+      "y": 4.2,
+      "faces": {
+        "E": "object:ammo_box",
+        "N": "blank",
+        "W": "target:BLUE_OUTPOST",
+        "S": "blank"
+      }
+    },
+    {
+      "x": 1.06,
+      "y": 3.6,
+      "faces": {
+        "E": "object:ammo_box",
+        "N": "blank",
+        "W": "blank",
+        "S": "non_object:field_position"
+      }
+    },
+    {
+      "x": 1.06,
+      "y": 2.8,
+      "faces": {
+        "E": "object:tank",
+        "N": "target:BLUE_RADAR",
+        "W": "object:ammo_box",
+        "S": "non_object:barrier"
+      }
+    },
+    {
+      "x": 1.46,
+      "y": 2.0,
+      "faces": {
+        "E": "object:missile",
+        "N": "non_object:destroyed_building",
+        "W": "hidden",
+        "S": "blank"
+      }
+    },
+    {
+      "x": 1.06,
+      "y": 2.0,
+      "faces": {
+        "E": "hidden",
+        "N": "blank",
+        "W": "blank",
+        "S": "object:ammo_box"
+      }
+    },
+    {
+      "x": 2.06,
+      "y": 1.0,
+      "faces": {
+        "E": "blank",
+        "N": "blank",
+        "W": "non_object:destroyed_building",
+        "S": "object:missile"
+      }
+    },
+    {
+      "x": 1.06,
+      "y": 0.8,
+      "faces": {
+        "E": "non_object:barrier",
+        "N": "blank",
+        "W": "target:BLUE_COMMS",
+        "S": "non_object:barrier"
+      }
+    },
+    {
+      "x": 2.46,
+      "y": 2.4,
+      "faces": {
+        "E": "object:tank",
+        "N": "blank",
+        "W": "blank",
+        "S": "blank"
+      }
+    },
+    {
+      "x": 3.06,
+      "y": 0.8,
+      "faces": {
+        "E": "non_object:barrier",
+        "N": "object:tank",
+        "W": "non_object:roadblock",
+        "S": "non_object:destroyed_building"
+      }
+    },
+    {
+      "x": 4.06,
+      "y": 4.2,
+      "faces": {
+        "E": "target:RED_OUTPOST",
+        "N": "non_object:field_position",
+        "W": "object:ammo_box",
+        "S": "object:military_truck"
+      }
+    },
+    {
+      "x": 5.06,
+      "y": 3.6,
+      "faces": {
+        "E": "blank",
+        "N": "blank",
+        "W": "blank",
+        "S": "blank"
+      }
+    },
+    {
+      "x": 5.06,
+      "y": 2.8,
+      "faces": {
+        "E": "blank",
+        "N": "target:RED_RADAR",
+        "W": "blank",
+        "S": "non_object:roadblock"
+      }
+    },
+    {
+      "x": 4.66,
+      "y": 2.0,
+      "faces": {
+        "E": "hidden",
+        "N": "object:drum",
+        "W": "non_object:destroyed_building",
+        "S": "object:ammo_box"
+      }
+    },
+    {
+      "x": 5.06,
+      "y": 2.0,
+      "faces": {
+        "E": "object:drum",
+        "N": "object:military_truck",
+        "W": "hidden",
+        "S": "non_object:barrier"
+      }
+    },
+    {
+      "x": 4.06,
+      "y": 1.0,
+      "faces": {
+        "E": "non_object:destroyed_building",
+        "N": "object:drum",
+        "W": "object:missile",
+        "S": "blank"
+      }
+    },
+    {
+      "x": 5.06,
+      "y": 0.8,
+      "faces": {
+        "E": "target:RED_COMMS",
+        "N": "object:missile",
+        "W": "blank",
+        "S": "object:ammo_box"
+      }
+    },
+    {
+      "x": 3.66,
+      "y": 2.4,
+      "faces": {
+        "E": "blank",
+        "N": "object:mortar",
+        "W": "non_object:destroyed_building",
+        "S": "blank"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+
+Files:             bag_0.db3
+Bag size:          216.2 MiB
+Storage id:        sqlite3
+Duration:          8.077959333s
+Start:             Nov 18 2026 19:01:36.657089100 (1794996096.657089100)
+End:               Nov 18 2026 19:01:44.735048433 (1794996104.735048433)
+Messages:          1072
+Topic information: Topic: /slam_trial/field | Type: team_interfaces/msg/FieldMap | Count: 2 | Serialization Format: cdr
+                   Topic: /slam_trial/control | Type: team_interfaces/msg/ControlState | Count: 134 | Serialization Format: cdr
+                   Topic: /scan | Type: sensor_msgs/msg/LaserScan | Count: 76 | Serialization Format: cdr
+                   Topic: /tf_static | Type: tf2_msgs/msg/TFMessage | Count: 1 | Serialization Format: cdr
+                   Topic: /tf | Type: tf2_msgs/msg/TFMessage | Count: 162 | Serialization Format: cdr
+                   Topic: /slam_trial/pose | Type: geometry_msgs/msg/PoseStamped | Count: 22 | Serialization Format: cdr
+                   Topic: /odom | Type: nav_msgs/msg/Odometry | Count: 81 | Serialization Format: cdr
+                   Topic: /slam_trial/map | Type: team_interfaces/msg/FieldMap | Count: 24 | Serialization Format: cdr
+                   Topic: /slam_trial/cmd_vel | Type: geometry_msgs/msg/Twist | Count: 37 | Serialization Format: cdr
+                   Topic: /imu/data | Type: sensor_msgs/msg/Imu | Count: 157 | Serialization Format: cdr
+                   Topic: /image_raw | Type: sensor_msgs/msg/Image | Count: 245 | Serialization Format: cdr
+                   Topic: /cmd_vel | Type: geometry_msgs/msg/Twist | Count: 131 | Serialization Format: cdr

@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 가상환경
+.venv/
+venv/
+env/
+.conda/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ROS2 colcon
+install/
+log/
+
+# 비밀 정보 (임무코드 · 토큰 · API 키)
+.env
+.env.*
+!.env.example
+secrets/
+secrets.json
+supervisor_state.json
+team_bundle*.tgz
+
+# 모델 가중치 · 내보낸 엔진 (USB · 공유 드라이브로 전달)
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+*.ckpt
+*.safetensors
+*.bin
+models/
+weights/
+# 예외: 드론 지도 상자 모델은 작아서(yolo11n-obb .pt 5.6 MB) git 으로 나눈다 — training/drone_boxes/README 학습 기록과 같은 파일
+!개발/src/perception/training/drone_boxes/trained/*.pt
+
+# 데이터 · 학습 산출물
+data/
+datasets/
+runs/
+wandb/
+mlruns/
+*.bag
+*.db3
+*.mcap
+
+# 에디터 · OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# mock 실행 결과 · 녹화
+mock/out/
+mock/ros2/_ws/
+mock/replay/recordings/

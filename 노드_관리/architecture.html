@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>MAICON · ROS 2 구성 관리</title><style>:root{--ink:#17283f;--muted:#68788e;--line:#e3e9f0;--bg:#f4f7fb;--nav:#142338;--blue:#4859ce;--topic:#16877f;--service:#3978c9;--action:#935bc6;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);background:var(--bg);font-size:14px;color-scheme:light}
+[hidden]{display:none!important}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}button,a,input,select,summary{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,g[tabindex]:focus-visible{outline:3px solid #a1a8ff}button{border:0}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}h1,h2,h3,h4,p{margin:0}h1{font-size:27px;letter-spacing:-1px}h2{font-size:17px;letter-spacing:-.4px}h3{font-size:15px;line-height:1.6}h4{font-size:14px;line-height:1.6}p{line-height:1.75}small{line-height:1.65}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}code{font-size:.91em;overflow-wrap:anywhere}li{line-height:1.8;margin-bottom:5px}ul{margin:8px 0;padding-left:20px}.muted{color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:1.5px;font-weight:750}.app{display:grid;grid-template-columns:202px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:var(--nav);color:#d9e5f5;padding:30px 14px;display:flex;flex-direction:column;gap:34px}.brand{display:flex;gap:10px;align-items:center;padding:0 10px}.logo{width:35px;height:35px;background:#b6bfff;color:#17283f;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:900}.brand strong{font-size:17px;letter-spacing:.7px}.brand small{font-size:8px;display:block;letter-spacing:1.5px;margin-top:3px;color:#a0b0c7}.nav-label{padding:0 12px;margin-bottom:12px;font-size:9px;letter-spacing:1.4px;color:#90a2bd}.nav{display:grid;gap:6px}.nav button{background:transparent;border-radius:9px;padding:13px 11px;color:#b2c1d6;text-align:left;font-size:12px;display:flex;align-items:center;gap:5px}.nav button.active{background:#2d405d;color:#fff}.nav button:hover{background:#243851}.count{margin-left:auto;background:#ffffff12;font-size:10px;padding:2px 5px;border-radius:4px}.side-note{margin-top:auto;padding:18px 10px 0;border-top:1px solid #ffffff1b;color:#91a6c2;line-height:1.9;font-size:10px;overflow-wrap:anywhere}.side-note strong{color:#c2d0e3;font-weight:500}.main{min-width:0}.topbar{display:flex;gap:14px;justify-content:space-between;align-items:center;min-height:76px;background:white;border-bottom:1px solid var(--line);padding:16px 25px}.breadcrumb{font-size:11px;color:var(--muted);white-space:nowrap}.breadcrumb b{color:var(--ink);font-weight:600;margin-left:7px}.actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}.search input{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#f8fafc;width:202px;font-size:12px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:10px 12px;font-size:11px;white-space:nowrap}.btn:hover{background:#edf1f9}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.content{padding:28px 25px 35px;max-width:1920px;margin:auto}.pagehead{margin-bottom:20px}.pagehead .eyebrow{color:#71829b;margin-bottom:9px}.pagehead p{color:var(--muted);font-size:12px;margin-top:7px}.data-status{color:var(--muted);font-size:10px;margin-top:9px;line-height:1.7;overflow-wrap:anywhere}.data-status.error{color:#ae3f35;background:#fff0ed;padding:10px;border:1px solid #f1d3ce;border-radius:7px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px}.panelhead{padding:19px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.panelhead p{font-size:11px;color:var(--muted);margin-top:5px}.panelhead .eyebrow{display:block;margin-bottom:8px}.pill{display:inline-block;background:#eff3f8;color:#65758d;font-size:10px;line-height:1.45;padding:4px 7px;border-radius:5px;font-weight:600;white-space:nowrap}.pill.warn{background:#fff2d9;color:#906115}.pill.ok{background:#e8f4ed;color:#327552}.pill.topics{background:#e7f6f1;color:var(--topic)}.pill.services{background:#eaf2ff;color:var(--service)}.pill.actions{background:#f3eafd;color:var(--action)}.pill.external{background:#fff2df;color:#a17226}.pill.official{background:#eceff3;color:#4a5a70}.official-node rect{fill:#f3f5f8;stroke:#8d9bb0;stroke-dasharray:6 4}.official-node .program-kicker{fill:#5d6b80}.snapshot-info{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:17px}.snapshot-info strong{font-size:12px}.snapshot-info p{color:var(--muted);font-size:11px;margin-top:3px}.graph-layout{display:grid;grid-template-columns:minmax(0,1fr) 284px;gap:18px;align-items:start}.graph-shell{min-width:0}.graph-toolbar{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}.graph-toolbar select{border:1px solid var(--line);border-radius:7px;background:#fff;padding:8px 7px;font-size:11px;max-width:100%;min-width:0}.zoom-buttons{display:flex;gap:5px;margin-left:auto}.zoom-buttons .btn{padding:7px 9px}.graph-canvas{height:730px;overflow:hidden;background:radial-gradient(#dfe5ee .8px,transparent .8px);background-size:17px 17px;touch-action:none}.graph-canvas svg{display:block;width:100%;height:100%;user-select:none}.interface-edge{cursor:pointer;--edge:var(--topic)}.interface-edge.services{--edge:var(--service)}.interface-edge.actions{--edge:var(--action)}.wire{stroke:var(--edge);stroke-width:2.5;fill:none;opacity:.65}.wire-hit{fill:none;stroke:transparent;stroke-width:18}.services .wire{stroke-dasharray:8 6}.actions .wire{stroke-dasharray:3 5}.source-port{fill:var(--edge)}.wire-label rect{fill:#fff;stroke:var(--edge);stroke-opacity:.45;stroke-width:1.5}.wire-label text{fill:var(--edge);dominant-baseline:auto;pointer-events:none}.wire-kind{font-size:16px;font-weight:750}.wire-name{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:22px;font-weight:550;letter-spacing:-.8px}.wire-direction{font-size:26px;font-weight:750}.interface-edge:hover .wire,.interface-edge:focus .wire{opacity:1;stroke-width:4}.interface-edge:hover .wire-label rect,.interface-edge:focus .wire-label rect{stroke-width:3;fill:#f8fbff}.quiet,.hover-quiet{opacity:.12}.overview-node{cursor:pointer}.overview-node rect{fill:#fff;stroke:#bdcadd;stroke-width:2;filter:drop-shadow(0 7px 9px #2339560a)}.overview-node:hover rect,.overview-node:focus rect,.selected-node rect{stroke:var(--blue);stroke-width:3}.program-kicker{fill:#9c762e;font-size:16px}.program-title{fill:var(--ink);font-size:28px;font-weight:750;letter-spacing:-.7px}.program-sub{fill:#4b607c;font-size:20px}.program-foot{fill:#75869d;font-size:15px}.central rect{fill:var(--nav);stroke:var(--nav)}.central .program-title{fill:white}.central .program-kicker{fill:#e6c88a}.central .program-sub{fill:#c1cfe5}.central .program-foot{fill:#a6b8d1}.graph-legend{display:flex;gap:12px;flex-wrap:wrap;padding:13px 16px 7px;font-size:10px;border-top:1px solid var(--line)}.graph-legend small{width:100%;font-size:10px;color:var(--muted)}.topic-dot{color:var(--topic)}.service-dot{color:var(--service)}.action-dot{color:var(--action)}.graph-inspector{font-size:10px;min-height:45px;color:var(--muted);padding:7px 16px 13px;line-height:1.7;white-space:pre-line}.boundary-summary{padding:16px;border-top:1px solid var(--line);background:#fafbfd}.boundary-summary strong{font-size:12px}.boundary-summary p{font-size:10px;color:var(--muted);margin:5px 0 10px}.boundary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.boundary-chip{border:1px solid #e0e7f0;background:white;border-radius:7px;padding:9px;text-align:left;min-width:0}.boundary-chip:hover{border-color:#b6c8e0}.boundary-chip code{font-size:11px}.boundary-chip small{font-size:9px;display:block;line-height:1.6;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}.change-panel{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;max-height:1100px;display:flex;flex-direction:column}.change-intro{font-size:10px;color:var(--muted);padding:12px 18px;border-bottom:1px solid var(--line)}.change-list{overflow:auto}.change-item{padding:18px;border-bottom:1px solid var(--line);position:relative}.change-item time{display:block;font-size:9px;color:var(--muted);margin-bottom:9px}.change-item h3{font-size:13px;margin:10px 0}.change-item>p{font-size:11px;color:var(--muted);margin:10px 0}.change-diff{background:#f8fafc;border:1px solid #edf0f5;border-radius:7px;padding:10px}.change-diff small{font-size:9px;color:var(--muted)}.change-diff p{font-size:11px;margin:3px 0 8px}.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.chip{padding:5px 7px;background:#f1f4fa;border:1px solid #e5eaf2;color:#4b5e7c;border-radius:5px;font-size:10px;overflow-wrap:anywhere;text-align:left}.chip:hover{background:#e8edff;color:var(--blue)}.io-summary-grid{padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.io-mini{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;background:#f9fbfe;border:1px solid var(--line);border-radius:9px;padding:14px;min-width:0}.io-mini:hover{border-color:#b4bde8}.io-mini strong{font-size:12px}.io-mini span:not(.pill){color:var(--muted);font-size:11px}.io-mini small{font-size:10px;color:#526680}.notice{padding:13px 16px;background:#eff2ff;border:1px solid #dfe5fa;color:#556087;border-radius:10px;font-size:12px;line-height:1.8;margin-bottom:20px}.tablewrap{overflow:auto}.io-table{width:100%;border-collapse:collapse;min-width:900px;table-layout:fixed}.io-table th{background:#f8fafc;padding:15px 13px;text-align:left;font-size:11px;color:var(--muted);border-bottom:1px solid var(--line)}.io-table th:first-child{width:180px}.io-table td{padding:14px 12px;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid #f0f3f7;font-size:11px}.io-table td p{font-size:10px;color:var(--muted);margin:7px 0 10px}.interface-name{background:none;color:var(--ink);padding:0;text-align:left;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;font-weight:650;overflow-wrap:anywhere}.interface-name:hover{color:var(--blue);text-decoration:underline}.io-path{display:block;text-align:left;width:100%;padding:8px;background:#f7f9fc;border:1px solid #e6ebf3;border-radius:7px;margin:6px 0;overflow-wrap:anywhere}.io-path:hover{border-color:#acb9e1}.io-path small{display:block;font-size:9px;color:var(--muted);margin-top:4px}.cell-label{font-size:9px;color:#60718e;display:block;margin-top:6px}.reference-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.reference-card{border:1px solid var(--line);background:white;border-radius:12px;padding:20px;text-align:left;min-width:0}.reference-card:hover{border-color:#b2c0de}.reference-card h2{margin:12px 0;font-size:17px}.reference-card strong{font-size:12px}.reference-card p{font-size:11px;color:var(--muted);margin-top:7px}.reference-card small{display:block;font-size:10px;color:var(--muted);margin-top:10px;overflow-wrap:anywhere}.search-section{margin-bottom:24px}.search-section h2{margin:20px 0 10px}.searchhit{display:block;text-align:left;width:100%;border:1px solid var(--line);background:white;padding:15px 18px;border-radius:9px;margin-bottom:8px}.searchhit strong{font-size:12px}.searchhit p{font-size:11px;color:var(--muted);margin-top:5px}.empty{padding:55px 25px;text-align:center;color:var(--muted)}.empty h2{color:var(--ink);margin-bottom:18px}.empty p{font-size:12px;margin:12px 0}.loadinfo{font-size:10px;color:var(--muted);line-height:1.8;padding:8px 0 20px}.footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--line);padding-top:18px;color:#8592a7;font-size:9px;line-height:1.7}dialog{width:min(1050px,calc(100vw - 32px));max-height:90vh;border:1px solid #dce4ef;border-radius:16px;padding:0;box-shadow:0 25px 100px #14233833;color:var(--ink)}dialog::backdrop{background:#12243c70;backdrop-filter:blur(3px)}.detailtop{position:sticky;top:0;background:#fff;z-index:2;padding:24px 28px 20px;border-bottom:1px solid var(--line)}.detailtop h2{font-size:22px;margin:12px 30px 8px 0;overflow-wrap:anywhere}.detailtop p{font-size:12px;color:var(--muted)}.badges{display:flex;gap:6px;flex-wrap:wrap}.close{position:absolute;top:17px;right:18px;width:30px;height:30px;border-radius:7px;background:#f0f3f8;font-size:23px;color:#697d98}.detailbody{padding:4px 28px 28px;font-size:12px}.detail-section{padding-top:20px;margin-top:7px}.detail-section>h3{margin-bottom:12px}.detail-section p{font-size:12px}.detail-kv{display:grid;grid-template-columns:165px minmax(0,1fr);font-size:12px;margin:14px 0 0}.detail-kv dt,.detail-kv dd{padding:9px 0;border-bottom:1px solid #edf1f6;line-height:1.8;overflow-wrap:anywhere}.detail-kv dt{color:var(--muted);padding-right:15px}.detail-kv dd{margin:0}.contract-item{border:1px solid var(--line);border-radius:10px;padding:17px;margin:12px 0;background:#fbfcfe}.contract-item h4{margin-bottom:7px;text-transform:none}.contract-item details{margin-top:14px}.contract-item summary,summary{cursor:pointer;font-size:12px;color:#536782;line-height:1.8}.contract-item .detail-section{padding-top:8px}.interface-card{border:1px solid var(--line);border-radius:10px;margin:12px 0;padding:14px;background:#fff}.interface-heading{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.interface-flow{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:center;gap:10px;margin:13px 0 6px}.interface-flow>div{display:flex;gap:5px;flex-wrap:wrap;align-items:center}.interface-flow small{display:block;width:100%;font-size:10px;color:var(--muted)}.interface-flow b{color:#7c8ca4;text-align:center}.interface-card>p{font-size:11px;color:var(--muted);margin-top:8px}.interface-card .flow-return{color:#687ab6;text-align:right;font-size:10px}.node-contract{margin:6px 0 20px}.timing-note{padding:12px;background:#f3f5ff;border-radius:8px;font-size:11px!important;color:#65739a;margin-top:15px}.definition-file{margin:12px 0;border:1px solid var(--line);border-radius:9px;overflow:hidden}.definition-file>summary{padding:12px;background:#f5f8fc;overflow-wrap:anywhere}.definition-basis{padding:10px 13px;font-size:10px!important;color:var(--muted);overflow-wrap:anywhere}.definition-file pre{margin:0;padding:16px;overflow:auto;background:#16263d;color:#dce8f8;font-size:12px;line-height:1.85;tab-size:2}.definition-file pre code{font-size:inherit;overflow-wrap:normal}.definition-error{padding:15px;border:1px solid #f0d7b5;border-radius:8px;background:#fff9ed;margin:10px 0;color:#8d632c}.definition-error code{display:block;margin:8px 0;overflow-wrap:anywhere}.item-change{padding:12px 0;border-bottom:1px solid var(--line)}.item-change small{font-size:10px;color:var(--muted)}.item-change p{margin-top:5px}#graph-shell:fullscreen{background:white;width:100vw;height:100vh;overflow:auto;border-radius:0}#graph-shell:fullscreen .graph-canvas{height:calc(100vh - 220px)}
+@media(min-width:1750px){.graph-canvas{height:820px}.graph-layout{grid-template-columns:minmax(0,1fr) 310px}}
+@media(max-width:1200px){.app{grid-template-columns:176px minmax(0,1fr)}.sidebar{padding-left:10px;padding-right:10px}.brand{padding:0 5px}.brand strong{font-size:15px}.topbar{padding:14px 18px}.breadcrumb{display:none}.actions{width:100%;justify-content:flex-start}.content{padding:25px 18px}.graph-layout{grid-template-columns:minmax(0,1fr)}.graph-canvas{height:760px}.change-panel{max-height:500px}.change-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.graph-toolbar select{max-width:260px}}
+@media(max-width:700px){.app{display:block}.sidebar{position:relative;width:100%;height:auto;padding:17px;gap:18px}.brand small,.side-note,.nav-label{display:none}.nav{display:flex;gap:5px;overflow:auto}.nav button{white-space:nowrap;padding:9px;font-size:11px}.nav .count{margin-left:5px}.topbar{padding:12px 15px}.actions{gap:6px}.search{width:100%}.search input{width:100%}.btn{font-size:10px;padding:9px}.content{padding:22px 14px}h1{font-size:23px}.graph-canvas{height:510px}.graph-toolbar{gap:7px;padding:10px}.graph-toolbar select{flex:1;max-width:100%}.zoom-buttons{margin-left:0;width:100%;justify-content:flex-end}.graph-legend{gap:9px}.boundary-grid{grid-template-columns:minmax(0,1fr)}.snapshot-info{padding:12px;gap:9px}.snapshot-info p{font-size:10px}.snapshot-info .pill{font-size:9px}.change-list{display:block}.io-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.io-mini{padding:11px}.io-mini strong{font-size:10px;overflow-wrap:anywhere}.io-mini .pill{font-size:8px}.footer{flex-direction:column}.detailtop{padding:20px 17px 15px}.detailtop h2{font-size:18px}.detailbody{padding:0 17px 20px}.detail-kv{grid-template-columns:118px minmax(0,1fr);font-size:11px}.contract-item{padding:12px}.interface-name{font-size:11px}.interface-flow{gap:5px;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr)}.reference-grid{grid-template-columns:minmax(0,1fr)}.definition-file pre{font-size:10px}.graph-inspector{min-height:58px}}
+
+/* Compact graph: preserve every connection while prioritizing the whole diagram. */
+.topbar{min-height:59px;padding:11px 22px}.content{padding:20px 22px 30px}.pagehead{margin-bottom:14px}.pagehead>.eyebrow{display:none}h1{font-size:23px}.pagehead>p{margin-top:5px;font-size:11px}.pagehead:has(~#screen .graph-layout)>p{display:none}.data-status{margin-top:5px;font-size:9px}.compact-meta{align-items:center;flex-wrap:wrap;padding:9px 12px;gap:8px 14px;margin-bottom:12px;font-size:10px;color:var(--muted)}.compact-meta strong{font-size:11px;color:var(--ink)}.compact-meta>span:last-child{margin-left:auto}.graph-layout{grid-template-columns:minmax(0,1fr) 255px;gap:14px}.graph-shell>.panelhead{padding:13px 16px;min-height:48px}.graph-shell>.panelhead h2{font-size:15px}.graph-shell>.panelhead p{font-size:10px;margin:0}.graph-toolbar{padding:9px 11px;gap:6px}.graph-toolbar select{font-size:10px;padding:7px}.zoom-buttons .btn{font-size:10px;padding:6px 8px}.graph-canvas{height:clamp(440px,calc(100vh - 340px),650px);background-size:18px 18px}.graph-legend{padding:10px 13px 5px;gap:7px 13px;font-size:9px}.graph-legend small{font-size:9px}.graph-inspector{padding:5px 13px 10px;min-height:32px;font-size:9px}.wire-kind{font-size:13px}.wire-name{font-size:15px;letter-spacing:-.25px;font-weight:500}.wire-direction{font-size:19px}.wire-label rect{stroke-opacity:.25;stroke-width:1;fill:#fff}.wire{stroke-width:1.3;opacity:.35}.wire-hit{stroke-width:12}.services .wire{stroke-dasharray:5 4}.actions .wire{stroke-dasharray:2 4}.interface-wire{--edge:var(--topic);cursor:pointer}.interface-wire.services{--edge:var(--service)}.interface-wire.actions{--edge:var(--action)}.interface-edge:hover .wire-label rect,.interface-edge:focus .wire-label rect{stroke-width:2;fill:#f5f9ff;stroke-opacity:1}.interface-wire.hover-active .wire{stroke-width:2.3;opacity:.9}.quiet,.hover-quiet{opacity:.1}.program-kicker{font-size:10px}.program-title{font-size:21px;letter-spacing:-.5px}.program-sub{font-size:14px}.program-foot{font-size:10px}.overview-node rect{stroke-width:1.2}.overview-node:hover rect,.overview-node:focus rect,.selected-node rect{stroke-width:2}.boundary-details{border-top:1px solid var(--line);background:#fafbfd}.boundary-details>summary{padding:11px 14px;font-size:10px;color:var(--muted)}.boundary-details>summary span{margin-left:8px;font-size:9px;color:#8b98aa}.boundary-details .boundary-summary{border:0;padding-top:5px}.change-panel{max-height:calc(100vh - 210px)}.change-panel>.panelhead{padding:16px}.change-panel h2{font-size:15px}.change-intro{padding:10px 15px;font-size:9px}.change-item{padding:15px}.change-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.change-item time{margin:0;font-size:9px}.change-meta .pill{font-size:8px;padding:3px 5px}.change-item h3{font-size:12px;margin:10px 0 7px}.change-item .change-preview{margin:0 0 10px;font-size:10px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.change-more>summary{font-size:9px;color:var(--blue)}.change-more>p{margin:10px 0;font-size:10px}.change-more .change-diff{margin-top:10px}.change-more .change-diff p{font-size:10px}.change-more .chip{font-size:9px}.io-summary-grid{padding:13px;gap:8px}.io-mini{padding:12px}.io-mini strong{font-size:11px}
+@media(min-width:1750px){.graph-canvas{height:clamp(540px,calc(100vh - 340px),730px)}.graph-layout{grid-template-columns:minmax(0,1fr) 275px}}
+@media(max-width:1200px) and (min-width:1101px){.graph-layout{grid-template-columns:minmax(0,1fr) 235px}.change-list{display:block}.change-panel{max-height:calc(100vh - 190px)}.graph-canvas{height:600px}}
+@media(max-width:1100px){.graph-layout{grid-template-columns:minmax(0,1fr)}.change-panel{max-height:450px}.graph-canvas{height:560px}.graph-toolbar select{flex:none}}
+@media(max-width:700px){.content{padding:18px 12px}.topbar{padding:10px 13px}h1{font-size:21px}.compact-meta{font-size:9px;gap:7px 10px}.compact-meta>span:last-child{margin-left:0;width:100%}.graph-shell>.panelhead p{display:none}.graph-toolbar select{flex:1}.graph-canvas{height:420px}.graph-legend{font-size:8px;gap:6px 10px}.graph-legend small{font-size:8px}.graph-inspector{font-size:8px}.graph-toolbar .zoom-buttons{width:100%}.change-panel{max-height:450px}}
+
+/* Overview first; expand the shared contract only when needed. */
+.app{grid-template-columns:174px minmax(0,1fr)}.sidebar{padding:25px 10px}.brand{padding:0 8px}.graph-layout{grid-template-columns:minmax(0,1fr) 235px;gap:12px}.graph-toolbar{gap:7px}.graph-mode{display:flex;padding:3px;background:#edf1f7;border-radius:7px;gap:2px}.graph-mode button{padding:6px 9px;font-size:10px;border-radius:5px;color:#6b7b91;background:transparent}.graph-mode button[aria-pressed="true"]{background:white;color:#243b5d;box-shadow:0 1px 4px #152d5020;font-weight:700}.graph-context{padding:7px 13px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);font-size:9px;color:var(--muted)}.graph-context strong{font-weight:600;color:#4e627c}.graph-canvas{height:clamp(410px,calc(100vh - 370px),700px);cursor:grab}.graph-canvas:active{cursor:grabbing}.zoom-buttons{align-items:center}.zoom-level{font-size:9px;color:var(--muted);width:32px;text-align:center;font-variant-numeric:tabular-nums}.program-title{font-size:16px;letter-spacing:-.4px}.program-sub{font-size:11px}.program-foot{font-size:8px}.program-kicker{font-size:8px}.wire-kind{font-size:10px}.wire-name{font-size:12px;letter-spacing:-.3px}.wire-direction{font-size:15px}.wire{stroke-width:1.2;opacity:.4}.bundle-wire,.bundle-edge{cursor:pointer}.bundle-path{fill:none;stroke:#8b9bb0;stroke-width:1.5;opacity:.75}.bundle-edge rect{fill:white;stroke:#cfd9e6;stroke-width:1}.bundle-edge text{fill:#526882;font-size:10px;font-weight:650;pointer-events:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.bundle-wire.hover-active .bundle-path{stroke:#4859ce;stroke-width:2.5;opacity:1}.bundle-edge:hover rect,.bundle-edge:focus rect,.bundle-edge.hover-active rect{stroke:#4859ce;fill:#f3f5ff}.bundle-explanation{margin-top:18px;color:var(--muted);font-size:11px}.graph-legend small{line-height:1.7}.graph-shell:fullscreen .graph-canvas{height:calc(100vh - 230px)}
+@media(min-width:1750px){.graph-layout{grid-template-columns:minmax(0,1fr) 255px}.graph-canvas{height:calc(100vh - 370px);max-height:800px}}
+@media(max-width:1100px){.graph-layout{grid-template-columns:minmax(0,1fr)}.graph-canvas{height:510px}.change-panel{max-height:450px}}
+@media(max-width:700px){.app{display:block}.graph-canvas{height:390px}.graph-toolbar .zoom-buttons{width:auto;margin-left:auto;flex-wrap:wrap}.graph-mode{width:100%}.graph-mode button{flex:1}.graph-toolbar select{flex:1}.graph-context{font-size:8px}.zoom-buttons .btn{padding:6px}.zoom-level{width:28px}}
+
+</style></head>
+<body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="logo">M</div><div><strong>MAICON</strong><small>ROS 2 / DEVELOPMENT</small></div></div><nav aria-label="ROS 2 관리 화면"><div class="nav-label">ROS 2 MANAGEMENT</div><div class="nav" id="nav"></div></nav><div class="side-note"><strong>통신 계약 · 구현 상태 관리</strong><br>데이터 원본: YAML<br>타입 원본: .msg / .srv / .action<br><br><span id="side-date"></span></div></aside>
+<main class="main"><header class="topbar"><div class="breadcrumb">ROS 2 관리 / <b id="crumb">노드 그래프</b></div><div class="actions"><div class="search"><input id="search" type="search" aria-label="노드·토픽·서비스·액션 검색" placeholder="노드, 토픽, 서비스, 액션 검색…" autocomplete="off"></div><button class="btn" id="reload">새로고침</button><button class="btn" id="load-definitions">타입 파일 선택</button><button class="btn primary" id="load">YAML 불러오기</button><input type="file" id="file" accept=".yaml,.yml,text/plain" hidden><input type="file" id="definitions" accept=".msg,.srv,.action" multiple hidden></div></header>
+<div class="content"><div class="pagehead"><div class="eyebrow">ROS 2 / DEVELOPMENT CONTRACT</div><h1 id="page-title">ROS 2 구성과 변경 이력</h1><p id="page-subtitle"></p><div id="data-status" class="data-status" role="status" aria-live="polite"></div></div><div id="screen"></div><div class="loadinfo">관리 원본은 <code>interfaces.yaml</code>, 팀 자료형 원본은 <code>개발/src/team_interfaces/</code>입니다. YAML 수정 후 새로고침하세요. HTTP로 열면 YAML과 타입 파일을 직접 읽고, HTML을 직접 열면 파일을 선택해야 합니다. <strong>코드·실행 상태를 자동 수집하거나 ROS 설정에 적용하지 않습니다.</strong></div><footer class="footer"><span>MAICON · ROS 2 구성 관리<br>노드 · 토픽 · 서비스 · 액션 · ROS 변경 이력</span><span>계약: interfaces.yaml · 타입: team_interfaces · 표시: architecture.html</span></footer></div></main></div>
+<dialog id="detail" aria-labelledby="detail-title"><div id="detail-content"></div></dialog>
+<script>'use strict';
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const kinds = {topics:{name:'Topic',short:'T',roles:['publisher','subscriber'],ends:['publishers','subscribers'],ref:'topic_id',color:'#16877f'},services:{name:'Service',short:'S 요청',roles:['client','provider'],ends:['clients','providers'],ref:'service_id',color:'#3978c9'},actions:{name:'Action',short:'A 목표',roles:['client','provider'],ends:['clients','providers'],ref:'action_id',color:'#935bc6'}};
+const statusValues = ['설계 확정·미구현','구현 중','구현 완료','대회 제공'];
+const endpointSection = kind => kind === 'topics' ? 'topic_endpoints' : kind === 'services' ? 'service_endpoints' : 'action_endpoints';
+let data = null, current = ['io','reference'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'graph';
+let query = '', graphKind = '전체', graphFocus = '', camera = null, extent = null;
+let loadMessage = 'YAML을 불러오세요. 내장 데이터 복사본은 없습니다.', loadError = false, generation = 0, detailGeneration = 0;
+let manualDefinitions = [];
+let graphLayout = new URLSearchParams(location.search).get('layout')==='map'?'map':'topics';
+const byId = (kind,id) => data?.[kind]?.find(x => x.id === id);
+const nodeName = id => byId('nodes',id)?.name ?? id;
+const button = (kind,id,label,cls='chip') => `<button type="button" class="${cls}" data-kind="${kind}" data-id="${esc(id)}">${label}</button>`;
+const badge = (text,cls='') => `<span class="pill ${cls}">${esc(text)}</span>`;
+const statusBadge = x => badge(x.status || '미확인', x.status === '구현 완료' ? 'ok' : x.status === '대회 제공' ? 'official' : 'warn');
+const list = xs => xs?.length ? `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="muted">미확인·미기록</p>';
+const section = (title,body) => `<section class="detail-section"><h3>${esc(title)}</h3>${body}</section>`;
+const value = v => v == null ? '<span class="muted">미확인·미기록</span>' : Array.isArray(v) ? v.map(esc).join('<br>') || '없음' : esc(v);
+const kv = entries => `<dl class="detail-kv">${entries.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${value(v)}</dd>`).join('')}</dl>`;
+const unique = xs => [...new Set(xs)];
+const repoPath = p => typeof p === 'string' && p.length && !/^(\/|[a-z]+:)/i.test(p) && !p.split('/').some(x => !x || x === '.' || x === '..') && !p.includes('\\');
+const repoURL = p => repoPath(p) ? new URL('../'+p,location.href).href : null;
+const repoLink = p => repoURL(p) ? `<a href="${esc(repoURL(p))}" target="_blank" rel="noopener">${esc(p)} ↗</a>` : esc(p);
+
+// Intentionally small YAML subset, documented in interfaces.yaml. No eval or remote libraries.
+function parseYaml(text) {
+  const out = Object.create(null); let key = null, item = null;
+  const put = (obj,k,v,line) => {
+    if (['__proto__','constructor','prototype'].includes(k) || Object.hasOwn(obj,k)) throw Error(`${line}행: 중복·금지 필드 ${k}`);
+    obj[k] = v;
+  };
+  text.replace(/^\uFEFF/,'').split(/\r?\n/).forEach((line,i) => {
+    if (!line.trim() || /^\s*#/.test(line)) return;
+    const val = s => { try { return JSON.parse(s); } catch { throw Error(`${i+1}행: 큰따옴표 문자열·숫자·null·한 줄 JSON 배열을 사용하세요.`); } };
+    let m;
+    if ((m = line.match(/^([a-z_][a-z0-9_]*):(?:\s+(.*))?$/i))) { key=m[1]; item=null; put(out,key,m[2]===undefined?[]:val(m[2]),i+1); }
+    else if ((m=line.match(/^  - ([a-z_][a-z0-9_]*):\s+(.+)$/i)) && Array.isArray(out[key])) { item=Object.create(null);put(item,m[1],val(m[2]),i+1);out[key].push(item); }
+    else if ((m=line.match(/^    ([a-z_][a-z0-9_]*):\s+(.+)$/i)) && item) put(item,m[1],val(m[2]),i+1);
+    else throw Error(`${i+1}행: 지원하지 않는 YAML 형식입니다. 기존 항목과 같은 들여쓰기를 사용하세요.`);
+  });
+  validate(out); return out;
+}
+function validate(d) {
+  if (d.version !== 4) throw Error('version: 4 통신 계약이 필요합니다. 이전 임시 데이터는 지원하지 않습니다.');
+  const sections = ['packages','nodes',...Object.keys(kinds),'topic_endpoints','service_endpoints','action_endpoints','changes','sources','reference_equipment','official_references'];
+  for (const key of sections) {
+    if (!Array.isArray(d[key])) throw Error(`${key}: 목록이 필요합니다.`);
+    const ids = new Set();
+    for (const x of d[key]) {
+      if (!x || typeof x !== 'object' || typeof x.id !== 'string' || !x.id || ids.has(x.id)) throw Error(`${key}: 고유한 id가 필요합니다.`);
+      ids.add(x.id);
+      for (const [k,v] of Object.entries(x)) {
+        if ((k.endsWith('_ms') || ['qos_depth','publish_rate_hz','feedback_rate_hz','max_concurrent_goals'].includes(k)) && v !== null && (typeof v !== 'number' || !Number.isFinite(v) || v < 0)) throw Error(`${x.id}: ${k}는 0 이상의 숫자 또는 null이어야 합니다.`);
+      }
+    }
+  }
+  const array = (x,k,required=false) => {
+    if (!required && x[k] === undefined) return;
+    if (!Array.isArray(x[k]) || x[k].some(v => typeof v !== 'string')) throw Error(`${x.id}: ${k}는 문자열 배열이어야 합니다.`);
+  };
+  const find = (key,id) => d[key].some(x => x.id === id);
+  const pkgNames = new Set();
+  for (const p of d.packages) {
+    if (!/^[a-z][a-z0-9_]*$/.test(p.name) || pkgNames.has(p.name) || !(p.kind === 'official' ? p.path === null && typeof p.robot_path === 'string' && p.robot_path.length > 0 : repoPath(p.path))) throw Error(`${p.id}: 패키지 이름·경로를 확인하세요.`);
+    pkgNames.add(p.name);
+  }
+  const nodeNames = new Set();
+  for (const n of d.nodes) {
+    if (typeof n.name !== 'string' || !/^\/(?:[a-zA-Z_][a-zA-Z0-9_]*\/)*[a-zA-Z_][a-zA-Z0-9_]*$/.test(n.name) || nodeNames.has(n.name) || !find('packages',n.package)) throw Error(`${n.id}: 중복 없는 실제 ROS 전체 이름과 패키지가 필요합니다.`);
+    if (!statusValues.includes(n.status)) throw Error(`${n.id}: 구현 상태를 확인하세요.`);
+    nodeNames.add(n.name); array(n,'source_files',true);
+    if (n.status === '구현 완료' && !n.source_files.length) throw Error(`${n.id}: 구현 완료에는 실제 소스 경로가 필요합니다.`);
+  }
+  const qosEnums = {qos_reliability:['reliable','best_effort','system_default'],qos_durability:['volatile','transient_local','system_default'],qos_history:['keep_last','keep_all','system_default'],qos_liveliness:['automatic','manual_by_topic','system_default']};
+  for (const [key,kind] of Object.entries(kinds)) {
+    const paths = new Set();
+    for (const x of d[key]) {
+      if (typeof x.name !== 'string' || !/^\/[a-zA-Z0-9_/]+$/.test(x.name) || paths.has(x.name)) throw Error(`${x.id}: 인터페이스 이름이 잘못되었거나 중복되었습니다.`);
+      paths.add(x.name);
+      if (x.type !== null && (typeof x.type !== 'string' || !/^[a-z][a-z0-9_]*\/(msg|srv|action)\/[A-Za-z][A-Za-z0-9_]*$/.test(x.type))) throw Error(`${x.id}: ROS 타입 경로를 확인하세요.`);
+      if (x.type === null && x.scope !== 'official') throw Error(`${x.id}: 팀 타입은 정의가 필요합니다.`);
+      if (x.type && x.type.split('/')[1] !== ({topics:'msg',services:'srv',actions:'action'}[key])) throw Error(`${x.id}: 통신 방식과 타입 종류가 다릅니다.`);
+      array(x,'definition_files',true);
+      for (const p of x.definition_files) if (!repoPath(p) || !/\.(msg|srv|action)$/.test(p)) throw Error(`${x.id}: 정의 파일 경로가 잘못되었습니다.`);
+      if (x.type?.startsWith('team_interfaces/') && !x.definition_files.length) throw Error(`${x.id}: 팀 타입 원본 경로가 필요합니다.`);
+      for (const k of kind.ends) { if (Object.hasOwn(x,k)) throw Error(`${x.id}: 연결은 endpoints에만 기록하세요.`); array(x,'external_'+k); }
+    }
+    const seen = new Set();
+    for (const e of d[endpointSection(key)]) {
+      if (!find(key,e[kind.ref]) || !find('nodes',e.node_id) || !kind.roles.includes(e.role)) throw Error(`${e.id}: 연결 대상·역할을 확인하세요.`);
+      const tuple = [e[kind.ref],e.node_id,e.role].join('|');
+      if (seen.has(tuple)) throw Error(`${e.id}: 중복 연결입니다.`); seen.add(tuple);
+      for (const [k,allowed] of Object.entries(qosEnums)) if (e[k] != null && !allowed.includes(e[k])) throw Error(`${e.id}: ${k} 값이 잘못되었습니다.`);
+      if (e.qos_depth != null && !Number.isInteger(e.qos_depth)) throw Error(`${e.id}: depth는 정수여야 합니다.`);
+    }
+  }
+  for (const key of sections) for (const x of d[key]) for (const k of ['notes','sources','source_files','field_semantics','goal_semantics','feedback_semantics','result_semantics','special_values']) array(x,k);
+  for (const c of d.changes) {
+    let targets = 0;
+    for (const [k,sectionName] of [['node_ids','nodes'],['topic_ids','topics'],['service_ids','services'],['action_ids','actions']]) {array(c,k,true);targets += c[k].length;}
+    if (!targets) throw Error(`${c.id}: ROS 변경 대상이 필요합니다.`);
+  }
+  for (const r of d.official_references) if (!['Topic','Service'].includes(r.kind) || !find('reference_equipment',r.equipment)) throw Error(`${r.id}: 공식 장비·종류를 확인하세요.`);
+}
+function links(nodeId) {
+  const result = {};
+  for (const [key,k] of Object.entries(kinds)) for (let i=0;i<2;i++) result[key+'_'+i] = data[key].filter(x => data[endpointSection(key)].some(e => e.node_id === nodeId && e[k.ref] === x.id && e.role === k.roles[i]));
+  return result;
+}
+function ends(kind,x) {
+  const k=kinds[kind];
+  return k.roles.map((role,i)=>[
+    ...data[endpointSection(kind)].filter(e=>e[k.ref]===x.id&&e.role===role).map(e=>({id:e.node_id,label:nodeName(e.node_id)})),
+    ...(x['external_'+k.ends[i]]||[]).map(label=>({label,external:true}))
+  ]);
+}
+function routes() {
+  const result=[];
+  for (const kind of Object.keys(kinds)) for (const x of data[kind]) {
+    const [from,to]=ends(kind,x);
+    for (const a of from) for (const b of to) if (!a.external && !b.external && a.id!==b.id) result.push({from:a.id,to:b.id,x,kind});
+  }
+  return result;
+}
+function nav() {
+  $('#nav').innerHTML=[['graph','노드 그래프',data?.nodes.length],['io','노드별 입출력',data?data.topics.length+data.services.length+data.actions.length:null],['reference','대회 제공 토픽·서비스',data?.official_references.length]].map(([id,label,count])=>`<button data-view="${id}" class="${current===id?'active':''}">${label}${count!=null?`<span class="count">${count}</span>`:''}</button>`).join('');
+}
+function changeLog() {
+  const changes=data.changes.slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  return `<aside class="change-panel" aria-label="ROS 2 변경 이력"><div class="panelhead"><div><span class="eyebrow muted">ROS 2 CHANGELOG</span><h2>변경 이력</h2></div>${badge(changes.length+'건')}</div><p class="change-intro">노드·통신 약속의 변경을 확인합니다.</p><div class="change-list">${changes.map(c=>{
+    const targets=[['node_ids','nodes'],['topic_ids','topics'],['service_ids','services'],['action_ids','actions']];
+    const count=targets.reduce((sum,[key])=>sum+c[key].length,0);
+    return `<article class="change-item"><div class="change-meta"><time title="${esc(c.date)}">${esc(String(c.date||'미기록').slice(0,10))}</time>${badge(c.category)}</div><h3>${esc(c.label)}</h3><p class="change-preview" title="${esc(c.after)}">${esc(c.after)}</p><details class="change-more"><summary>전후 비교 · 변경 대상 ${count}개</summary><div class="change-diff"><small>변경 전</small><p>${esc(c.before)}</p><small>변경 후</small><p>${esc(c.after)}</p></div><p>${esc(c.reason)}</p><div class="chips">${targets.flatMap(([key,kind])=>c[key].map(id=>byId(kind,id)?button(kind,id,esc(byId(kind,id).name)):badge(id+' · 삭제됨'))).join('')}</div></details></article>`;
+  }).join('')||'<p class="empty">기록된 ROS 변경이 없습니다.</p>'}</div></aside>`;
+}
+function graphView() {
+  const implemented=data.nodes.filter(n=>n.status==='구현 완료').length,official=data.nodes.filter(n=>n.status==='대회 제공').length,team=data.nodes.length-official;
+  return `<div class="snapshot-info compact-meta">${badge('개발 계약','warn')}<strong>노드 ${data.nodes.length}개</strong><span>팀 ${team}개 · 대회 제공 ${official}개(점선)</span><span>팀 구현 완료 ${implemented}개</span><span>Topic ${data.topics.length} · Service ${data.services.length} · Action ${data.actions.length}</span></div><div class="graph-layout"><section class="panel graph-shell" id="graph-shell"><div class="panelhead"><h2>노드 연결 그래프</h2><p>노드·이름을 누르면 상세 확인</p></div><div class="graph-toolbar"><div class="graph-mode" role="group" aria-label="그래프 표시 방식"><button data-layout="topics" aria-pressed="${graphLayout==='topics'}">토픽 전체</button><button data-layout="map" aria-pressed="${graphLayout==='map'}">연결 요약</button></div><select id="graph-focus" aria-label="노드 관련 연결 강조"><option value="">모든 연결</option>${data.nodes.map(n=>`<option value="${esc(n.id)}" ${graphFocus===n.id?'selected':''}>${esc(n.name)}</option>`).join('')}</select><select id="graph-kind" aria-label="인터페이스 종류">${['전체','Topic','Service','Action'].map(k=>`<option ${graphKind===k?'selected':''}>${k}</option>`).join('')}</select><div class="zoom-buttons"><output class="zoom-level" id="zoom-level" aria-label="전체 맞춤 대비 확대율">100%</output><button class="btn" id="zoom-out" aria-label="축소">−</button><button class="btn" id="zoom-in" aria-label="확대">+</button><button class="btn" id="graph-fit">전체 맞춤</button><button class="btn" id="graph-fullscreen">크게 보기</button></div></div><div class="graph-context"><strong>${graphLayout==='map'?routes().filter(e=>graphKind==='전체'||kinds[e.kind].name===graphKind).length+'개 연결 → '+connectionGroups().length+'개 방향으로 묶음 · 선/개수 클릭으로 목록 확인':'모든 통신 이름 표시 · 작게 전체를 보고 필요한 곳 확대'}</strong><span>노드 클릭: 외부 장비·미연결 인터페이스까지 확인</span></div><div class="graph-canvas">${overviewGraph()}</div><div class="graph-legend"><span class="topic-dot">T · Topic 발행 → 구독</span><span class="service-dot">S · Service 요청 → 제공</span><span class="action-dot">A · Action 목표 → 제공</span><small>응답·피드백·결과는 반대 방향 · S/A 노드 수치는 호출/제공 · 팀 이름에서 /team/ 생략</small></div><div class="graph-inspector" aria-live="polite">빈 곳 드래그로 이동 · 휠/트랙패드로 포인터 위치 확대 · +/− · 전체 맞춤</div><details class="boundary-details"><summary>대회 제공 장비 연결 <span>${data.official_references.length}개 규격</span></summary>${boundarySummary()}</details></section>${changeLog()}</div>${ioSummary()}`;
+}
+function overviewGraph() {
+  return graphLayout==='topics'?detailedGraph():connectionMap();
+}
+function connectionGroups() {
+  const groups=new Map();
+  for(const e of routes().filter(e=>graphKind==='전체'||kinds[e.kind].name===graphKind)){
+    const key=JSON.stringify([e.from,e.to]);
+    if(!groups.has(key))groups.set(key,{from:e.from,to:e.to,members:[]});
+    groups.get(key).members.push(e);
+  }
+  return [...groups.values()];
+}
+function connectionMap() {
+  const groups=connectionGroups(),all=routes(),degree=id=>all.filter(e=>e.from===id||e.to===id).length;
+  const ordered=data.nodes.slice().sort((a,b)=>degree(b.id)-degree(a.id)||data.nodes.indexOf(a)-data.nodes.indexOf(b));
+  const count=Math.max(1,ordered.length-1),r=Math.max(380,count*82);
+  const nodes=ordered.map((node,i)=>{const angle=-Math.PI*.75+(i-1)*Math.PI*2/count;return {...node,cx:i?Math.cos(angle)*r:0,cy:i?Math.sin(angle)*r*.72:0};});
+  const map=new Map(nodes.map(n=>[n.id,n]));
+  const placed=groups.map(g=>{
+    const a=map.get(g.from),b=map.get(g.to),dx=b.cx-a.cx,dy=b.cy-a.cy,len=Math.hypot(dx,dy)||1;
+    // Opposite directions use opposite sides of the same connection.
+    return {...g,x:(a.cx+b.cx)/2-dy/len*32,y:(a.cy+b.cy)/2+dx/len*32};
+  });
+  for(let pass=0;pass<160;pass++){
+    let changed=false;
+    for(const p of placed)for(const n of nodes){const dx=p.x-n.cx,dy=p.y-n.cy,px=179-Math.abs(dx),py=64-Math.abs(dy);if(px>0&&py>0){if(px<py)p.x+=(dx>=0?1:-1)*(px+1);else p.y+=(dy>=0?1:-1)*(py+1);changed=true;}}
+    for(let i=0;i<placed.length;i++)for(let j=i+1;j<placed.length;j++){const a=placed[i],b=placed[j],dx=a.x-b.x,dy=a.y-b.y,px=168-Math.abs(dx),py=30-Math.abs(dy);if(px>0&&py>0){if(px<py){const d=(dx>=0?1:-1)*(px+1)/2;a.x+=d;b.x-=d;}else{const d=(dy>=0?1:-1)*(py+1)/2;a.y+=d;b.y-=d;}changed=true;}}
+    if(!changed)break;
+  }
+  const boxes=[...nodes.map(n=>({x:n.cx-95,y:n.cy-40,w:190,h:80})),...placed.map(p=>({x:p.x-78,y:p.y-12,w:156,h:24}))];
+  const minX=boxes.length?Math.min(...boxes.map(b=>b.x))-90:0,minY=boxes.length?Math.min(...boxes.map(b=>b.y))-65:0;
+  extent={x:minX,y:minY,w:boxes.length?Math.max(900,Math.max(...boxes.map(b=>b.x+b.w))-minX+90):900,h:boxes.length?Math.max(540,Math.max(...boxes.map(b=>b.y+b.h))-minY+65):540};
+  const port=(n,p)=>{const dx=p.x-n.cx,dy=p.y-n.cy,s=1/Math.max(Math.abs(dx)/97,Math.abs(dy)/42,.001);return {x:n.cx+dx*s,y:n.cy+dy*s};};
+  const diagrams=placed.map(g=>{
+    const a=map.get(g.from),b=map.get(g.to),start=port(a,g),end=port(b,g),quiet=graphFocus&&g.from!==graphFocus&&g.to!==graphFocus;
+    const full=`${a.name} → ${b.name}\n`+g.members.map(e=>`${kinds[e.kind].name}: ${e.x.name}`).join('\n');
+    const counts=Object.keys(kinds).filter(k=>g.members.some(e=>e.kind===k)).map(k=>`${kinds[k].name[0]} ${g.members.filter(e=>e.kind===k).length}`).join(' · ');
+    const attrs=`data-bundle-from="${esc(g.from)}" data-bundle-to="${esc(g.to)}" data-from="${esc(g.from)}" data-to="${esc(g.to)}"`;
+    const labelPort=n=>{const dx=n.cx-g.x,dy=n.cy-g.y,t=1/Math.max(Math.abs(dx)/78,Math.abs(dy)/12,.001);return {x:g.x+dx*t,y:g.y+dy*t};};
+    const entry=labelPort(a),exit=labelPort(b),curve=(u,v)=>`M${u.x} ${u.y} C${(u.x+v.x)/2} ${u.y},${(u.x+v.x)/2} ${v.y},${v.x} ${v.y}`;
+    return {wire:`<g class="bundle-wire ${quiet?'quiet':''}" ${attrs} role="button" tabindex="0" aria-label="${esc(full)}"><title>${esc(full)}</title><path class="wire-hit" d="${curve(start,entry)}"/><path class="wire-hit" d="${curve(exit,end)}"/><path class="bundle-path" d="${curve(start,entry)}"/><path class="bundle-path" d="${curve(exit,end)}" marker-end="url(#bundle-arrow)"/></g>`,label:`<g class="bundle-edge ${quiet?'quiet':''}" ${attrs} role="button" tabindex="0" aria-label="${esc(full)}"><title>${esc(full)}</title><rect x="${g.x-78}" y="${g.y-12}" width="156" height="24" rx="12"/><text x="${g.x}" y="${g.y+4}" text-anchor="middle">${esc(counts)}　${Math.abs(b.cx-a.cx)<30?(b.cy>a.cy?'↓':'↑'):(b.cx>a.cx?'→':'←')}</text></g>`};
+  });
+  const cards=nodes.map((n,i)=>{const l=links(n.id);return `<g class="overview-node ${i===0?'central':''} ${n.status==='대회 제공'?'official-node':''} ${graphFocus===n.id?'selected-node':''}" data-kind="nodes" data-id="${esc(n.id)}" role="button" tabindex="0" aria-label="${esc(n.name)}의 모든 입출력"><title>${esc(n.name+' · '+n.status+'\n'+n.description)}</title><rect x="${n.cx-95}" y="${n.cy-40}" width="190" height="80" rx="9"/><text class="program-title" x="${n.cx-82}" y="${n.cy-15}">${esc(n.name.length>20?n.name.slice(0,18)+'…':n.name)}</text><text class="program-sub" x="${n.cx-82}" y="${n.cy+3}">${esc(n.label||n.package)}</text><text class="program-foot" x="${n.cx-82}" y="${n.cy+22}">T ↑${l.topics_0.length} ↓${l.topics_1.length}　S ${l.services_0.length}/${l.services_1.length}　A ${l.actions_0.length}/${l.actions_1.length}</text></g>`;}).join('');
+  return `<svg id="node-graph" class="connection-map" viewBox="${extent.x} ${extent.y} ${extent.w} ${extent.h}" xmlns="http://www.w3.org/2000/svg" aria-label="방향별로 묶은 전체 ROS 2 연결"><defs><marker id="bundle-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#8b9bb0"/></marker></defs><g class="wire-layer">${diagrams.map(d=>d.wire).join('')}</g><g class="label-layer">${diagrams.map(d=>d.label).join('')}</g><g class="node-layer">${cards}</g></svg>`;
+}
+function showBundle(from,to) {
+  const group=connectionGroups().find(g=>g.from===from&&g.to===to);if(!group)return;
+  ++detailGeneration;
+  $('#detail-content').innerHTML=`<div class="detailtop"><button id="close-detail" class="close" aria-label="상세 닫기">×</button>${badge('방향별 통신 목록')}<h2 id="detail-title">${esc(nodeName(from))} → ${esc(nodeName(to))}</h2><p>${group.members.length}개 연결 · 이름을 누르면 타입·QoS·상세 계약 확인</p></div><div class="detailbody"><p class="bundle-explanation">Topic은 발행 → 구독, Service는 요청 → 제공, Action은 목표·취소 → 제공 방향입니다. 서비스 응답과 액션 피드백·결과는 반대 방향입니다.</p>${group.members.map(e=>interfaceCard(e.kind,e.x)).join('')}</div>`;
+  if(!$('#detail').open)$('#detail').showModal();$('#close-detail').onclick=()=>$('#detail').close();
+}
+
+function detailedGraph() {
+  const allRoutes=routes(),n=data.nodes.length,degree=id=>allRoutes.filter(e=>e.from===id||e.to===id).length;
+  const ordered=data.nodes.slice().sort((a,b)=>degree(b.id)-degree(a.id)||data.nodes.indexOf(a)-data.nodes.indexOf(b));
+  const count=Math.max(1,n-1),radius=Math.max(520,count*96),w=radius*2+480,h=radius*1.4+320,cx=w/2,cy=h/2;
+  const nodes=ordered.map((node,i)=>{const angle=-Math.PI*.75+(i-1)*Math.PI*2/count;return {...node,cx:i?cx+Math.cos(angle)*radius:cx,cy:i?cy+Math.sin(angle)*radius*.7:cy};});
+  const map=new Map(nodes.map(x=>[x.id,x])),bundles=new Map();
+  for(const e of allRoutes.filter(e=>graphKind==='전체'||kinds[e.kind].name===graphKind)){
+    const key=JSON.stringify([e.from,e.to].sort());if(!bundles.has(key))bundles.set(key,[]);bundles.get(key).push(e);
+  }
+  const placed=[];
+  for(const xs of bundles.values()){
+    xs.sort((a,b)=>a.from.localeCompare(b.from)||a.kind.localeCompare(b.kind)||a.x.name.localeCompare(b.x.name));
+    const a=map.get(xs[0].from),b=map.get(xs[0].to),hub=ordered[0]?.id,outer=a.id===hub?b:b.id===hub?a:null;
+    let x=(a.cx+b.cx)/2,y=(a.cy+b.cy)/2;
+    if(outer&&Math.abs(outer.cx-cx)>240){x=outer.cx;y=outer.cy+(outer.cy<cy?1:-1)*(64+(xs.length-1)*30/2);}
+    xs.forEach((e,i)=>placed.push({e,x,y:y+(i-(xs.length-1)/2)*30}));
+  }
+  for(let pass=0;pass<160;pass++){
+    let changed=false;
+    for(const p of placed)for(const node of nodes){
+      const dx=p.x-node.cx,dy=p.y-node.cy,px=223-Math.abs(dx),py=65-Math.abs(dy);
+      if(px>0&&py>0){if(px<py)p.x+=(dx>=0?1:-1)*(px+.5);else p.y+=(dy>=0?1:-1)*(py+.5);changed=true;}
+    }
+    for(let i=0;i<placed.length;i++)for(let j=i+1;j<placed.length;j++){
+      const a=placed[i],b=placed[j],dx=a.x-b.x,dy=a.y-b.y,px=244-Math.abs(dx),py=30-Math.abs(dy);
+      if(px>0&&py>0){if(px<py){const delta=(dx>=0?1:-1)*(px+.5)/2;a.x+=delta;b.x-=delta;}else{const delta=(dy>=0?1:-1)*(py+.5)/2;a.y+=delta;b.y-=delta;}changed=true;}
+    }
+    if(!changed)break;
+  }
+  // Fit actual cards and labels, so an empty margin cannot push nodes below the fold.
+  const boxes=[...nodes.map(a=>({x:a.cx-95,y:a.cy-40,w:190,h:80})),...placed.map(a=>({x:a.x-116,y:a.y-12,w:232,h:24}))];
+  const minX=boxes.length?Math.min(...boxes.map(b=>b.x))-32:0,minY=boxes.length?Math.min(...boxes.map(b=>b.y))-32:0;
+  extent={x:minX,y:minY,w:boxes.length?Math.max(780,Math.max(...boxes.map(b=>b.x+b.w))-minX+32):900,h:boxes.length?Math.max(430,Math.max(...boxes.map(b=>b.y+b.h))-minY+32):500};
+  const port=(node,p)=>{const dx=p.x-node.cx,dy=p.y-node.cy,r=1/Math.max(Math.abs(dx)/97,Math.abs(dy)/42,.001);return{x:node.cx+dx*r,y:node.cy+dy*r};};
+  const markers=`<defs>${Object.entries(kinds).map(([key,k])=>`<marker id="arrow-${key}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10Z" fill="${k.color}"/></marker>`).join('')}</defs>`;
+  const diagrams=placed.map(({e,x,y})=>{
+    const a=map.get(e.from),b=map.get(e.to),vertical=Math.abs(a.cx-b.cx)<45,right=b.cx>a.cx,down=b.cy>a.cy;
+    const entry=vertical?{x:x-48,y:y+(down?-12:12)}:{x:x+(right?-116:116),y};
+    const exit=vertical?{x:x+48,y:y+(down?12:-12)}:{x:x+(right?116:-116),y};
+    const start=port(a,entry),end=port(b,exit);
+    const curve=(u,v)=>vertical?`M${u.x} ${u.y} C${u.x} ${(u.y+v.y)/2},${v.x} ${(u.y+v.y)/2},${v.x} ${v.y}`:`M${u.x} ${u.y} C${(u.x+v.x)/2} ${u.y},${(u.x+v.x)/2} ${v.y},${v.x} ${v.y}`;
+    const quiet=graphFocus&&e.from!==graphFocus&&e.to!==graphFocus;
+    const attributes=`data-kind="${e.kind}" data-id="${esc(e.x.id)}" data-from="${esc(e.from)}" data-to="${esc(e.to)}"`;
+    const full=`${e.x.name}\n${a.name} → ${b.name}${e.kind==='topics'?' · 발행 → 구독':e.kind==='services'?' · 요청 → 제공, 응답 ←':' · 목표/취소 → 제공, 피드백/결과 ←'}`;
+    const short=e.x.name.replace(/^\/team\//,'');
+    return {wire:`<g class="interface-wire ${e.kind} ${quiet?'quiet':''}" ${attributes}><path class="wire-hit" d="${curve(start,entry)}"/><path class="wire-hit" d="${curve(exit,end)}"/><path class="wire" d="${curve(start,entry)}"/><path class="wire" d="${curve(exit,end)}" marker-end="url(#arrow-${e.kind})"/><circle class="source-port" cx="${start.x}" cy="${start.y}" r="2.5"/></g>`,label:`<g class="interface-edge ${e.kind} ${quiet?'quiet':''}" ${attributes} role="button" tabindex="0" aria-label="${esc(full)}"><title>${esc(full)}</title><g class="wire-label"><rect x="${x-116}" y="${y-12}" width="232" height="24" rx="6"/><text class="wire-kind" x="${x-108}" y="${y+4}">${kinds[e.kind].name[0]}</text><text class="wire-name" x="${x-92}" y="${y+4}">${esc(short.length>25?short.slice(0,23)+'…':short)}</text><text class="wire-direction" x="${x+107}" y="${y+5}" text-anchor="end">${vertical?(down?'↓':'↑'):(right?'→':'←')}</text></g></g>`};
+  });
+  const cards=nodes.map((node,i)=>{const l=links(node.id);return `<g class="overview-node ${i===0?'central':''} ${node.status==='대회 제공'?'official-node':''} ${node.id===graphFocus?'selected-node':''}" role="button" tabindex="0" data-kind="nodes" data-id="${esc(node.id)}" aria-label="${esc(node.name)}의 모든 입출력"><title>${esc(node.name+' · '+node.status+'\n'+node.description)}</title><rect x="${node.cx-95}" y="${node.cy-40}" width="190" height="80" rx="12"/><text class="program-kicker" x="${node.cx-82}" y="${node.cy-27}">${esc(node.status)}</text><text class="program-title" x="${node.cx-82}" y="${node.cy-8}">${esc(node.name.length>20?node.name.slice(0,18)+'…':node.name)}</text><text class="program-sub" x="${node.cx-82}" y="${node.cy+10}">${esc(node.label||node.package)}</text><text class="program-foot" x="${node.cx-82}" y="${node.cy+28}">T ↑${l.topics_0.length} ↓${l.topics_1.length}　S ${l.services_0.length}/${l.services_1.length}　A ${l.actions_0.length}/${l.actions_1.length}</text></g>`;}).join('');
+  // All wires are behind all labels. A later wire can never cross printed text.
+  return `<svg id="node-graph" viewBox="${extent.x} ${extent.y} ${extent.w} ${extent.h}" xmlns="http://www.w3.org/2000/svg" aria-label="전체 ROS 2 노드 그래프">${markers}<g class="wire-layer">${diagrams.map(d=>d.wire).join('')}</g><g class="label-layer">${diagrams.map(d=>d.label).join('')}</g><g class="node-layer">${cards}</g></svg>`;
+}
+
+function boundarySummary() {
+  const xs=Object.keys(kinds).flatMap(kind=>data[kind].filter(x=>ends(kind,x).some(side=>side.some(e=>e.external))).map(x=>({kind,x})));
+  return `<div class="boundary-summary"><strong>대회 제공 장비와 연결</strong><p>대회 제공 노드로 잇지 못한 연결만 장비 이름으로 표시합니다. 대회 제공 노드(로봇 실측)는 그래프에 점선 카드로 나옵니다.</p><div class="boundary-grid">${xs.map(({kind,x})=>{const [a,b]=ends(kind,x);return button(kind,x.id,`<code>${esc(x.name)}</code><small>${a.map(e=>esc(e.label)).join(', ')||'발행·호출 없음'} → ${b.map(e=>esc(e.label)).join(', ')||'구독·제공 없음'}</small>`,'boundary-chip');}).join('')||'<p class="muted">없음 — 공식 연결은 모두 대회 제공 노드에 이어져 있습니다.</p>'}</div></div>`;
+}
+function ioSummary() {
+  return `<section class="panel"><div class="panelhead"><div><h2>노드별 입출력</h2><p>연결은 YAML endpoints에서 한 번만 관리합니다.</p></div><button class="btn" data-view="io">전체 입출력 표 →</button></div><div class="io-summary-grid">${data.nodes.map(n=>{const l=links(n.id);return button('nodes',n.id,`<strong>${esc(n.name)}</strong><span>${esc(n.label||'')}</span><small>Topic 발행 ${l.topics_0.length} · 구독 ${l.topics_1.length}<br>Service 호출 ${l.services_0.length} · 제공 ${l.services_1.length}<br>Action 호출 ${l.actions_0.length} · 제공 ${l.actions_1.length}</small>${statusBadge(n)}`,'io-mini');}).join('')}</div></section>`;
+}
+function interfaceCard(kind,x) {
+  const [a,b]=ends(kind,x),labels=side=>side.length?side.map(e=>e.external?badge(e.label,'external'):button('nodes',e.id,esc(e.label))).join(' '):badge('연결 상대 없음');
+  return `<article class="interface-card"><div class="interface-heading">${badge(kinds[kind].name,kind)}${button(kind,x.id,esc(x.name),'interface-name')}${statusBadge(x)}</div><div class="interface-flow"><div><small>${kind==='topics'?'발행':'호출'}</small>${labels(a)}</div><b>→</b><div><small>${kind==='topics'?'구독':'제공'}</small>${labels(b)}</div></div>${kind!=='topics'?`<p class="flow-return">← ${kind==='services'?'응답':'피드백·결과'}${kind==='actions'?' · 취소 요청은 목표와 같은 방향':''}</p>`:''}<p>${esc(x.description)}</p></article>`;
+}
+function ioView() {
+  const cell=(kind,xs,side)=>xs.length?xs.map(x=>{
+    const peers=ends(kind,x)[side===0?1:0],hint=side===0?(kind==='topics'?'이 노드 → 구독자':'이 노드 → 제공자'):(kind==='topics'?'발행자 → 이 노드':'호출자 → 이 노드');
+    return button(kind,x.id,`<code>${esc(x.name)}</code><small>${hint}</small><small>${peers.map(e=>esc(e.label)).join(', ')||'연결 상대 없음'}</small>`,'io-path');
+  }).join(''):'<span class="muted">없음</span>';
+  return `<div class="notice">서비스·액션은 호출/목표 방향을 표시합니다. 응답·피드백·결과는 반대 방향입니다.</div><div class="panel tablewrap"><table class="io-table"><thead><tr><th>노드 / 역할</th><th>← 구독 토픽</th><th>→ 발행 토픽</th><th>서비스<br>호출 / 제공</th><th>액션<br>호출 / 제공</th></tr></thead><tbody>${data.nodes.map(n=>{const l=links(n.id);return `<tr><td>${button('nodes',n.id,esc(n.name),'interface-name')}<p>${esc(n.description)}</p>${statusBadge(n)}</td><td>${cell('topics',l.topics_1,1)}</td><td>${cell('topics',l.topics_0,0)}</td><td><strong class="cell-label">호출 →</strong>${cell('services',l.services_0,0)}<strong class="cell-label">제공 ←</strong>${cell('services',l.services_1,1)}</td><td><strong class="cell-label">호출 →</strong>${cell('actions',l.actions_0,0)}<strong class="cell-label">제공 ←</strong>${cell('actions',l.actions_1,1)}</td></tr>`;}).join('')}</tbody></table></div>`;
+}
+function sourceLinks(refs) {
+  return `<div class="chips">${(refs||[]).map(ref=>{const [id,place]=ref.split('|'),s=byId('sources',id);if(!s)return '';const url=/^https?:\/\//.test(s.path)?s.path:new URL(s.path,location.href).href;return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(s.label)}${place?' · '+esc(place):''} ↗</a>`;}).join('')}</div>`;
+}
+function referenceView() {
+  return `<div class="notice">공식 문서의 공개 규격입니다. 사용 계획·현재 구현 상태와 구분합니다. 전체 타입·미공개 설정은 현장 배포본과 대조합니다.</div><div class="reference-grid">${data.official_references.map(x=>button('official_references',x.id,`${badge(x.kind,x.kind==='Topic'?'topics':'services')}<h2><code>${esc(x.name)}</code></h2><strong>${esc(x.label)}</strong><p>${esc(byId('reference_equipment',x.equipment)?.label)}</p><p>${esc(x.summary)}</p><small>${esc(x.type)}</small>`,'reference-card')).join('')}</div>`;
+}
+function searchView() {
+  const q=query.toLocaleLowerCase();
+  return ['nodes',...Object.keys(kinds),'official_references'].map(kind=>{
+    const xs=data[kind].filter(x=>JSON.stringify(x).toLocaleLowerCase().includes(q));
+    return xs.length?`<section class="search-section"><h2>${kind==='nodes'?'노드':kind==='official_references'?'대회 제공 토픽·서비스':kinds[kind].name} · ${xs.length}</h2>${xs.map(x=>button(kind,x.id,`<strong>${esc(x.name)}</strong><p>${esc(x.description||x.summary||'')}</p>`,'searchhit')).join('')}</section>`:'';
+  }).join('')||'<div class="empty">검색 결과가 없습니다.</div>';
+}
+function render() {
+  nav();
+  document.title='MAICON · '+(graphLayout==='map'?'연결 요약':'토픽 전체');
+  const titles={graph:'ROS 2 구성과 변경 이력',io:'노드별 입출력',reference:'대회 제공 토픽·서비스'};
+  $('#crumb').textContent=query?'검색':titles[current]; $('#page-title').textContent=query?'노드·인터페이스 검색':titles[current];
+  $('#page-subtitle').textContent=current==='reference'?'공식 규격과 장비 출처를 확인합니다.':'초기 개발 계약 · 설계와 실제 구현 상태를 함께 관리합니다.';
+  $('#data-status').textContent=loadMessage; $('#data-status').classList.toggle('error',loadError);
+  $('#side-date').textContent=data?'계약 확인 '+data.checked_at:'';
+  $('#screen').innerHTML=!data?`<div class="empty panel"><h2>통신 계약을 불러오세요</h2><p>${location.protocol==='file:'?'HTML을 직접 열었습니다. 위의 YAML 불러오기로 interfaces.yaml을 선택하세요.':'같은 폴더의 interfaces.yaml을 읽습니다. 실패하면 새로고침하거나 파일을 선택하세요.'}</p><p>타입 원문은 로컬 HTTP로 열면 저장소에서 직접 읽습니다.<br>파일로 열 때는 ‘타입 파일 선택’으로 .msg/.srv/.action을 선택할 수 있습니다.</p></div>`:query?searchView():current==='io'?ioView():current==='reference'?referenceView():graphView();
+  if (data && current==='graph' && !query) bindGraph();
+}
+const labels={publish_condition:'발행 조건',publish_rate_hz:'발행 주기 (Hz)',usage:'수신 용도',receive_timeout_ms:'마지막 수신 이후 제한 (ms)',max_data_age_ms:'원본 데이터 최대 나이 (ms)',on_timeout:'수신 중단 시 동작',on_stale:'오래된 데이터 처리',operation:'제공 작업',response_semantics:'응답의 완료 의미',idempotency:'중복 요청 처리',call_condition:'호출 조건',timeout_ms:'호출 제한 (ms)',processing_timeout_ms:'제공 처리 제한 (ms)',on_failure:'실패 시 동작',retry_policy:'재시도 정책',accept_timeout_ms:'목표 접수 제한 (ms)',execution_timeout_ms:'기본 실행 제한 (ms)',cancel_timeout_ms:'취소 응답 제한 (ms)',feedback_timeout_ms:'피드백 수신 제한 (ms)',max_concurrent_goals:'동시 목표 수',feedback_rate_hz:'피드백 주기 (Hz)',qos_notes:'액션별 QoS',qos_reliability:'reliability',qos_durability:'durability',qos_history:'history',qos_depth:'depth',qos_deadline_ms:'deadline (ms)',qos_lifespan_ms:'lifespan (ms)',qos_liveliness:'liveliness',qos_lease_duration_ms:'liveliness lease (ms)'};
+const qosKeys=Object.keys(labels).filter(k=>k.startsWith('qos_')&&k!=='qos_notes');
+function endpointDetails(kind,x,nodeId=null) {
+  const k=kinds[kind];
+  const es=data[endpointSection(kind)].filter(e=>e[k.ref]===x.id&&(!nodeId||e.node_id===nodeId));
+  const fields={topics:{publisher:['publish_condition','publish_rate_hz'],subscriber:['usage','receive_timeout_ms','max_data_age_ms','on_timeout','on_stale']},services:{provider:['operation','response_semantics','idempotency','processing_timeout_ms'],client:['call_condition','timeout_ms','on_failure','retry_policy']},actions:{provider:['operation','max_concurrent_goals','feedback_rate_hz','execution_timeout_ms'],client:['call_condition','accept_timeout_ms','execution_timeout_ms','cancel_timeout_ms','feedback_timeout_ms','on_failure','retry_policy']}};
+  return es.map(e=>`<article class="contract-item"><h4>${esc(nodeName(e.node_id))} · ${{publisher:'발행',subscriber:'구독',provider:'제공',client:'호출'}[e.role]}</h4>${statusBadge(e)}${kv(fields[kind][e.role].map(key=>[labels[key],e[key]]))}${kind==='actions'?`<p class="muted">${esc(e.qos_notes||'ROS 2 action 기본 정책 사용 계획. 피드백·상태·goal/result/cancel별 변경 시 별도 명시. 실제 코드 미구현.')}</p>`:`<details><summary>이 노드의 QoS 설정</summary>${kv(qosKeys.map(key=>[labels[key],e[key]]))}</details>`}${e.source_files?.length?section('실제 구현 파일',e.source_files.map(repoLink).join('<br>')):''}</article>`).join('')||'<p class="muted">기록된 노드별 계약이 없습니다.</p>';
+}
+function commonDetails(kind,x) {
+  let body=kv([['타입',x.type],['구분',x.scope==='official'?'대회 제공 인터페이스 사용 계획':'팀 인터페이스'],['단위',x.units],['좌표 기준',x.frame]]);
+  if (kind==='topics') body+=kv([['원본 시각 필드',x.stamp_field],['시계 기준',x.clock]])+section('특별한 값',list(x.special_values))+'<p class="timing-note">수신 중단은 마지막 메시지 도착 이후, 데이터 나이는 원본 생성 시각 이후입니다. 서로 다른 기준으로 판단합니다.</p>';
+  if (kind==='actions') body+=section('목표 의미',list(x.goal_semantics))+section('피드백 의미',list(x.feedback_semantics))+section('결과 의미',list(x.result_semantics))+kv([['취소 정책',x.cancel_policy],['목표 교체 정책',x.preemption_policy]]);
+  if (kind!=='topics') body+=kv([['성공 기준',x.success_criteria],['실패 기준',x.failure_criteria]]);
+  body+=section('필드 의미·제약',list(x.field_semantics));
+  if(x.notes?.length)body+=section('추가 약속',list(x.notes));
+  if(x.official_reference)body+=section('공식 규격',button('official_references',x.official_reference,'문서 명시값 확인 →'));
+  return body;
+}
+function historyFor(kind,id) {
+  const key={nodes:'node_ids',topics:'topic_ids',services:'service_ids',actions:'action_ids'}[kind];
+  const xs=data.changes.filter(c=>(c[key]||[]).includes(id));
+  return section('ROS 계약·구현 변경 이력',xs.length?xs.map(c=>`<article class="item-change"><small>${esc(c.date)} · ${esc(c.category)}</small><p>${esc(c.label)}</p><p>${esc(c.before)} → ${esc(c.after)}</p></article>`).join(''):'<p class="muted">기록된 변경 없음</p>');
+}
+function show(kind,id) {
+  const x=byId(kind,id); if(!x)return;
+  const token=++detailGeneration; let body='',title=x.name,meta='';
+  if(kind==='nodes'){
+    const l=links(id),pkg=byId('packages',x.package);
+    meta=statusBadge(x);body=kv([['역할',x.description],['담당',x.owner],['소속 패키지',pkg?.path ?? (pkg?.robot_path ? '로봇 내부 · '+pkg.name+' · '+pkg.robot_path : null)]])+section('이 노드의 필수 규칙',list(x.notes));
+    if(pkg)body+=`<p>${repoLink(pkg.path+'/README.md')}</p>`;
+    body+=section('실제 실행 구현 파일',x.source_files.length?x.source_files.map(repoLink).join('<br>'):'<p class="muted">없음 · 패키지 껍데기만 작성됨</p>');
+    for(const [key,k]of Object.entries(kinds))for(let i=0;i<2;i++)body+=section(`${k.name} · ${key==='topics'?(i===0?'발행 →':'구독 ←'):(i===0?'호출 →':'제공 ←')} (${l[key+'_'+i].length})`,l[key+'_'+i].map(item=>interfaceCard(key,item)+`<details class="node-contract"><summary>이 노드의 ${esc(item.name)} 계약</summary>${endpointDetails(key,item,id)}</details>`).join('')||'<p class="muted">없음</p>');
+  }else if(kinds[kind]){
+    
+    meta=badge(kinds[kind].name,kind)+' '+statusBadge(x);
+    body=interfaceCard(kind,x)+commonDetails(kind,x)+section('실제 타입 정의 파일',`<div id="definition-content" aria-live="polite"><p class="muted">정의 파일 확인 중…</p></div>`)+section('노드별 통신 계약',endpointDetails(kind,x));
+  }else{
+    meta=badge(x.kind,x.kind==='Topic'?'topics':'services')+' '+badge('공식 문서');
+    body=kv([['장비',byId('reference_equipment',x.equipment)?.label],['용도',x.summary],['타입',x.type],['주기',x.rate],['QoS 문서 명시값',x.qos],['공개 상태',x.status]])+section('필드',list(x.fields))+section('요청',list(x.request))+section('응답',list(x.response))+section('참고',list(x.notes))+sourceLinks(x.sources);
+  }
+  if(kind!=='official_references')body+=historyFor(kind,id);
+  $('#detail-content').innerHTML=`<div class="detailtop"><button id="close-detail" class="close" aria-label="상세 닫기">×</button><div class="badges">${meta}</div><h2 id="detail-title">${esc(title)}</h2><p>${esc(x.description||x.summary||'')}</p></div><div class="detailbody">${body}</div>`;
+  if(!$('#detail').open)$('#detail').showModal();$('#close-detail').onclick=()=>$('#detail').close();
+  if(kinds[kind])showDefinitions(x,token);
+}
+function localTypePath(type) {
+  const [pkg,folder,name]=type.replace(/\[.*\]$/,'').split('/');
+  const p=data.packages.find(x=>x.name===pkg);
+  return p && folder && name ? `${p.path}/${folder}/${name}.${folder}` : null;
+}
+async function readDefinition(path) {
+  if(location.protocol==='file:'){
+    const candidates=manualDefinitions.filter(f=>f.relative===path||path.endsWith('/'+f.relative));
+    if(candidates.length===1)return{text:await candidates[0].file.text(),basis:'수동 선택 · 경로 접미사 일치'};
+    if(candidates.length>1)throw Error('같은 경로의 선택 파일이 여러 개입니다. 선택 범위를 줄이세요.');
+    throw Error('브라우저 파일 접근 제한. 타입 파일을 선택하거나 저장소 루트의 로컬 HTTP로 여세요.');
+  }
+  const url=repoURL(path);if(!url)throw Error('저장소 상대 경로가 아닙니다.');
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw Error(`HTTP ${response.status} · 파일 경로 또는 정적 서버의 루트를 확인하세요.`);
+  const text=await response.text();if(/^\s*</.test(text))throw Error('타입 파일 대신 HTML이 반환되었습니다.');
+  return{text,basis:'저장소 파일 직접 조회 · '+new Date().toLocaleTimeString('ko-KR')};
+}
+async function showDefinitions(x,token) {
+  let paths=x.definition_files.slice(),out='',seen=new Set(),index=0;
+  if(!paths.length){if(token===detailGeneration&&$('#definition-content'))$('#definition-content').innerHTML='<p class="muted">저장소 내 정의 파일 없음. 외부 표준·대회 제공 타입은 공식 원본을 확인합니다.</p>';return;}
+  for(;index<paths.length&&index<40;index++){
+    const path=paths[index];if(seen.has(path))continue;seen.add(path);
+    try{
+      const {text,basis}=await readDefinition(path);
+      out+=`<details class="definition-file" ${index===0?'open':''}><summary>${esc(path)}</summary><p class="definition-basis">${esc(basis)} · ${repoLink(path)}</p><pre><code>${esc(text)}</code></pre></details>`;
+      // Follow only packages registered in YAML; external ROS definitions remain external.
+      for(const line of text.split(/\r?\n/)){
+        const m=line.trim().match(/^([a-z][a-z0-9_]*)(?:\/msg)?\/([A-Z][A-Za-z0-9_]*)(?:\[[^\]]*\])?\s+[a-z][a-z0-9_]*\s*(?:#.*)?$/);
+        if(m){const nested=localTypePath(`${m[1]}/msg/${m[2]}`);if(nested&&!seen.has(nested)&&!paths.includes(nested))paths.push(nested);}
+      }
+    }catch(error){out+=`<div class="definition-error"><strong>정의 파일 미확인</strong><code>${esc(path)}</code><p>${esc(error.message)}</p></div>`;}
+    if(token!==detailGeneration||!$('#definition-content'))return;
+    $('#definition-content').innerHTML=out;
+  }
+  if(index<paths.length&&token===detailGeneration)$('#definition-content').insertAdjacentHTML('beforeend','<p class="muted">연관 정의 40개까지 표시합니다. 나머지는 파일 링크에서 확인하세요.</p>');
+}
+function bindGraph() {
+  document.querySelectorAll('[data-layout]').forEach(b=>b.onclick=()=>{graphLayout=b.dataset.layout;camera=null;const url=new URL(location.href);url.searchParams.set('layout',graphLayout);history.replaceState(null,'',url);render();});
+  $('#graph-focus').onchange=e=>{graphFocus=e.target.value;render();};$('#graph-kind').onchange=e=>{graphKind=e.target.value;camera=null;render();};
+  const svg=$('#node-graph');if(!svg)return;
+  if(!camera)camera={...extent};
+  const update=()=>{svg.setAttribute('viewBox',`${camera.x} ${camera.y} ${camera.w} ${camera.h}`);$('#zoom-level').textContent=Math.round(extent.w/camera.w*100)+'%';};
+  const zoom=(f,anchor={x:camera.x+camera.w/2,y:camera.y+camera.h/2})=>{const w=Math.max(extent.w*.08,Math.min(extent.w*2.5,camera.w*f)),ratio=w/camera.w;camera={x:anchor.x+(camera.x-anchor.x)*ratio,y:anchor.y+(camera.y-anchor.y)*ratio,w,h:camera.h*ratio};update();};
+  $('#zoom-in').onclick=()=>zoom(.8);$('#zoom-out').onclick=()=>zoom(1.25);$('#graph-fit').onclick=()=>{camera={...extent};update();};
+  $('#graph-fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('#graph-shell').requestFullscreen();}catch{$('.graph-inspector').textContent='이 브라우저에서는 전체 화면을 사용할 수 없습니다.';}};
+  let drag=null,moved=false;
+  const point=(e,matrix)=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(matrix);};
+  svg.addEventListener('wheel',e=>{e.preventDefault();const matrix=svg.getScreenCTM()?.inverse();if(matrix)zoom(Math.exp(Math.max(-100,Math.min(100,e.deltaY))*.004),point(e,matrix));},{passive:false});
+  svg.addEventListener('pointerdown',e=>{if(e.target.closest('[data-kind],[data-bundle-from]'))return;const matrix=svg.getScreenCTM()?.inverse();if(!matrix)return;drag={p:point(e,matrix),camera:{...camera},matrix};moved=false;svg.setPointerCapture(e.pointerId);});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const p=point(e,drag.matrix),dx=p.x-drag.p.x,dy=p.y-drag.p.y;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;camera={...drag.camera,x:drag.camera.x-dx,y:drag.camera.y-dy};update();});
+  svg.addEventListener('pointerup',()=>{drag=null;});svg.addEventListener('pointercancel',()=>{drag=null;});
+  svg.addEventListener('click',e=>{if(moved){e.stopPropagation();moved=false;}},true);
+  const emphasize=(id,node)=>{
+    svg.querySelectorAll('.interface-edge,.interface-wire,.bundle-edge,.bundle-wire').forEach(g=>{const active=Boolean(id||node)&&(id?(g.dataset.id===id||(g.dataset.from+'|'+g.dataset.to)===id):g.dataset.from===node||g.dataset.to===node);g.classList.toggle('hover-quiet',Boolean(id||node)&&!active);g.classList.toggle('hover-active',active);});
+  };
+  svg.querySelectorAll('.interface-edge,.interface-wire,.bundle-edge,.bundle-wire,.overview-node').forEach(g=>{
+    const enter=()=>{const isNode=g.classList.contains('overview-node');emphasize(isNode?null:g.dataset.id||(g.dataset.from+'|'+g.dataset.to),isNode?g.dataset.id:null);$('.graph-inspector').textContent=isNode?`${nodeName(g.dataset.id)} · 모든 입출력을 보려면 클릭하세요.`:g.getAttribute('aria-label')||g.querySelector('title')?.textContent||'연결 이름을 눌러 상세를 확인하세요.';};
+    g.addEventListener('pointerenter',enter);g.addEventListener('focus',enter);
+    g.addEventListener('pointerleave',()=>emphasize(null,null));g.addEventListener('blur',()=>emphasize(null,null));
+  });
+  update();
+}
+function go(view) {
+  current=['graph','io','reference'].includes(view)?view:'graph';query='';$('#search').value='';history.replaceState(null,'','#'+current);render();
+}
+async function applyText(text,label) {
+  const next=parseYaml(text);data=next;camera=null;graphFocus='';graphKind='전체';
+  ++detailGeneration;if($('#detail').open)$('#detail').close();loadMessage=`${label} · 계약 확인 ${data.checked_at} · 실행 그래프 자동 수집 없음`;loadError=false;render();
+}
+async function reload() {
+  if(location.protocol==='file:'){$('#file').click();return;}
+  const request=++generation;$('#reload').disabled=true;
+  try{const r=await fetch(new URL('interfaces.yaml',location.href),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const text=await r.text();if(request!==generation)return;await applyText(text,'같은 폴더 YAML 로드');}
+  catch(error){if(request!==generation)return;loadError=true;loadMessage=`최신 YAML 읽기 실패: ${error.message}${data?' · 마지막 정상 로드 자료를 유지합니다.':' · 표시할 자료가 없습니다.'}`;render();}
+  finally{if(request===generation){$('#reload').disabled=false;}}
+}
+document.addEventListener('click',e=>{const bundle=e.target.closest('[data-bundle-from]');if(bundle&&data){showBundle(bundle.dataset.bundleFrom,bundle.dataset.bundleTo);return;}const target=e.target.closest('[data-kind],[data-view]');if(!target)return;if(target.dataset.view)go(target.dataset.view);else if(data)show(target.dataset.kind,target.dataset.id);});
+document.addEventListener('keydown',e=>{const bundle=e.target.closest('g[data-bundle-from]');if(bundle&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showBundle(bundle.dataset.bundleFrom,bundle.dataset.bundleTo);return;}const target=e.target.closest('g[data-kind]');if(target&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(target.dataset.kind,target.dataset.id);}});
+$('#detail').addEventListener('close',()=>{++detailGeneration;});
+$('#detail').addEventListener('click',e=>{if(e.target===$('#detail')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('#detail').close();}});
+let timer;$('#search').oninput=e=>{clearTimeout(timer);query=e.target.value.trim();timer=setTimeout(render,100);};
+$('#reload').onclick=reload;$('#load').onclick=()=>$('#file').click();$('#load-definitions').onclick=()=>$('#definitions').click();
+$('#file').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;const request=++generation;try{const text=await file.text();if(request!==generation)return;await applyText(text,file.name+' 수동 로드');}catch(error){loadError=true;loadMessage=`YAML 읽기 실패: ${error.message}${data?' · 마지막 정상 로드 자료 유지':''}`;render();}finally{e.target.value='';$('#reload').disabled=false;}};
+$('#definitions').onchange=e=>{manualDefinitions=Array.from(e.target.files||[]).map(file=>({file,relative:file.webkitRelativePath||file.name})).filter(x=>/\.(msg|srv|action)$/.test(x.relative));loadMessage=`타입 파일 ${manualDefinitions.length}개 수동 선택 · 전체 저장소 경로는 확인하지 못했습니다. 상세를 다시 열어 확인하세요.`;loadError=false;render();if($('#detail').open)$('#detail').close();e.target.value='';};
+window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+document.addEventListener('fullscreenchange',()=>{const b=$('#graph-fullscreen');if(b)b.textContent=document.fullscreenElement?'줄이기':'크게 보기';});
+$('#load-definitions').hidden=location.protocol!=='file:';
+document.title='MAICON · '+(graphLayout==='map'?'연결 요약':'토픽 전체');
+render();if(/^https?:$/.test(location.protocol))reload();
+</script></body></html>

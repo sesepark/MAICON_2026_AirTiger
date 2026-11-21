@@ -1,0 +1,20 @@
+{
+  "input_counts": {
+    "/odom": 81,
+    "/slam_trial/field": 2
+  },
+  "pose_count": 22,
+  "note": "Direct timestamped callbacks; synthetic map and no scan matching.",
+  "first_stamp_ns": 1794996101456869718,
+  "last_stamp_ns": 1794996103556900934,
+  "first_xy": [
+    3.0,
+    3.0
+  ],
+  "last_xy": [
+    3.0658941364381462,
+    2.8997383983805776
+  ],
+  "published_displacement_m": 0.11997677265296314,
+  "odom_axis_rotation_rad": null
+}

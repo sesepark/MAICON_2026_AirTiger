@@ -1,0 +1,46 @@
+test_assault_keeps_speed_and_stops_near_wall (test_drive_core.ExecutorTest) ... ok
+test_blocked_clears_when_path_opens (test_drive_core.ExecutorTest) ... ok
+test_blocked_is_reported_but_keeps_trying_until_timeout (test_drive_core.ExecutorTest) ... ok
+test_degraded_caps_speed (test_drive_core.ExecutorTest) ... ok
+test_goal_too_close_to_wall_is_moved (test_drive_core.ExecutorTest) ... ok
+test_invalid_goals (test_drive_core.ExecutorTest) ... ok
+test_localization_hold_then_lost (test_drive_core.ExecutorTest) ... ok
+test_normal_goal_around_box_with_heading (test_drive_core.ExecutorTest) ... ok
+test_rotate_in_place_only (test_drive_core.ExecutorTest) ... ok
+test_straight_mode_does_not_turn (test_drive_core.ExecutorTest) ... ok
+test_stuck_backs_up (test_drive_core.ExecutorTest) ... ok
+test_timeout_and_cancel (test_drive_core.ExecutorTest) ... ok
+test_waits_briefly_for_first_pose (test_drive_core.ExecutorTest) ... ok
+test_waits_then_replans_around_unmapped_obstacle (test_drive_core.ExecutorTest) ... ok
+test_yaw_ignored_with_supervisor_convention (test_drive_core.ExecutorTest) ... ok
+test_from_message_like_object (test_drive_core.FieldMapTest) ... ok
+test_40cm_gap_is_passable_but_blocked_by_extra (test_drive_core.GridTest) ... ok
+test_nearest_free_and_bounds (test_drive_core.GridTest) ... ok
+test_plans_around_box_and_keeps_clearance (test_drive_core.GridTest) ... ok
+test_map_points_are_explained_and_others_block (test_drive_core.ObstacleTest) ... ok
+test_scan_conversion_uses_lidar_mount (test_drive_core.ObstacleTest) ... ok
+test_fills_between_slam_updates_with_odom_and_imu (test_drive_core.PoseTrackerTest) ... ok
+test_late_pose_keeps_motion_since_its_stamp (test_drive_core.PoseTrackerTest) ... ok
+test_levels_have_hysteresis (test_drive_core.PoseTrackerTest) ... ok
+test_single_late_pose_only_degrades (test_drive_core.PoseTrackerTest) ... ok
+test_field_map_round_trip (test_map_integration.MapIntegrationTest) ... [INFO] [1794994167.774178767] [navigation]: 지도 갱신: 8.00 × 4.00 m, 박스 1개
+ok
+test_pose_expires_then_slot_and_scan_restore_tracking (test_map_integration.MapIntegrationTest) ... ok
+test_cancel (test_node_split.DrivingNodeTest) ... ok
+test_control_lost_stops (test_node_split.DrivingNodeTest) ... ok
+test_drives_to_goal_and_succeeds (test_node_split.DrivingNodeTest) ... ok
+test_entry_point_stops_robot_and_releases_node (test_node_split.DrivingNodeTest) ... ok
+test_invalid_run_id_and_empty_orientation (test_node_split.DrivingNodeTest) ... ok
+test_map_is_kept_and_wrong_frame_is_not_used (test_node_split.DrivingNodeTest) ... ok
+test_new_goal_replaces_running_goal_without_stopping (test_node_split.DrivingNodeTest) ... ok
+test_wiring (test_node_split.DrivingNodeTest) ... ok
+test_scan_rejects_insufficient_data (test_node_split.NodeSplitTest) ... ok
+test_slam_entry_point_releases_node_after_spin_error (test_node_split.NodeSplitTest) ... ok
+test_slam_owns_map_publisher (test_node_split.NodeSplitTest) ... ok
+test_slam_uses_observation_time_and_bounds_odometry (test_node_split.NodeSplitTest) ... ok
+test_slot_initialization_requires_a_unique_candidate (test_node_split.NodeSplitTest) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 8.879s
+
+OK

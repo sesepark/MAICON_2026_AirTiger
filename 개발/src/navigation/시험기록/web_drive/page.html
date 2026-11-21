@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웹 주행 시험기</title>
+<style>
+  :root {
+    --bg:#0f1318; --panel:#171c23; --card:#1c222b; --line:#2b3440; --line2:#232b36; --text:#e2e8ef; --dim:#8b97a7; --faint:#5f6b7b;
+    --ok:#3fb97a; --okbg:#173b29; --okfg:#86e3b0; --warn:#e0a63a; --warnbg:#43341a; --warnfg:#f3ca7a; --bad:#e5534b; --badbg:#47201e; --badfg:#ff9a93;
+    --accent:#4c9be8; --accentbg:#1d3550; --cand:#b48cff;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; background:var(--bg); color:var(--text); font:14px/1.5 "Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif; }
+  #app { display:flex; flex-direction:column; height:100vh; }
+  button { background:#27303c; color:var(--text); border:1px solid var(--line); border-radius:7px; padding:6px 11px; font:inherit; cursor:pointer; }
+  button:hover:not(:disabled) { background:#313c4b; }
+  button:disabled { opacity:.45; cursor:default; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  button.primary:hover:not(:disabled) { background:#5ba6ee; }
+  button.on { background:var(--accentbg); border-color:var(--accent); color:#cfe5ff; }
+  input[type=number], select { background:#10151b; color:var(--text); border:1px solid var(--line); border-radius:6px; padding:5px 7px; font:inherit; }
+  input[type=number] { width:64px; }
+  label { color:var(--dim); }
+  .dim { color:var(--dim); } .faint { color:var(--faint); }
+
+  /* 위 막대 */
+  #bar { display:flex; gap:12px; align-items:center; padding:8px 12px; background:var(--panel); border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  #stop { background:var(--bad); border-color:var(--bad); color:#fff; font-weight:700; font-size:16px; padding:8px 20px; letter-spacing:.02em; }
+  #stop:hover { background:#f0665e; }
+  #steps { display:flex; align-items:stretch; gap:4px; flex-wrap:wrap; }
+  .step { display:flex; align-items:center; gap:9px; padding:5px 12px 5px 7px; text-align:left; min-width:150px; }
+  .step .num { width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:13px; background:#2e3846; color:var(--dim); flex:none; }
+  .step b { display:block; font-weight:600; font-size:13px; }
+  .step small { display:block; color:var(--dim); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:170px; }
+  .step.ok .num { background:var(--ok); color:#06210f; } .step.busy .num { background:var(--warn); color:#2b1d02; } .step.bad .num { background:var(--bad); color:#fff; }
+  .step.ok small { color:var(--okfg); } .step.busy small { color:var(--warnfg); } .step.bad small { color:var(--badfg); }
+  .chev { color:var(--faint); align-self:center; }
+  #simTag { margin-left:auto; }
+
+  /* 본문 */
+  #main { flex:1 1 auto; display:flex; min-height:0; }
+  #left { flex:1 1 auto; min-width:0; position:relative; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; cursor:crosshair; touch-action:none; }
+  #toolHint { position:absolute; top:10px; left:50%; transform:translateX(-50%); display:none; gap:10px; align-items:center; background:#2a2412; border:1px solid var(--warn); color:var(--warnfg); padding:6px 8px 6px 14px; border-radius:20px; box-shadow:0 4px 16px #0008; max-width:calc(100% - 20px); }
+  #toolHint button { padding:3px 10px; border-radius:14px; }
+  #layers { position:absolute; top:10px; right:10px; background:#171c23e6; border:1px solid var(--line); border-radius:8px; padding:6px 10px; font-size:12px; display:flex; flex-direction:column; gap:2px; }
+  #layers label { color:var(--text); cursor:pointer; white-space:nowrap; }
+  .legend { position:absolute; left:10px; bottom:8px; font-size:12px; color:var(--dim); background:#171c23cc; border-radius:6px; padding:3px 8px; max-width:calc(100% - 20px); }
+  .legend span { display:inline-block; margin-right:10px; white-space:nowrap; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+  #right { flex:0 0 400px; overflow-y:auto; background:var(--panel); border-left:1px solid var(--line); padding:10px; display:flex; flex-direction:column; gap:10px; }
+
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .card.focus { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .head { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+  .head .num { width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:13px; background:#2e3846; color:var(--dim); flex:none; }
+  .head h2 { margin:0; font-size:15px; font-weight:650; }
+  .head .sub { margin-left:auto; font-size:12px; color:var(--dim); text-align:right; }
+  details.card > summary { cursor:pointer; font-weight:600; color:var(--dim); list-style:none; }
+  details.card > summary::before { content:'▸ '; } details.card[open] > summary::before { content:'▾ '; }
+  details.card[open] > summary { margin-bottom:8px; }
+  h3 { margin:12px 0 4px; font-size:12px; color:var(--dim); font-weight:600; }
+  .note { margin:0 0 8px; color:var(--dim); font-size:12.5px; }
+  .row { display:flex; gap:7px; align-items:center; flex-wrap:wrap; margin:7px 0; }
+  .seg { display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:10px; }
+  .seg button { flex:1; border:0; border-radius:0; background:transparent; color:var(--dim); padding:6px 4px; }
+  .seg button + button { border-left:1px solid var(--line); }
+  .seg button.on { background:var(--accentbg); color:#cfe5ff; font-weight:600; }
+  .seg.small { margin:6px 0 0; } .seg.small button { padding:3px 4px; font-size:12px; }
+  .notice { border-radius:7px; padding:7px 10px; font-size:13px; margin:6px 0; }
+  .notice.bad { background:var(--badbg); color:var(--badfg); } .notice.warn { background:var(--warnbg); color:var(--warnfg); } .notice.ok { background:var(--okbg); color:var(--okfg); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .pill.ok { background:var(--okbg); color:var(--okfg); } .pill.warn { background:var(--warnbg); color:var(--warnfg); } .pill.bad { background:var(--badbg); color:var(--badfg); } .pill.dim { background:#2a3340; color:var(--dim); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td { padding:3px 4px; vertical-align:top; border-bottom:1px solid var(--line2); word-break:break-word; }
+  td:first-child { color:var(--dim); white-space:nowrap; width:96px; }
+  #droneImg { width:100%; border-radius:6px; display:block; background:#0b0e12; min-height:60px; cursor:zoom-in; }
+  ul.notes { margin:6px 0; padding-left:18px; color:var(--warnfg); font-size:12.5px; }
+  .check { display:flex; gap:6px; align-items:flex-start; margin:8px 0; color:var(--text); cursor:pointer; }
+  .check input { margin-top:4px; }
+  #slotGrid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:6px 0 10px; }
+  #slotGrid .colhead { text-align:center; font-size:12px; font-weight:600; }
+  #slotGrid button { padding:9px 4px; font-weight:600; }
+  #slotGrid button.blue { border-color:#2f5f93; } #slotGrid button.red { border-color:#8a3a36; }
+  #slotGrid button.on { background:var(--accentbg); border-color:var(--accent); color:#fff; }
+  ol.checklist { list-style:none; margin:0; padding:0; font-size:13px; }
+  ol.checklist li { display:flex; gap:8px; padding:3px 0; align-items:flex-start; }
+  ol.checklist .ic { width:18px; height:18px; border-radius:50%; flex:none; display:grid; place-items:center; font-size:11px; font-weight:700; margin-top:1px; background:#2e3846; color:var(--faint); }
+  ol.checklist .ok .ic { background:var(--ok); color:#06210f; } ol.checklist .busy .ic { background:var(--warn); color:#2b1d02; } ol.checklist .bad .ic { background:var(--bad); color:#fff; }
+  ol.checklist .ok { color:var(--text); } ol.checklist .todo { color:var(--faint); }
+  ol.checklist small { display:block; color:var(--dim); }
+  #log { font:12px/1.45 Consolas,monospace; max-height:240px; overflow-y:auto; background:#10151b; border:1px solid var(--line); border-radius:6px; padding:6px; }
+  #log div { white-space:pre-wrap; }
+  #banner { display:none; background:var(--bad); color:#fff; padding:6px 12px; font-weight:600; }
+  @media (max-width: 900px) {
+    #app { height:auto; } #main { flex-direction:column; } #left { height:72vw; flex:none; }
+    #right { flex:none; width:100%; border-left:0; border-top:1px solid var(--line); overflow:visible; }
+    .step { min-width:0; } .step small { max-width:110px; } #layers { font-size:11px; }
+  }
+</style>
+</head>
+<body>
+<div id="banner">시험기 서버와 연결이 끊겼습니다 — 로봇은 3초 안에 스스로 멈춥니다</div>
+<div id="app">
+  <header id="bar">
+    <button id="stop" title="Space · Esc">■ 정지</button>
+    <span id="allowed" class="pill dim">주행 허용 꺼짐</span>
+    <nav id="steps">
+      <button class="step" data-step="map"><span class="num">1</span><span><b>지도</b><small id="st-map">—</small></span></button>
+      <span class="chev">›</span>
+      <button class="step" data-step="init"><span class="num">2</span><span><b>처음 위치</b><small id="st-init">—</small></span></button>
+      <span class="chev">›</span>
+      <button class="step" data-step="drive"><span class="num">3</span><span><b>주행</b><small id="st-drive">—</small></span></button>
+    </nav>
+    <span id="simTag" class="pill warn" style="display:none">가상 경기장 (PC)</span>
+  </header>
+  <div id="main">
+    <section id="left">
+      <canvas id="cv"></canvas>
+      <div id="toolHint"><span id="hintText"></span><button id="toolCancel">취소 (Esc)</button></div>
+      <div id="layers">
+        <label><input type="checkbox" data-layer="floor" checked> 드론 바닥 그림</label>
+        <label><input type="checkbox" data-layer="cand" checked> 지도 후보 상자</label>
+        <label><input type="checkbox" data-layer="scan" checked> 라이다</label>
+        <label><input type="checkbox" data-layer="obst" checked> 임시 장애물</label>
+        <label><input type="checkbox" data-layer="trail" checked> 지나온 길</label>
+      </div>
+      <div class="legend">
+        <span><i style="background:#7b8794"></i>지도 상자</span><span><i style="background:var(--cand)"></i>후보 상자</span><span><i style="background:#39c5cf"></i>라이다</span>
+        <span><i style="background:#3fb97a"></i>경로</span><span><i style="background:#4c9be8"></i>SLAM 위치</span><span><i style="background:#e5534b88"></i>임시 장애물</span><span><i style="background:#f0883e"></i>지도에 없는 점</span>
+      </div>
+    </section>
+    <aside id="right">
+      <div id="warnings"></div>
+
+      <!-- ① 지도 -->
+      <section class="card" id="card-map">
+        <div class="head"><span class="num">1</span><h2>지도</h2><span class="sub" id="mapNow"></span></div>
+        <div class="seg" id="mapTabs"><button data-tab="drone">드론 사진</button><button data-tab="lidar">라이다</button><button data-tab="manual">직접 편집</button></div>
+
+        <div data-pane="drone">
+          <p class="note">경기와 같은 길입니다: 드론 사진 → perception 의 함수(경계 → 상자) → 지도. 계산은 이 시험기가 대신 합니다.</p>
+          <div id="droneOff" class="notice bad" style="display:none"></div>
+          <div class="row"><label for="droneSource">사진</label><select id="droneSource" style="flex:1;min-width:0"></select></div>
+          <div class="faint" id="droneSourceNote" style="font-size:12px;margin-top:-3px"></div>
+          <input type="file" id="droneFile" accept="image/jpeg" style="display:none">
+          <div class="row"><button id="droneGo" class="primary">사진 받아 지도 만들기</button><span id="droneBusy" class="dim"></span></div>
+          <div id="droneError" class="notice bad" style="display:none"></div>
+          <div id="droneResult" style="display:none">
+            <img id="droneImg" alt="드론 사진 분석 결과" title="누르면 크게">
+            <div class="seg small" id="imgTabs"><button data-img="overlay">찾은 것</button><button data-img="top">위에서 본 바닥</button><button data-img="photo">원본</button></div>
+            <table id="droneTable" style="margin-top:8px"></table>
+            <ul id="droneNotes" class="notes"></ul>
+            <label class="check"><input type="checkbox" id="addPillars" checked><span>고정 기둥 10개 더하기<br><span class="dim" style="font-size:12px">perception 은 벽 쪽 끝 띠 안 물체를 내지 않아 기둥이 지도에서 빠집니다</span></span></label>
+            <div class="row"><button id="droneApply" class="primary">이 지도 쓰기</button><button id="droneDiscard">버리기</button></div>
+          </div>
+        </div>
+
+        <div data-pane="lidar">
+          <p class="note">드론 사진이 없는 모의 배치용입니다. 로봇이 있는 곳을 누른 채 로봇이 보는 쪽으로 끌면(±30 cm · ±30° 면 충분), 자세를 벽에 맞추고 라이다에 보이는 상자로 지도를 만든 뒤 <b>그 자세에서 바로 시작</b>합니다 (② 출발 칸 탐색은 건너뜀).</p>
+          <div class="row"><button data-tool="build" class="primary">로봇 자리 찍기</button><button id="addBoxes" title="지금 SLAM 위치에서 라이다에 새로 보이는 상자를 지도에 더한다">보이는 상자 추가</button></div>
+          <p class="note" style="margin:0">「보이는 상자 추가」: 움직인 뒤 새로 보이는 상자를 지도에 더합니다. 가려졌던 상자는 가까이 가면 주행 노드가 임시 장애물로 피합니다.</p>
+        </div>
+
+        <div data-pane="manual">
+          <div class="row"><label>가로</label><input type="number" id="cfgW" step="0.1"><label>세로</label><input type="number" id="cfgH" step="0.1"><label>상자</label><input type="number" id="cfgB" step="0.05"></div>
+          <div class="row"><button data-tool="box">상자 놓기/치우기</button><button id="presetPillars">기둥 10개만</button><button id="presetEmpty">상자 없음</button></div>
+          <div class="row"><button id="applyMap" class="primary">지도 적용</button><span id="mapDirty" style="color:var(--warn)"></span></div>
+          <p class="note" style="margin:0">기본 경기장은 실측 6.12 × 5.00 m (supervisor · perception 과 같은 값). 드론 사진 지도는 늘 이 크기로 계산합니다.</p>
+        </div>
+      </section>
+
+      <!-- ② 처음 위치 -->
+      <section class="card" id="card-init">
+        <div class="head"><span class="num">2</span><h2>처음 위치</h2><span class="sub" id="initNow"></span></div>
+        <p class="note">로봇을 출발 칸에 세운 채 그 칸을 누릅니다. 경기와 같은 순서로 진행합니다: 단계 ready(잠김) → running → 지도 → SLAM 이 칸 안을 라이다로 찾음. <b>끝날 때까지 로봇을 건드리지 마세요.</b></p>
+        <div id="slotGrid">
+          <div class="colhead" style="color:#7fb6ee">BLUE (왼쪽)</div><div class="colhead" style="color:#f0928c">RED (오른쪽)</div>
+          <button class="blue" data-slot="B-1">B-1</button><button class="red" data-slot="R-1">R-1</button>
+          <button class="blue" data-slot="B-2">B-2</button><button class="red" data-slot="R-2">R-2</button>
+          <button class="blue" data-slot="B-3">B-3</button><button class="red" data-slot="R-3">R-3</button>
+        </div>
+        <ol class="checklist" id="initSteps"></ol>
+        <details style="margin-top:8px"><summary class="dim" style="cursor:pointer">다른 방법</summary>
+          <div class="row"><button data-tool="region">주변에서 찾기</button><span class="dim" style="font-size:12px">출발 칸이 아닌 곳: 로봇 자리를 클릭하면 ±0.4 m 안을 찾음</span></div>
+          <div class="row"><button data-tool="pose">자세 직접 주기</button><span class="dim" style="font-size:12px">±10 cm · ±11° 로 알 때 (항공 지도가 우리 차를 찍어 준 것과 같은 길)</span></div>
+        </details>
+      </section>
+
+      <!-- ③ 주행 -->
+      <section class="card" id="card-drive">
+        <div class="head"><span class="num">3</span><h2>주행</h2><span class="sub" id="driveNow"></span></div>
+        <div id="driveBlock" class="notice warn" style="display:none"></div>
+        <p class="note">지도를 클릭하면 그 좌표로 갑니다. 끌면 도착해서 바라볼 방향. <b>Space · Esc = 정지</b></p>
+        <div class="row"><label>방식</label><select id="mode"><option value="normal">normal (경로)</option><option value="straight">straight (직진만)</option><option value="assault">assault (돌진)</option></select>
+          <label class="check" style="margin:0"><input type="checkbox" id="instant" checked><span>클릭하면 바로 출발</span></label></div>
+        <div class="row"><label>위치 오차</label><input type="number" id="posTol" value="0.10" step="0.01" min="0.02"><label>방향</label><input type="number" id="yawTol" value="0.10" step="0.01" min="0.02"><label>제한 s</label><input type="number" id="timeout" value="60" step="5" min="1"></div>
+        <div class="row"><button id="go" class="primary" disabled>출발</button><span id="pending" class="dim"></span></div>
+        <table id="goalTable"></table>
+        <div class="row simonly" style="display:none"><button data-tool="hidden">지도에 없는 상자 놓기</button><span class="dim" style="font-size:12px">가상 경기장: 회피 시험</span></div>
+      </section>
+
+      <details class="card" id="card-status"><summary>노드 상태 (SLAM · 주행 · 연결)</summary>
+        <h3 style="margin-top:0">SLAM (navigation_slam)</h3><table id="slamTable"></table>
+        <h3>주행 (navigation)</h3><table id="driveTable"></table>
+        <h3>연결</h3><table id="linkTable"></table>
+      </details>
+      <details class="card" open><summary>기록</summary><div id="log"></div></details>
+    </aside>
+  </div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const cv = $('cv'), ctx = cv.getContext('2d');
+let S = null, trail = [], tool = 'goal', pending = null, drag = null, editConfig = null, lastOk = 0;
+let view = {scale: 100, ox: 0, oy: 0};
+let mapTab = 'drone', imgTab = 'overlay', shownImg = '', optionsKey = '';
+const floorImg = new Image(); let floorKey = '';
+const layers = {floor: true, cand: true, scan: true, obst: true, trail: true};
+const store = {get(k, d) { try { const v = localStorage.getItem('web_drive.' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+               set(k, v) { try { localStorage.setItem('web_drive.' + k, JSON.stringify(v)); } catch (e) { /* 저장 못 해도 동작 */ } }};
+Object.assign(layers, store.get('layers', {}));
+mapTab = store.get('mapTab', 'drone');
+
+function post(action, body) {
+  return fetch('/api/' + action, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body || {})})
+    .then(r => r.json().catch(() => ({})).then(j => { if (!r.ok) { const text = j.error || ('HTTP ' + r.status); alert('실패: ' + text); throw Object.assign(new Error(text), {shown: true}); } return j; }))
+    .catch(e => { if (!e.shown) alert('시험기 서버에 닿지 못함: ' + e); throw e; });
+}
+const quiet = p => p.catch(() => {});
+function config() { return editConfig || (S && S.config); }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const pill = (text, kind) => '<span class="pill ' + kind + '">' + esc(text) + '</span>';
+const f = (v, n) => (v === null || v === undefined) ? '—' : Number(v).toFixed(n === undefined ? 2 : n);
+const deg = r => (r === null || r === undefined) ? '—' : (r * 180 / Math.PI).toFixed(0) + '°';
+const fresh = (age, limit) => age !== null && age !== undefined && age < limit;
+function rows(id, list) { $(id).innerHTML = list.map(([k, v]) => '<tr><td>' + esc(k) + '</td><td>' + v + '</td></tr>').join(''); }
+
+// ---------------------------------------------------------------- 좌표
+function fit() {
+  const c = config(); if (!c) return;
+  const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  cv.width = r.width * dpr; cv.height = r.height * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const pad = 28;
+  view.scale = Math.max(10, Math.min((r.width - 2 * pad) / c.width, (r.height - 2 * pad) / c.height));
+  view.ox = (r.width - c.width * view.scale) / 2;
+  view.oy = (r.height + c.height * view.scale) / 2;
+}
+const sx = x => view.ox + x * view.scale, sy = y => view.oy - y * view.scale;
+const wx = px => (px - view.ox) / view.scale, wy = py => (view.oy - py) / view.scale;
+
+// ---------------------------------------------------------------- 그리기
+function robotShape(x, y, yaw, color, dashed, fill) {
+  ctx.save(); ctx.translate(sx(x), sy(y)); ctx.rotate(-yaw);
+  const L = 0.25 * view.scale, W = 0.23 * view.scale;
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.setLineDash(dashed ? [4, 3] : []);
+  if (fill) { ctx.fillStyle = fill; ctx.fillRect(-L / 2, -W / 2, L, W); }
+  ctx.strokeRect(-L / 2, -W / 2, L, W);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(L * 0.9, 0); ctx.stroke();
+  ctx.restore(); ctx.setLineDash([]);
+}
+function arrow(x, y, yaw, len, color) {
+  const x2 = x + Math.cos(yaw) * len, y2 = y + Math.sin(yaw) * len;
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(sx(x), sy(y)); ctx.lineTo(sx(x2), sy(y2)); ctx.stroke();
+  ctx.save(); ctx.translate(sx(x2), sy(y2)); ctx.rotate(-yaw);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-8, 4); ctx.lineTo(-8, -4); ctx.closePath(); ctx.fill(); ctx.restore();
+}
+function square(x, y, half) { return [sx(x) - half, sy(y) - half, 2 * half, 2 * half]; }
+function draw() {
+  const c = config(); if (!c) return;
+  fit();
+  const r = cv.getBoundingClientRect();
+  ctx.clearRect(0, 0, r.width, r.height);
+  const dr = S && S.drone && S.drone.result;
+  // 경기장 바닥 · 격자 (드론 바닥 그림이 있으면 깐다)
+  ctx.fillStyle = '#19202a'; ctx.fillRect(sx(0), sy(c.height), c.width * view.scale, c.height * view.scale);
+  if (layers.floor && dr && floorImg.complete && floorImg.naturalWidth && floorKey) {
+    ctx.globalAlpha = 0.6; ctx.drawImage(floorImg, sx(0), sy(dr.field[1]), dr.field[0] * view.scale, dr.field[1] * view.scale); ctx.globalAlpha = 1;
+  }
+  ctx.strokeStyle = 'rgba(70,84,102,0.35)'; ctx.lineWidth = 1; ctx.beginPath();
+  for (let x = 0; x <= c.width + 1e-6; x += 0.2) { ctx.moveTo(sx(x), sy(0)); ctx.lineTo(sx(x), sy(c.height)); }
+  for (let y = 0; y <= c.height + 1e-6; y += 0.2) { ctx.moveTo(sx(0), sy(y)); ctx.lineTo(sx(c.width), sy(y)); }
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(90,108,130,0.6)'; ctx.beginPath();
+  for (let x = 0; x <= c.width + 1e-6; x += 1) { ctx.moveTo(sx(x), sy(0)); ctx.lineTo(sx(x), sy(c.height)); }
+  for (let y = 0; y <= c.height + 1e-6; y += 1) { ctx.moveTo(sx(0), sy(y)); ctx.lineTo(sx(c.width), sy(y)); }
+  ctx.stroke();
+  ctx.fillStyle = '#6b788a'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  for (let x = 0; x <= c.width + 1e-6; x += 1) ctx.fillText(x.toFixed(0), sx(x), sy(0) + 15);
+  ctx.textAlign = 'right';
+  for (let y = 0; y <= c.height + 1e-6; y += 1) ctx.fillText(y.toFixed(0), sx(0) - 7, sy(y) + 4);
+  ctx.strokeStyle = '#c9d3df'; ctx.lineWidth = 2; ctx.strokeRect(sx(0), sy(c.height), c.width * view.scale, c.height * view.scale);
+  ctx.fillStyle = '#4f7fb3'; ctx.textAlign = 'left'; ctx.fillText('BLUE', sx(0) + 4, sy(c.height) - 6);
+  ctx.fillStyle = '#b5605a'; ctx.textAlign = 'right'; ctx.fillText('RED', sx(c.width) - 4, sy(c.height) - 6);
+  // 출발 칸
+  ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  const init = S && S.init;
+  for (const b of c.bases || []) {
+    const active = S && S.slot === b.name;
+    ctx.strokeStyle = active ? '#e0a63a' : '#4a5869'; ctx.lineWidth = active ? 2 : 1; ctx.setLineDash([5, 4]);
+    ctx.strokeRect(sx(b.min_x), sy(b.max_y), (b.max_x - b.min_x) * view.scale, (b.max_y - b.min_y) * view.scale);
+    ctx.setLineDash([]); ctx.fillStyle = active ? '#e0a63a' : '#6b7a8c';
+    ctx.fillText(b.name, sx((b.min_x + b.max_x) / 2), sy((b.min_y + b.max_y) / 2) + 4);
+  }
+  if (init && init.how === 'region' && init.region) { const g = init.region; ctx.strokeStyle = '#e0a63a'; ctx.setLineDash([2, 3]); ctx.strokeRect(sx(g[0]), sy(g[3]), (g[2] - g[0]) * view.scale, (g[3] - g[1]) * view.scale); ctx.setLineDash([]); }
+  // 임시 장애물 칸 (주행 노드)
+  const D = S && S.debug && S.debug.navigation, M = S && S.debug && S.debug.navigation_slam;
+  if (layers.obst && D && D.obstacles && D.age < 2) {
+    const cell = D.obstacles.cell, a = D.obstacles.cells; ctx.fillStyle = 'rgba(229,83,75,0.28)';
+    for (let i = 0; i < a.length; i += 2) ctx.fillRect(sx(a[i] * cell), sy((a[i + 1] + 1) * cell), cell * view.scale + 0.5, cell * view.scale + 0.5);
+  }
+  // 상자: SLAM 이 내보낸 지도(실선) / 적용 전 편집본(점선)
+  const half = c.box_size / 2 * view.scale;
+  const nav = S && S.nav_map;
+  const navBoxes = nav ? nav.boxes : [];
+  const key = b => b[0].toFixed(2) + ',' + b[1].toFixed(2);
+  const navSet = new Set(navBoxes.map(key));
+  for (const b of navBoxes) { ctx.fillStyle = 'rgba(123,135,148,0.85)'; ctx.fillRect(...square(b[0], b[1], half)); ctx.strokeStyle = '#aab4c0'; ctx.lineWidth = 1; ctx.strokeRect(...square(b[0], b[1], half)); }
+  for (const b of c.boxes) if (!navSet.has(key(b))) { ctx.strokeStyle = '#e0a63a'; ctx.setLineDash([4, 3]); ctx.lineWidth = 1.5; ctx.strokeRect(...square(b[0], b[1], half)); ctx.setLineDash([]); }
+  if (S && S.hidden) for (const b of S.hidden) { ctx.fillStyle = 'rgba(160,90,200,0.55)'; ctx.fillRect(...square(b[0], b[1], half)); }
+  // 드론 사진 후보
+  if (layers.cand && dr && candidatePending()) {
+    ctx.strokeStyle = '#b48cff'; ctx.lineWidth = 2; ctx.setLineDash([6, 3]); ctx.fillStyle = '#d6c2ff'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+    dr.boxes.forEach((b, i) => { ctx.strokeRect(...square(b.x, b.y, half)); ctx.fillText(String(i), sx(b.x), sy(b.y) + 4); });
+    ctx.setLineDash([]); ctx.strokeStyle = '#e5534b'; ctx.lineWidth = 1.5;
+    for (const q of dr.rejected || []) { const X = sx(q.x), Y = sy(q.y); ctx.beginPath(); ctx.moveTo(X - 4, Y - 4); ctx.lineTo(X + 4, Y + 4); ctx.moveTo(X + 4, Y - 4); ctx.lineTo(X - 4, Y + 4); ctx.stroke(); }
+    if (dr.camera) { ctx.strokeStyle = '#ffe36e'; const X = sx(dr.camera.x), Y = sy(dr.camera.y); ctx.beginPath(); ctx.moveTo(X - 8, Y); ctx.lineTo(X + 8, Y); ctx.moveTo(X, Y - 8); ctx.lineTo(X, Y + 8); ctx.stroke(); }
+  }
+  // 다른 차량 (지도)
+  if (nav) for (const v of nav.vehicles) if (v.role !== 1) { ctx.fillStyle = v.role === 2 ? '#e5534b' : '#b58b3c'; ctx.beginPath(); ctx.arc(sx(v.x), sy(v.y), 0.14 * view.scale, 0, 7); ctx.fill(); }
+  // 지나온 길
+  if (layers.trail && trail.length > 1) { ctx.strokeStyle = 'rgba(76,155,232,0.55)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(sx(trail[0][0]), sy(trail[0][1])); for (const p of trail) ctx.lineTo(sx(p[0]), sy(p[1])); ctx.stroke(); }
+  // 라이다 (그 스캔을 받을 때의 SLAM 위치에 놓는다)
+  if (layers.scan && S && S.scan && S.scan.pose && S.scan.age < 1.5) {
+    const [px, py, pyaw] = S.scan.pose, cs = Math.cos(pyaw), sn = Math.sin(pyaw);
+    ctx.fillStyle = '#39c5cf';
+    for (const p of S.scan.points) { const X = px + cs * p[0] - sn * p[1], Y = py + sn * p[0] + cs * p[1]; ctx.fillRect(sx(X) - 1.2, sy(Y) - 1.2, 2.4, 2.4); }
+  }
+  if (layers.scan && D && D.unexplained && D.age < 1.5) { ctx.fillStyle = '#f0883e'; for (const p of D.unexplained) ctx.fillRect(sx(p[0]) - 2, sy(p[1]) - 2, 4, 4); }
+  if (M && M.slot_pose) { ctx.strokeStyle = '#e0a63a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(sx(M.slot_pose[0]), sy(M.slot_pose[1]), 6, 0, 7); ctx.stroke(); }
+  // 경로 · 목표
+  const job = D && D.age < 2 ? D.job : null;
+  if (job && D.pose && job.path && job.path.length) {
+    ctx.strokeStyle = '#3fb97a'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(sx(D.pose[0]), sy(D.pose[1]));
+    for (const p of job.path) ctx.lineTo(sx(p[0]), sy(p[1])); ctx.stroke();
+    ctx.fillStyle = '#3fb97a'; for (const p of job.path) { ctx.beginPath(); ctx.arc(sx(p[0]), sy(p[1]), 3, 0, 7); ctx.fill(); }
+  }
+  const g = S && S.goal;
+  if (g) {
+    const done = !!g.outcome, col = !done ? '#3fb97a' : (g.outcome === 'REACHED' ? '#7fe0aa' : '#e5534b');
+    ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(sx(g.x), sy(g.y), g.pos_tol * view.scale, 0, 7); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx(g.x) - 6, sy(g.y)); ctx.lineTo(sx(g.x) + 6, sy(g.y)); ctx.moveTo(sx(g.x), sy(g.y) - 6); ctx.lineTo(sx(g.x), sy(g.y) + 6); ctx.stroke();
+    if (g.yaw !== null) arrow(g.x, g.y, g.yaw, 0.3, col);
+    if (job && (Math.abs(job.target[0] - g.x) > 0.01 || Math.abs(job.target[1] - g.y) > 0.01)) { ctx.strokeStyle = '#e0a63a'; ctx.beginPath(); ctx.arc(sx(job.target[0]), sy(job.target[1]), 5, 0, 7); ctx.stroke(); }
+  }
+  if (pending) { ctx.strokeStyle = '#fff'; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(sx(pending.x), sy(pending.y), 8, 0, 7); ctx.stroke(); ctx.setLineDash([]); if (pending.yaw !== null) arrow(pending.x, pending.y, pending.yaw, 0.3, '#fff'); }
+  if (drag) {
+    const yaw = Math.atan2(wy(drag.cy) - drag.y, wx(drag.cx) - drag.x);
+    if (Math.hypot(drag.cx - sx(drag.x), drag.cy - sy(drag.y)) > 12) { if (tool === 'build' || tool === 'pose') robotShape(drag.x, drag.y, yaw, '#fff', true); arrow(drag.x, drag.y, yaw, 0.35, '#fff'); }
+    if (tool === 'region') { ctx.strokeStyle = '#e0a63a'; ctx.strokeRect(sx(drag.x - 0.4), sy(drag.y + 0.4), 0.8 * view.scale, 0.8 * view.scale); }
+  }
+  // 로봇
+  if (S && S.truth) robotShape(S.truth.x, S.truth.y, S.truth.yaw, '#9aa5b1', true);
+  if (D && D.pose && D.age < 1.5) robotShape(D.pose[0], D.pose[1], D.pose[2], '#3fb97a', true);
+  if (S && S.pose) robotShape(S.pose.x, S.pose.y, S.pose.yaw, S.pose.age < 0.6 ? '#4c9be8' : '#e5534b', false, S.pose.age < 0.6 ? 'rgba(76,155,232,0.35)' : 'rgba(229,83,75,0.3)');
+}
+
+// ---------------------------------------------------------------- 단계 판단
+function candidatePending() {
+  const dr = S.drone.result;
+  return !!dr && dr.boxes.length > 0 && !(S.config.source === '드론 사진' && S.config.made >= dr.at);
+}
+function mapStep() {
+  const M = S.debug.navigation_slam, n = S.config.boxes.length;
+  if (S.drone.state === 'busy') return ['busy', '사진 계산 중 ' + f(S.drone.elapsed, 0) + ' s'];
+  if (candidatePending()) return ['busy', '후보 ' + S.drone.result.boxes.length + '개 — 확인 대기'];
+  if (M && fresh(M.age, 2.5) && M.map) return ['ok', S.config.source + ' · 상자 ' + n + '개'];
+  if (S.nav_map) return ['ok', S.config.source + ' · 상자 ' + n + '개'];
+  return ['todo', '아직 안 보냄'];
+}
+function slotNote() { const M = S.debug.navigation_slam; return M && fresh(M.age, 2.5) ? (M.slot_note || '') : ''; }
+function initStep() {
+  const p = S.pose, init = S.init, note = slotNote();
+  if (p && fresh(p.age, 0.6)) return ['ok', (init && init.slot ? init.slot + ' · ' : '') + '위치 나옴'];
+  if (p && !fresh(p.age, 0.6) && init && init.age > (p.age || 0)) return ['bad', '위치 끊김 ' + f(p.age, 1) + ' s'];
+  if (/실패|모름|쓰지 않음/.test(note) && init && init.map_age > 0.5) return ['bad', note.startsWith('출발 칸 탐색 실패') ? '탐색 실패' : '시작 못 함'];
+  if (init && init.age < 30) return ['busy', S.phase === 'ready' ? '잠긴 자리 기억 중' : '찾는 중'];
+  return ['todo', '시작 전'];
+}
+function driveStep() {
+  const g = S.goal, fb = S.feedback;
+  if (g && !g.outcome) return ['busy', (fb ? fb.phase : '보냄') + (fb && fb.remaining !== null ? ' · ' + f(fb.remaining, 1) + ' m' : '')];
+  if (g) return [g.outcome === 'REACHED' ? 'ok' : 'bad', g.outcome];
+  return ['todo', '목표 없음'];
+}
+
+// ---------------------------------------------------------------- 표 · 카드
+function renderSteps() {
+  for (const [name, fn] of [['map', mapStep], ['init', initStep], ['drive', driveStep]]) {
+    const [kind, text] = fn();
+    const btn = document.querySelector('.step[data-step="' + name + '"]');
+    btn.className = 'step ' + kind; $('st-' + name).textContent = text;
+    document.querySelector('#card-' + name + ' .head .num').style.cssText = kind === 'ok' ? 'background:var(--ok);color:#06210f' : kind === 'busy' ? 'background:var(--warn);color:#2b1d02' : kind === 'bad' ? 'background:var(--bad);color:#fff' : '';
+  }
+}
+function renderMapCard() {
+  const c = S.config, M = S.debug.navigation_slam, o = S.drone_options, d = S.drone;
+  $('mapNow').innerHTML = esc(c.source) + ' · 상자 ' + c.boxes.length + '개 · ' + f(c.width) + ' × ' + f(c.height) + ' m' + (c.made ? ' · ' + esc(c.made) : '') +
+    '<br>' + (M && fresh(M.age, 2.5) ? (M.map ? pill('SLAM 이 받음', 'ok') : pill('SLAM 에 아직 없음', 'warn')) : '');
+  document.querySelectorAll('#mapTabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === mapTab));
+  document.querySelectorAll('[data-pane]').forEach(p => p.style.display = p.dataset.pane === mapTab ? '' : 'none');
+  // 사진 출처
+  const key = JSON.stringify([o.ready, o.samples, o.has_code, o.server, o.topic_publishers > 0]);
+  if (key !== optionsKey) {
+    optionsKey = key;
+    const sel = $('droneSource'), keep = sel.value || store.get('droneSource', '');
+    const opts = [];
+    for (const cam of o.cameras) opts.push(['server:' + cam, '서버 카메라 ' + cam + (cam === 'main' ? ' (본선)' : ' (연습 경기장)'), !o.has_code]);
+    opts.push(['topic', 'server_bridge 가 받은 사진 (/team/server/uav_image)', !(o.topic_publishers > 0)]);
+    for (const s of o.samples) opts.push(['sample:' + s, '샘플 ' + s.replace('drone_', '') + ' (연습 경기장 사진, 18일)', false]);
+    opts.push(['file', '파일 올리기 (JPEG)…', false]);
+    sel.innerHTML = opts.map(([v, t, off]) => '<option value="' + esc(v) + '"' + (off ? ' disabled' : '') + '>' + esc(t) + (off ? ' — 쓸 수 없음' : '') + '</option>').join('');
+    const usable = opts.filter(x => !x[2]).map(x => x[0]);
+    sel.value = usable.includes(keep) ? keep : (usable.find(v => v.startsWith('sample:')) || usable[0]);
+  }
+  const v = $('droneSource').value || '';
+  $('droneSourceNote').textContent = v.startsWith('server:') ? '서버 ' + o.server + (o.secrets_from ? ' · 임무코드: ' + o.secrets_from : '') :
+    v === 'topic' ? 'server_bridge 를 켜 둔 경우 (마지막 사진 ' + (o.uav_age === null ? '없음' : f(o.uav_age, 0) + ' s 전') + ')' :
+    !o.has_code ? '서버 카메라: 임무코드가 없어 쓸 수 없음 (nav_web/secrets.json 의 server_url · mission_code)' : '';
+  $('droneOff').style.display = o.ready ? 'none' : ''; $('droneOff').textContent = o.ready ? '' : '드론 사진 → 지도를 쓸 수 없음: ' + o.error;
+  $('droneGo').disabled = !o.ready || d.state === 'busy';
+  $('droneBusy').textContent = d.state === 'busy' ? '⏳ ' + d.detail + ' · ' + f(d.elapsed, 0) + ' s (PC 약 10 s, 로봇은 더 걸림)' : '';
+  $('droneError').style.display = d.state === 'error' ? '' : 'none'; $('droneError').textContent = d.state === 'error' ? d.detail : '';
+  const r = d.result;
+  $('droneResult').style.display = r ? '' : 'none';
+  $('droneResult').style.opacity = d.state === 'busy' ? 0.45 : 1;
+  if (!r) return;
+  if (!d.images.includes(imgTab)) imgTab = d.images.includes('overlay') ? 'overlay' : 'photo';
+  const src = '/drone/' + imgTab + '.jpg?v=' + d.version;
+  if (src !== shownImg) { $('droneImg').src = src; shownImg = src; }
+  document.querySelectorAll('#imgTabs button').forEach(b => { b.classList.toggle('on', b.dataset.img === imgTab); b.disabled = !d.images.includes(b.dataset.img); });
+  const b = r.boundary;
+  rows('droneTable', [
+    ['사진', esc(r.source) + ' · ' + esc(r.at) + (r.captured ? ' <span class="dim">(찍은 시각 ' + esc(r.captured) + ')</span>' : '') + ' · ' + r.image_size.join('×')],
+    ['결과', (r.ok ? pill('믿을 만함', 'ok') : pill('믿기 어려움', 'bad')) + ' ' + f(r.took_s, 1) + ' s 걸림'],
+    ['경기장 경계', pill(b.ok ? '맞음' : '검사 실패', b.ok ? 'ok' : 'bad') + ' 바닥선 잔차 ' + f(b.rms_cm, 1) + ' cm · 끝 띠 ' + f(b.strip) + ' m · CM 반폭 ' + f(b.cm_half) + ' m'],
+    ['상자', '<b>' + r.boxes.length + '개</b>' + (r.rejected.length ? ' <span class="dim">(버린 후보 ' + r.rejected.length + ' — 붉은 ×)</span>' : '')],
+    ['카메라', r.camera ? '높이 ' + f(r.camera.height) + ' m · ' + ({measured: '옆면으로 잼', given: '준 값', default: '기본값 (못 잼)'}[r.camera.source] || esc(r.camera.source)) + ' · 옆면 ' + r.camera.faces + '개' : '—'],
+    ['경기장 크기', f(r.field[0]) + ' × ' + f(r.field[1]) + ' m 로 계산' + (Math.abs(r.field[0] - S.config.width) > 1e-3 || Math.abs(r.field[1] - S.config.height) > 1e-3 ? ' <span class="dim">(쓰면 지금 지도 ' + f(S.config.width) + ' × ' + f(S.config.height) + ' 도 이 크기로 바뀜)</span>' : '')],
+  ]);
+  const notes = (b.notes || []).filter(t => !/^OK /.test(t)).concat(r.notes || []);
+  $('droneNotes').innerHTML = notes.map(t => '<li>' + esc(t) + '</li>').join('');
+  $('droneApply').disabled = !r.boxes.length;
+  $('droneApply').textContent = candidatePending() ? '이 지도 쓰기 (상자 ' + r.boxes.length + '개)' : '다시 쓰기';
+}
+function renderInitCard() {
+  const init = S.init, M = S.debug.navigation_slam, Mf = M && fresh(M.age, 2.5), p = S.pose, poseOk = p && fresh(p.age, 0.6);
+  document.querySelectorAll('#slotGrid button').forEach(b => b.classList.toggle('on', S.slot === b.dataset.slot));
+  $('initNow').textContent = S.slot ? S.camp + ' · ' + S.slot + ' · 단계 ' + S.phase : '단계 ' + S.phase;
+  const items = [];
+  const item = (state, text, sub) => items.push('<li class="' + state + '"><span class="ic">' + ({ok: '✓', busy: '…', bad: '!', todo: ''}[state]) + '</span><span>' + esc(text) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</span></li>');
+  if (!init) { $('initSteps').innerHTML = '<li class="todo"><span class="ic"></span><span>출발 칸을 누르면 여기에 진행 상황이 나옵니다</span></li>'; return; }
+  if (init.how === 'slot' || init.how === 'region') {
+    const locked = Mf && M.locked, running = S.phase === 'running', sent = init.map_age !== null && init.map_age >= 0, note = slotNote();
+    const found = note.startsWith('출발 칸에서 찾음'), failed = /실패|모름|쓰지 않음/.test(note), settled = found || poseOk;
+    item(locked || settled ? 'ok' : init.age < 3 ? 'busy' : 'bad', '단계 ready — SLAM 이 서 있는 자리를 기억',
+         settled ? '' : locked ? (M.still ? '그대로 서 있음' : '잠긴 뒤 움직였음 → 출발 칸 탐색을 쓰지 않음') : (Mf ? '' : 'SLAM 내부 상태가 안 옴 (debug:=true?)'));
+    item(running ? 'ok' : 'busy', '단계 running');
+    item(sent ? (Mf && M.map || settled ? 'ok' : 'busy') : 'todo', '지도 보냄 (' + S.config.source + ', 출발 칸 6개)');
+    item(found || poseOk ? 'ok' : failed && sent ? 'bad' : sent ? 'busy' : 'todo', (init.how === 'region' ? '클릭한 곳 주변' : init.slot + ' 칸 안') + '을 라이다로 찾기', sent ? note : '');
+  } else {
+    item('ok', init.how === 'lidar' ? '라이다로 지도 만들고 그 자세에서 시작' : '자세 직접 줌');
+  }
+  item(poseOk ? 'ok' : p ? 'bad' : 'busy', 'SLAM 위치 나옴', p ? '(' + f(p.x) + ', ' + f(p.y) + ') ' + deg(p.yaw) + (poseOk ? '' : ' · ' + f(p.age, 1) + ' s 전에 끊김') : '');
+  $('initSteps').innerHTML = items.join('');
+}
+function renderDriveCard() {
+  const p = S.pose, poseOk = p && fresh(p.age, 0.6), g = S.goal, fb = S.feedback;
+  $('driveBlock').style.display = poseOk ? 'none' : '';
+  $('driveBlock').textContent = poseOk ? '' : '위치가 아직 없습니다 — ② 처음 위치를 먼저 잡으세요. 지금 목표를 보내면 주행 노드가 위치를 기다리다 끝냅니다.';
+  $('driveNow').innerHTML = S.allowed ? pill('주행 허용', 'ok') : '';
+  rows('goalTable', g ? [
+    ['보낸 목표', '(' + f(g.x) + ', ' + f(g.y) + ')' + (g.yaw === null ? '' : ' ' + deg(g.yaw)) + ' · ' + esc(g.sent)],
+    ['결과', g.outcome ? pill(g.outcome, g.outcome === 'REACHED' ? 'ok' : 'bad') + ' ' + esc(g.detail || '') : pill('가는 중', 'warn') + (fb ? ' ' + esc(fb.phase) + (fb.remaining !== null ? ' · ' + f(fb.remaining) + ' m' : '') + (fb.blocked ? ' ' + pill('막힘', 'bad') : '') : '')],
+  ] : []);
+}
+function renderStatus() {
+  const M = S.debug.navigation_slam, D = S.debug.navigation, st = S.status.navigation, p = S.pose;
+  $('allowed').className = 'pill ' + (S.allowed ? 'ok' : 'dim');
+  $('allowed').textContent = S.allowed ? '주행 허용 켜짐' : '주행 허용 꺼짐' + (S.stop_reason ? ' — ' + S.stop_reason : '');
+  const slam = [
+    ['위치', p ? pill(fresh(p.age, 0.6) ? '나옴' : '끊김 ' + f(p.age, 1) + ' s', fresh(p.age, 0.6) ? 'ok' : 'bad') + ' (' + f(p.x) + ', ' + f(p.y) + ') ' + deg(p.yaw) : pill('아직 없음', 'warn')],
+    ['단계 · slot', esc(S.phase) + ' · ' + esc(S.slot || '—') + ' <span class="dim">' + esc(S.run_id) + '</span>'],
+  ];
+  if (M && fresh(M.age, 2.5)) {
+    slam.push(['지도', M.map ? '받음 (상자 ' + M.boxes + '개)' : pill('없음', 'warn')]);
+    slam.push(['라이다', M.scan ? esc(M.scan.result) + (M.scan.ms !== undefined ? ' · ' + M.scan.ms + ' ms' : '') + ' · ' + f(M.scan.age, 1) + ' s 전' : pill('/scan 안 옴', 'bad')]);
+    slam.push(['마지막 정합', M.anchor ? '(' + f(M.anchor[0]) + ', ' + f(M.anchor[1]) + ') ' + deg(M.anchor[2]) + ' · ' + f(M.anchor_age, 1) + ' s 전' : '—']);
+    slam.push(['odom 축 각도', M.delta === null ? pill('아직 모름', 'warn') + ' (움직이면 맞춰짐)' : deg(M.delta)]);
+    slam.push(['출발 칸', (M.locked ? '잠긴 자리 기억함' : '잠긴 자리 모름') + (M.still ? ' · 그대로 서 있음' : ' · 움직였음') + (M.slot_note ? '<br>' + esc(M.slot_note) : '')]);
+    slam.push(['입력', '/odom ' + f(M.odom_age, 1) + ' s 전 · 방향(' + esc(M.yaw_source) + ') ' + f(M.heading_age, 1) + ' s 전']);
+  } else slam.push(['내부 상태', pill('debug 안 옴', 'warn') + ' (navigation_slam -p debug:=true)']);
+  rows('slamTable', slam);
+  const drive = [];
+  drive.push(['노드 상태', st ? pill(st.state, st.state === 'READY' ? 'ok' : st.state === 'ERROR' ? 'bad' : 'warn') + ' ' + esc(st.detail || '') : pill('안 옴', 'bad')]);
+  if (D && fresh(D.age, 2.5)) {
+    drive.push(['위치 상태', pill(D.level, D.level === 'ok' ? 'ok' : D.level === 'degraded' ? 'warn' : 'bad') + ' 위치 ' + f(D.pose_age, 2) + ' s 전 · 스캔 ' + f(D.scan_age, 2) + ' s 전']);
+    drive.push(['명령', 'v ' + f(D.cmd[0]) + ' m/s · w ' + f(D.cmd[1]) + ' rad/s']);
+    drive.push(['허용', D.allowed ? pill('허용', 'ok') : pill('막힘', 'dim') + ' ' + esc(D.why || '')]);
+    if (D.job) {
+      drive.push(['목표 단계', '<b>' + esc(D.job.phase) + '</b> (' + esc(D.job.mode) + ')' + (D.job.blocked ? ' ' + pill('막힘', 'bad') : '')]);
+      drive.push(['남은 거리', f(D.job.remaining) + ' m · ' + f(D.job.elapsed, 1) + ' / ' + f(D.job.timeout, 0) + ' s']);
+    } else drive.push(['목표 단계', '없음']);
+    if (D.error) drive.push(['오류', pill(D.error, 'bad')]);
+    if (D.obstacles) drive.push(['임시 장애물', (D.obstacles.cells.length / 2) + ' 칸 · 지도에 없는 점 ' + D.unexplained.length]);
+  } else drive.push(['내부 상태', pill('debug 안 옴', 'warn') + ' (navigation_drive -p debug_hz:=5.0)']);
+  drive.push(['/cmd_vel', S.cmd.age === null ? '없음' : 'v ' + f(S.cmd.v) + ' · w ' + f(S.cmd.w) + ' · ' + f(S.cmd.age, 1) + ' s 전']);
+  rows('driveTable', drive);
+  const links = Object.entries(S.links).map(([k, v]) => [k, v ? pill('연결 ' + v, 'ok') : pill('없음', 'bad')]);
+  links.push(['/scan', S.scan && fresh(S.scan.age, 1) ? pill(S.scan.points.length * 2 + '점', 'ok') : pill('안 옴 (라이다 꺼짐?)', 'bad')]);
+  links.push(['/odom', S.odom && fresh(S.odom.age, 1) ? pill('옴', 'ok') + ' (' + f(S.odom.x) + ', ' + f(S.odom.y) + ')' : pill('안 옴', 'bad')]);
+  if (S.sim) links.push(['가상 로봇', '실제 (' + f(S.truth.x) + ', ' + f(S.truth.y) + ') ' + deg(S.truth.yaw) + (p ? ' · SLAM 오차 ' + (Math.hypot(p.x - S.truth.x, p.y - S.truth.y) * 100).toFixed(1) + ' cm' : '') + ' · 충돌 ' + S.collisions]);
+  rows('linkTable', links);
+  $('warnings').innerHTML = (S.warnings || []).map(w => '<div class="notice bad">' + esc(w) + '</div>').join('');
+  const log = $('log'), atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 4;
+  log.innerHTML = S.log.map(l => '<div>' + esc(l.t + ' ' + l.text) + '</div>').join('');
+  if (atEnd) log.scrollTop = log.scrollHeight;
+}
+function render() {
+  $('simTag').style.display = S.sim ? '' : 'none';
+  document.querySelectorAll('.simonly').forEach(e => e.style.display = S.sim ? '' : 'none');
+  renderSteps(); renderMapCard(); renderInitCard(); renderDriveCard(); renderStatus();
+  $('mapDirty').textContent = editConfig ? '적용 전 변경 있음' : '';
+  if (!editConfig && !['cfgW', 'cfgH', 'cfgB'].includes(document.activeElement.id)) { $('cfgW').value = S.config.width; $('cfgH').value = S.config.height; $('cfgB').value = S.config.box_size; }
+  const dr = S.drone.result, want = dr && S.drone.images.includes('top') ? '/drone/top.jpg?v=' + S.drone.version : '';
+  if (want !== floorKey) { floorKey = want; if (want) floorImg.src = want; }
+}
+
+// ---------------------------------------------------------------- 주기 갱신
+async function poll() {
+  try {
+    const r = await fetch('/state?trail=' + trail.length);
+    const s = await r.json();
+    if (s.trail_from === 0) trail = s.trail; else trail = trail.concat(s.trail);
+    if (s.trail_total < trail.length) trail = s.trail;
+    S = s; lastOk = Date.now();
+    render();
+  } catch (e) { /* 아래 배너 */ }
+  $('banner').style.display = Date.now() - lastOk > 1500 ? 'block' : 'none';
+  draw();
+  setTimeout(poll, 200);
+}
+floorImg.onload = draw;
+
+// ---------------------------------------------------------------- 조작
+const HINTS = {build: '로봇이 있는 곳을 누른 채 로봇이 보는 쪽으로 끄세요', region: '로봇이 있는 곳을 클릭하세요 (±0.4 m 안에서 찾음)',
+               pose: '로봇 위치를 누른 채 보는 쪽으로 끄세요', box: '클릭 = 상자 놓기/치우기 (20 cm 격자) · 끝나면 「지도 적용」', hidden: '클릭 = 지도에 없는 상자 놓기/치우기'};
+function setTool(t) {
+  tool = t;
+  document.querySelectorAll('[data-tool]').forEach(b => b.classList.toggle('on', b.dataset.tool === t && t !== 'goal'));
+  $('toolHint').style.display = t === 'goal' ? 'none' : 'flex'; $('hintText').textContent = HINTS[t] || '';
+}
+document.querySelectorAll('[data-tool]').forEach(b => b.onclick = () => setTool(tool === b.dataset.tool ? 'goal' : b.dataset.tool));
+$('toolCancel').onclick = () => setTool('goal');
+function focusCard(name) {
+  const card = $('card-' + name);
+  document.querySelectorAll('.card').forEach(c => c.classList.toggle('focus', c === card));
+  card.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  setTimeout(() => card.classList.remove('focus'), 1600);
+}
+document.querySelectorAll('.step').forEach(b => b.onclick = () => focusCard(b.dataset.step));
+document.querySelectorAll('#mapTabs button').forEach(b => b.onclick = () => { mapTab = b.dataset.tab; store.set('mapTab', mapTab); if (S) renderMapCard(); });
+document.querySelectorAll('#imgTabs button').forEach(b => b.onclick = () => { imgTab = b.dataset.img; if (S) renderMapCard(); });
+document.querySelectorAll('#layers input').forEach(i => { i.checked = !!layers[i.dataset.layer]; i.onchange = () => { layers[i.dataset.layer] = i.checked; store.set('layers', layers); draw(); }; });
+$('droneImg').onclick = () => window.open($('droneImg').src, '_blank');
+$('droneSource').onchange = () => { store.set('droneSource', $('droneSource').value); if (S) renderMapCard(); };
+$('droneGo').onclick = () => {
+  const v = $('droneSource').value;
+  if (v === 'file') { $('droneFile').value = ''; $('droneFile').click(); return; }
+  const body = v.startsWith('server:') ? {source: 'server', camera: v.slice(7)} : v.startsWith('sample:') ? {source: 'sample', sample: v.slice(7)} : {source: v};
+  quiet(post('drone', body));
+};
+$('droneFile').onchange = () => {
+  const file = $('droneFile').files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => quiet(post('drone', {source: 'file', name: file.name, data: reader.result}));
+  reader.readAsDataURL(file);
+};
+$('droneApply').onclick = () => quiet(post('drone_apply', {pillars: $('addPillars').checked}));
+$('droneDiscard').onclick = () => quiet(post('drone_discard', {}));
+document.querySelectorAll('#slotGrid button').forEach(b => b.onclick = () => quiet(post('init_slot', {slot: b.dataset.slot})));
+function sendGoal(goal) {
+  quiet(post('goal', {x: goal.x, y: goal.y, yaw: goal.yaw, mode: $('mode').value, pos_tol: +$('posTol').value, yaw_tol: +$('yawTol').value, timeout_s: +$('timeout').value}));
+  pending = null; $('go').disabled = true; $('pending').textContent = '';
+}
+function pointer(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+cv.addEventListener('pointerdown', e => { if (!S) return; const [px, py] = pointer(e); drag = {x: wx(px), y: wy(py), cx: px, cy: py}; cv.setPointerCapture(e.pointerId); draw(); });
+cv.addEventListener('pointermove', e => { if (!drag) return; [drag.cx, drag.cy] = pointer(e); draw(); });
+cv.addEventListener('pointerup', e => {
+  if (!drag) return;
+  const c = config(), d = drag; drag = null;
+  const dragged = Math.hypot(d.cx - sx(d.x), d.cy - sy(d.y)) > 12;
+  const yaw = dragged ? Math.atan2(wy(d.cy) - d.y, wx(d.cx) - d.x) : null;
+  const inside = d.x >= 0 && d.x <= c.width && d.y >= 0 && d.y <= c.height;
+  if (!inside) { draw(); return; }
+  if (tool === 'goal') {
+    const goal = {x: +d.x.toFixed(3), y: +d.y.toFixed(3), yaw: yaw};
+    if ($('instant').checked) sendGoal(goal);
+    else { pending = goal; $('go').disabled = false; $('pending').textContent = '(' + goal.x.toFixed(2) + ', ' + goal.y.toFixed(2) + ')' + (yaw === null ? '' : ' ' + deg(yaw)); }
+  } else if (tool === 'region') {
+    const slot = (S && S.slot) || (d.x < c.width / 2 ? 'B-2' : 'R-2');
+    quiet(post('init_slot', {slot: slot, region: [Math.max(0, d.x - 0.4), Math.max(0, d.y - 0.4), Math.min(c.width, d.x + 0.4), Math.min(c.height, d.y + 0.4)]}));
+    setTool('goal');
+  } else if (tool === 'build' || tool === 'pose') {
+    if (yaw === null) { $('hintText').textContent = '클릭이 아니라, 누른 채 로봇이 보는 쪽으로 끌어야 합니다'; draw(); return; }
+    quiet(post(tool === 'build' ? 'build_map' : 'init_pose', {x: d.x, y: d.y, yaw: yaw})); setTool('goal');
+  } else if (tool === 'box') {
+    if (!editConfig) editConfig = JSON.parse(JSON.stringify(S.config));
+    const half = editConfig.box_size / 2;
+    const i = editConfig.boxes.findIndex(b => Math.abs(b[0] - d.x) < half && Math.abs(b[1] - d.y) < half);
+    if (i >= 0) editConfig.boxes.splice(i, 1); else editConfig.boxes.push([+(Math.round(d.x / 0.2) * 0.2).toFixed(2), +(Math.round(d.y / 0.2) * 0.2).toFixed(2)]);
+  } else if (tool === 'hidden') quiet(post('sim_hidden', {x: Math.round(d.x / 0.2) * 0.2, y: Math.round(d.y / 0.2) * 0.2}));
+  draw();
+});
+$('go').onclick = () => pending && sendGoal(pending);
+$('stop').onclick = () => quiet(post('stop', {}));
+window.addEventListener('keydown', e => {
+  if (e.code !== 'Space' && e.code !== 'Escape') return;
+  if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName) && e.code === 'Space') return;
+  e.preventDefault();
+  if (e.code === 'Escape' && tool !== 'goal') setTool('goal');
+  quiet(post('stop', {reason: '정지 키'}));
+});
+function startEdit() { if (!editConfig) editConfig = JSON.parse(JSON.stringify(S.config)); }
+for (const [id, k] of [['cfgW', 'width'], ['cfgH', 'height'], ['cfgB', 'box_size']]) $(id).addEventListener('change', () => { startEdit(); editConfig[k] = +$(id).value; draw(); });
+$('applyMap').onclick = () => { const c = editConfig || S.config; post('map', c).then(() => { editConfig = null; }).catch(() => {}); };
+$('addBoxes').onclick = () => quiet(post('add_boxes', {}));
+$('presetEmpty').onclick = () => { startEdit(); editConfig.boxes = []; draw(); };
+$('presetPillars').onclick = () => { startEdit(); const W = editConfig.width, H = editConfig.height; editConfig.boxes = [[0.2, 0], [0.2, H], [W - 0.2, 0], [W - 0.2, H], [0.2, H - 1.6], [0.2, 1.6], [W - 0.2, H - 1.6], [W - 0.2, 1.6], [W / 2, H - 0.2], [W / 2, 0.2]]; draw(); };
+window.addEventListener('resize', draw);
+setTool('goal'); poll();
+</script>
+</body>
+</html>

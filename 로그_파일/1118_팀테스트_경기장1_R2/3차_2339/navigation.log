@@ -1,0 +1,141 @@
+[INFO] [1795012812.594189582] [navigation]: 지도 갱신: 6.12 × 5.00 m, 박스 14개
+[INFO] [1795012816.274477927] [navigation]: 목표 normal (4.42, 1.83) 
+[INFO] [1795012825.364885855] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012826.962293523] [navigation]: 목표 normal (3.83, 1.83) 
+[INFO] [1795012835.281132451] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012837.055176805] [navigation]: 목표 normal (4.03, 2.43) 
+[INFO] [1795012858.541422034] [navigation]: 목표 끝: BLOCKED 제한 시간 21.5 s 동안 막힘 (19.9 s 째)
+[INFO] [1795012858.745358212] [navigation]: 목표 normal (4.03, 2.83) 
+[INFO] [1795012879.103628731] [navigation]: 목표 끝: BLOCKED 제한 시간 20.3 s 동안 막힘 (20.3 s 째)
+[INFO] [1795012879.336873320] [navigation]: 목표 normal (4.42, 3.23) 
+[INFO] [1795012889.967864619] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012892.462781803] [navigation]: 목표 normal (3.83, 3.62) 
+[INFO] [1795012897.796799652] [navigation]: 목표 normal (2.62, 4.62) 
+[INFO] [1795012897.827195647] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795012928.608138826] [navigation]: 목표 끝: BLOCKED 제한 시간 30.8 s 동안 막힘 (15.6 s 째)
+[INFO] [1795012928.833778485] [navigation]: 목표 normal (2.43, 3.03) 
+[INFO] [1795012942.608088697] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012942.833952381] [navigation]: 목표 normal (3.03, 2.23) 
+[INFO] [1795012967.078507988] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012969.696827236] [navigation]: 목표 normal (1.62, 1.83) 
+[INFO] [1795012985.200945465] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012985.400181636] [navigation]: 목표 normal (2.62, 0.43) 
+[INFO] [1795012994.872301704] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795012994.975288686] [navigation]: 목표 normal (1.83, 0.43) 
+[INFO] [1795013004.642091113] [navigation]: 목표 끝: CANCELED 취소 요청
+[INFO] [1795013004.872143038] [navigation]: 목표 normal (2.02, 2.02) 
+[INFO] [1795013012.992446808] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013012.997033534] [navigation]: 목표 normal (0.60, 2.50) 
+[INFO] [1795013023.483859466] [navigation]: 목표 normal (0.42, 2.50) 
+[INFO] [1795013023.485423522] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013029.400310555] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795013029.435834358] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013037.643869095] [navigation]: 목표 assault (0.17, 3.87) 
+[INFO] [1795013037.649353466] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013037.756464529] [navigation]: 목표 assault (0.17, 3.92) 
+[INFO] [1795013037.767101682] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013037.868935001] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013037.871720259] [navigation]: 목표 assault (0.17, 3.94) 
+[INFO] [1795013037.951286521] [navigation]: 목표 assault (0.17, 3.98) 
+[INFO] [1795013037.974290229] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.050749020] [navigation]: 목표 assault (0.17, 3.96) 
+[INFO] [1795013038.069039921] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.171629539] [navigation]: 목표 assault (0.17, 4.01) 
+[INFO] [1795013038.173523968] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.268451614] [navigation]: 목표 assault (0.17, 4.02) 
+[INFO] [1795013038.269896212] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.370130370] [navigation]: 목표 assault (0.17, 4.01) 
+[INFO] [1795013038.371393749] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.570788834] [navigation]: 목표 assault (0.17, 4.03) 
+[INFO] [1795013038.572164311] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.871819474] [navigation]: 목표 assault (0.17, 4.09) 
+[INFO] [1795013038.873462571] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013038.974155905] [navigation]: 목표 assault (0.17, 4.10) 
+[INFO] [1795013038.975545846] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013039.058843235] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013039.069082207] [navigation]: 목표 assault (0.17, 4.04) 
+[INFO] [1795013039.172053494] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013039.173081862] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013039.372499922] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013039.374116331] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013039.571896830] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013039.573139825] [navigation]: 목표 assault (0.17, 4.08) 
+[INFO] [1795013039.774800256] [navigation]: 목표 assault (0.17, 4.07) 
+[INFO] [1795013039.776052210] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013040.179287822] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013040.181228523] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013041.983126719] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013041.984919930] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013043.993111254] [navigation]: 목표 assault (0.17, 4.07) 
+[INFO] [1795013043.999553528] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013044.098351631] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013044.099714883] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013045.200784696] [navigation]: 목표 assault (0.17, 3.95) 
+[INFO] [1795013045.232514008] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013045.302654781] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013045.307322820] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013052.143071550] [navigation]: 목표 assault (0.17, 3.94) 
+[INFO] [1795013052.144600629] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013052.267918332] [navigation]: 목표 assault (0.17, 4.04) 
+[INFO] [1795013052.270030492] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013052.346537184] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013052.358651511] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013053.268190276] [navigation]: 목표 assault (0.17, 4.08) 
+[INFO] [1795013053.270497991] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013053.366812470] [navigation]: 목표 assault (0.17, 4.07) 
+[INFO] [1795013053.369070968] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013053.470846650] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013053.474577714] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013053.867188829] [navigation]: 목표 assault (0.17, 4.08) 
+[INFO] [1795013053.872107815] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013053.972709943] [navigation]: 목표 assault (0.17, 4.07) 
+[INFO] [1795013053.977135034] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013054.269729405] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013054.281587568] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013054.782482877] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013054.784716543] [navigation]: 목표 assault (0.17, 4.08) 
+[INFO] [1795013054.876056962] [navigation]: 목표 assault (0.17, 4.07) 
+[INFO] [1795013054.877672123] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013055.075907596] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013055.078029100] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013055.175161703] [navigation]: 목표 assault (0.17, 3.96) 
+[INFO] [1795013055.189360990] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013055.274088797] [navigation]: 목표 assault (0.17, 4.06) 
+[INFO] [1795013055.282636510] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.078821589] [navigation]: 목표 assault (0.17, 3.98) 
+[INFO] [1795013056.095946199] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.174176372] [navigation]: 목표 assault (0.17, 4.08) 
+[INFO] [1795013056.188459180] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.283973550] [navigation]: 목표 assault (0.17, 4.09) 
+[INFO] [1795013056.285399875] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.377896856] [navigation]: 목표 assault (0.17, 3.99) 
+[INFO] [1795013056.389124417] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.480821610] [navigation]: 목표 assault (0.17, 4.00) 
+[INFO] [1795013056.492404281] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.580208230] [navigation]: 목표 assault (0.17, 4.02) 
+[INFO] [1795013056.592341309] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013056.680962103] [navigation]: 목표 assault (0.17, 4.03) 
+[INFO] [1795013056.688176900] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013057.485862798] [navigation]: 목표 assault (0.17, 3.93) 
+[INFO] [1795013057.498070662] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013057.587927955] [navigation]: 목표 assault (0.17, 4.03) 
+[INFO] [1795013057.595334850] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013058.700400841] [navigation]: 목표 assault (0.17, 4.12) 
+[INFO] [1795013058.702431784] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013058.799462816] [navigation]: 목표 assault (0.17, 4.04) 
+[INFO] [1795013058.815995994] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013061.935271469] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013061.938205241] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013067.670626373] [navigation]: 목표 assault (0.17, 3.95) 
+[INFO] [1795013067.672365471] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013067.770446149] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013067.772224480] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013068.067869638] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013068.071025622] [navigation]: 목표 assault (0.17, 3.94) 
+[INFO] [1795013068.170694739] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013068.173114584] [navigation]: 목표 assault (0.17, 4.04) 
+[INFO] [1795013071.084247292] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795013071.090879488] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013086.346696174] [navigation]: 목표 끝: TIMED_OUT 제한 시간 15.2 s 초과
+[INFO] [1795013086.379480218] [navigation]: 목표 assault (0.17, 4.05) 
+[INFO] [1795013089.432692836] [navigation]: 목표 끝: CONTROL_LOST 제어 허용 꺼짐: report

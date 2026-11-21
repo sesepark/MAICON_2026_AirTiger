@@ -1,0 +1,22 @@
+string run_id
+string target_id
+string class_id
+float32 min_confidence
+uint32 execution_timeout_ms
+---
+uint8 CANCELED=1
+uint8 TARGET_LOST=2
+uint8 TIMED_OUT=3
+uint8 CONTROL_LOST=4
+uint8 INVALID_GOAL=5
+uint8 outcome
+string detail
+---
+string track_id
+builtin_interfaces/Time observed_at
+bool observed_time_known
+bool identity_confirmed
+bool aligned
+bool angle_error_valid
+float32 pan_error_rad
+float32 tilt_error_rad

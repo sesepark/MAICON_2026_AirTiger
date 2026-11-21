@@ -1,0 +1,8 @@
+# 학습 서버용 (setup_server.sh 가 깐다). torch 는 setup_server.sh 가 GPU(CUDA) 판으로 따로 깐다
+# 확인한 판 (2026-11-19, 로컬 CPU 시험): ultralytics 8.4.215 · torch 2.15.0 · numpy 2.5.5 · opencv 5.1.0 · Python 3.14
+ultralytics>=8.3.0
+pyyaml
+numpy
+onnx
+onnxslim       # ONNX 내보내기 (없으면 ultralytics 가 그때 깔려고 인터넷을 쓴다)
+onnxruntime

@@ -1,0 +1,31 @@
+[INFO] [1795008234.354934262] [navigation]: 지도 갱신: 6.12 × 5.00 m, 박스 13개
+[INFO] [1795008238.036586632] [navigation]: 목표 normal (4.23, 2.23) 
+[INFO] [1795008241.917825189] [navigation]: 목표 끝: REACHED 
+[INFO] [1795008243.539377757] [navigation]: 목표 normal (4.03, 1.83) 
+[INFO] [1795008257.525900986] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008257.533610879] [navigation]: 목표 normal (3.62, 1.03) 
+[INFO] [1795008273.234293157] [navigation]: 목표 normal (2.62, 2.62) 
+[INFO] [1795008273.245086641] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008303.257315850] [navigation]: 목표 끝: TIMED_OUT 제한 시간 30.0 s 초과
+[INFO] [1795008303.347886267] [navigation]: 목표 normal (2.62, 2.62) 
+[INFO] [1795008333.414123754] [navigation]: 목표 끝: TIMED_OUT 제한 시간 30.0 s 초과
+[INFO] [1795008334.981830208] [navigation]: 목표 normal (2.83, 2.83) 
+[INFO] [1795008365.010891495] [navigation]: 목표 끝: TIMED_OUT 제한 시간 30.0 s 초과
+[INFO] [1795008366.532017022] [navigation]: 목표 normal (4.03, 3.62) 
+[INFO] [1795008381.945704642] [navigation]: 목표 끝: REACHED 
+[INFO] [1795008382.706427893] [navigation]: 목표 normal (2.62, 3.43) 
+[INFO] [1795008412.770382423] [navigation]: 목표 끝: TIMED_OUT 제한 시간 30.0 s 초과
+[INFO] [1795008417.856236903] [navigation]: 목표 normal (2.23, 1.83) 
+[INFO] [1795008433.583024115] [navigation]: 목표 normal (0.83, 3.23) 
+[INFO] [1795008433.611098325] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008434.682239466] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008434.684789259] [navigation]: 목표 normal (0.60, 2.50) 
+[INFO] [1795008445.458185590] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008445.460467890] [navigation]: 목표 normal (0.42, 2.50) 
+[INFO] [1795008451.236513088] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795008451.238429657] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795008481.234159726] [navigation]: 목표 끝: BLOCKED 제한 시간 30.0 s 동안 막힘 (21.3 s 째)
+[INFO] [1795008481.325284421] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795008511.320835418] [navigation]: 목표 끝: BLOCKED 제한 시간 30.0 s 동안 막힘 (30.0 s 째)
+[INFO] [1795008511.420277300] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795008511.959813897] [navigation]: 목표 끝: CONTROL_LOST 제어 허용 꺼짐: report

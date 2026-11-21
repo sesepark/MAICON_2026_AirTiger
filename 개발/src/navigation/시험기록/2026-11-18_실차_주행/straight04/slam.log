@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/ws/team/slam_trial_trial01/install/navigation/lib/navigation/navigation_slam", line 33, in <module>
+    sys.exit(load_entry_point('navigation==0.1.0', 'console_scripts', 'navigation_slam')())
+  File "/home/ws/team/slam_trial_trial01/install/navigation/lib/python3.10/site-packages/navigation/slam_node.py", line 278, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 222, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 739, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 728, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 711, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 608, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt

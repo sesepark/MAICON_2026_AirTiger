@@ -1,0 +1,17 @@
+uint8 PARSE_ORDER=1
+uint8 ASSESS_THREAT=6
+string run_id
+string task_id
+uint8 kind
+string tactical_command
+team_interfaces/Observation[] observations
+uint32 execution_timeout_ms
+---
+bool success
+team_interfaces/ParsedCommand command
+team_interfaces/ThreatAssessment assessment
+string error_code
+string detail
+---
+string stage
+uint32 elapsed_ms

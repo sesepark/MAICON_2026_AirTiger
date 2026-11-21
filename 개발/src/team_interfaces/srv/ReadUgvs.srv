@@ -1,0 +1,8 @@
+# supervisor → perception: 사진 한 장에 찍힌 UGV 들의 지금 상태를 알려 달라 (M6 위험도 순위의 재료).
+# ClassifyImage 와 같은 방식이다: 요청 한 번에 사진 한 장, 답도 한 번.
+string run_id
+sensor_msgs/Image image    # /image_raw 로 받은 그대로 (실측 640x480, rgb8). image.header.stamp = 촬영 시각
+---
+bool ok                    # 사진을 끝까지 처리했으면 true. false 면 detail 에 이유를 적고 ugvs 는 비운다
+team_interfaces/UgvState[] ugvs      # 사진에 보이는 UGV 마다 하나 (아군도 넣는다 — camp 로 구분). 한 대도 없으면 빈 목록 + ok=true
+string detail

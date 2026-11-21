@@ -1,0 +1,20 @@
+r 0.18 (합 0.35) test_assault_into_an_occupied_base_does_not_touch_and_gives_up_early   통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.032  
+r 0.18 (합 0.35) test_does_not_hit_a_ugv_coming_out_to_the_base_entrance                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.075  
+r 0.18 (합 0.35) test_backs_off_after_another_ugv_pushes_in                             통과  닿음(지도에 없는 것) 17  상자·벽 포함 17  차체 최소 거리 -0.006  
+r 0.18 (합 0.35) test_does_not_graze_a_box_on_the_way_to_the_scout_spots                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.036  
+r 0.13 (합 0.30) test_assault_into_an_occupied_base_does_not_touch_and_gives_up_early   통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.062  
+r 0.13 (합 0.30) test_does_not_hit_a_ugv_coming_out_to_the_base_entrance                실패  닿음(지도에 없는 것) 21  상자·벽 포함 21  차체 최소 거리 -0.065  AssertionError: 21 != 0 : 나오던 UGV 에 닿음
+r 0.13 (합 0.30) test_backs_off_after_another_ugv_pushes_in                             통과  닿음(지도에 없는 것) 17  상자·벽 포함 17  차체 최소 거리 -0.006  
+r 0.13 (합 0.30) test_does_not_graze_a_box_on_the_way_to_the_scout_spots                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.036  
+r 0.08 (합 0.25) test_assault_into_an_occupied_base_does_not_touch_and_gives_up_early   통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.075  
+r 0.08 (합 0.25) test_does_not_hit_a_ugv_coming_out_to_the_base_entrance                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.052  
+r 0.08 (합 0.25) test_backs_off_after_another_ugv_pushes_in                             통과  닿음(지도에 없는 것) 17  상자·벽 포함 17  차체 최소 거리 -0.006  
+r 0.08 (합 0.25) test_does_not_graze_a_box_on_the_way_to_the_scout_spots                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.036  
+r 0.05 (합 0.22) test_assault_into_an_occupied_base_does_not_touch_and_gives_up_early   통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.047  
+r 0.05 (합 0.22) test_does_not_hit_a_ugv_coming_out_to_the_base_entrance                실패  닿음(지도에 없는 것) 17  상자·벽 포함 25  차체 최소 거리 0.000  AssertionError: 17 != 0 : 나오던 UGV 에 닿음
+r 0.05 (합 0.22) test_backs_off_after_another_ugv_pushes_in                             통과  닿음(지도에 없는 것) 17  상자·벽 포함 17  차체 최소 거리 -0.006  
+r 0.05 (합 0.22) test_does_not_graze_a_box_on_the_way_to_the_scout_spots                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.036  
+r 0.00 (합 0.17) test_assault_into_an_occupied_base_does_not_touch_and_gives_up_early   통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.019  
+r 0.00 (합 0.17) test_does_not_hit_a_ugv_coming_out_to_the_base_entrance                실패  닿음(지도에 없는 것) 5  상자·벽 포함 231  차체 최소 거리 -0.052  AssertionError: 5 != 0 : 나오던 UGV 에 닿음
+r 0.00 (합 0.17) test_backs_off_after_another_ugv_pushes_in                             통과  닿음(지도에 없는 것) 17  상자·벽 포함 17  차체 최소 거리 -0.006  
+r 0.00 (합 0.17) test_does_not_graze_a_box_on_the_way_to_the_scout_spots                통과  닿음(지도에 없는 것) 0  상자·벽 포함 0  차체 최소 거리 0.036  

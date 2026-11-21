@@ -1,0 +1,45 @@
+PASS serialization msg/ControlState
+PASS serialization msg/MissionState
+PASS serialization msg/NodeStatus
+PASS serialization msg/ObjectCount
+PASS serialization msg/Observation
+PASS serialization msg/ObservationArray
+PASS serialization msg/ParsedCommand
+PASS serialization msg/Report
+PASS serialization msg/SectorCount
+PASS serialization msg/ServerCommand
+PASS serialization msg/ServerState
+PASS serialization msg/ThreatAssessment
+PASS serialization msg/UavFrame
+PASS serialization srv/SetReady
+PASS serialization srv/SubmitReport
+PASS serialization action/Analyze
+PASS serialization action/Navigate
+PASS serialization action/TrackTarget
+PASS installed package import supervisor
+PASS installed package import navigation
+PASS installed package import perception
+PASS installed package import server_bridge
+PASS installed package import llm_worker
+PASS DDS topic roundtrip ControlState
+PASS DDS topic roundtrip MissionState
+PASS DDS topic roundtrip NodeStatus
+PASS DDS topic roundtrip ObjectCount
+PASS DDS topic roundtrip Observation
+PASS DDS topic roundtrip ObservationArray
+PASS DDS topic roundtrip ParsedCommand
+PASS DDS topic roundtrip Report
+PASS DDS topic roundtrip SectorCount
+PASS DDS topic roundtrip ServerCommand
+PASS DDS topic roundtrip ServerState
+PASS DDS topic roundtrip ThreatAssessment
+PASS DDS topic roundtrip UavFrame
+PASS DDS service request/response SetReady
+PASS DDS service request/response SubmitReport
+PASS DDS action goal/feedback/result Analyze
+PASS DDS action cancellation Analyze
+PASS DDS action goal/feedback/result Navigate
+PASS DDS action cancellation Navigate
+PASS DDS action goal/feedback/result TrackTarget
+PASS DDS action cancellation TrackTarget
+ALL 44 CHECKS PASSED

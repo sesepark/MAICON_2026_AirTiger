@@ -1,0 +1,9 @@
+uint8 INITIALIZING=0
+uint8 READY=1
+uint8 DEGRADED=2
+uint8 ERROR=3
+std_msgs/Header header
+string run_id
+string node_name
+uint8 state
+string detail

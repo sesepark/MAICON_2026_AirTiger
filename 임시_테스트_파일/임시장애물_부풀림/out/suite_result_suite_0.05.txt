@@ -1,0 +1,14 @@
+.......................................ss..............................Fxx
+======================================================================
+FAIL: test_does_not_hit_a_ugv_coming_out_to_the_base_entrance (test_team_test_replay.TeamTestReplay)
+2차처럼 우리가 들어가는 중에 다른 UGV 가 입구 쪽으로 0.3 m/s 로 나온다. 고치기 전: 0.59 m/s 로 닿고 시한까지.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Admin\MAICON_final\.claude\worktrees\agent-a64538ddc60eca93c\임시_테스트_파일\임시장애물_부풀림\out\suite_0.05\navigation\test\test_team_test_replay.py", line 120, in test_does_not_hit_a_ugv_coming_out_to_the_base_entrance
+    self.assertEqual(loop.robot.hidden_contacts, 0, '나오던 UGV 에 닿음')
+AssertionError: 17 != 0 : 나오던 UGV 에 닿음
+
+----------------------------------------------------------------------
+Ran 74 tests in 84.140s
+
+FAILED (failures=1, skipped=2, expected failures=2)

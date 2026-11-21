@@ -1,0 +1,4 @@
+# tools/undistort_drone_frames.py (드론 화면 렌즈 왜곡 펴기) · label_drone_frames.py 의 전처리용
+# 확인한 판: numpy 2.5.5 · opencv-python-headless 5.1.0 (Python 3.14, 2026-11-19)
+numpy
+opencv-python-headless

@@ -1,0 +1,2 @@
+string[] ranking
+string rationale

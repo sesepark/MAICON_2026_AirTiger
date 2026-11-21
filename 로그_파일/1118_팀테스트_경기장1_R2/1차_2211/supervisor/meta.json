@@ -1,0 +1,50 @@
+{
+ "scout_mode": "face",
+ "slot": "",
+ "force_start": false,
+ "record_dir": "log/supervisor",
+ "save_photos": true,
+ "m1_fallback_s": 12.0,
+ "state_file": "supervisor_state.json",
+ "require_nodes": [
+  "perception"
+ ],
+ "alive_nodes": [
+  "navigation",
+  "server_bridge"
+ ],
+ "ready_deadline_s": 12.0,
+ "camera": {},
+ "arena": {},
+ "base_kinds": null,
+ "scout": {},
+ "mission": {},
+ "gimbal": {
+  "pan_deg_per_unit": 0.5,
+  "tilt_deg_per_unit": 0.3,
+  "speed": 120.0,
+  "acc": 20.0,
+  "settle_s": 0.6,
+  "rest_tilt_deg": 0.0
+ },
+ "nav": {
+  "position_tolerance_m": 0.1,
+  "yaw_tolerance_rad": 0.1,
+  "timeout_ms": 60000
+ },
+ "names": {
+  "pose": "/team/navigation/pose",
+  "map": "/team/navigation/map",
+  "boxes": "/team/perception/boxes",
+  "navigate": "/team/navigation/navigate",
+  "classify": "/team/perception/classify_image",
+  "read_ugvs": "/team/perception/read_ugvs",
+  "set_ready": "/team/server/set_ready",
+  "submit_report": "/team/server/submit_report",
+  "server_state": "/team/server/state",
+  "server_command": "/team/server/command",
+  "analyze": "/team/llm/analyze"
+ },
+ "run_id": "8fe23e2f9f6f",
+ "started_at": "2026-11-18 22:09:20"
+}

@@ -1,0 +1,311 @@
+2026-11-18T18:21:42,765653612+09:00
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/nvme0n1p15  232G   42G  181G  19% /home/ws
+/imu_filter_madgwick
+/mil_base_node
+/mil_match_node
+/ugv/joint_state_publisher
+/ugv/robot_state_publisher
+/ugv_base_node
+/ugv_web_console
+/usb_cam
+/camera_info [sensor_msgs/msg/CameraInfo]
+/cmd_vel [geometry_msgs/msg/Twist]
+/image_raw [sensor_msgs/msg/Image]
+/image_raw/compressed [sensor_msgs/msg/CompressedImage]
+/image_raw/compressedDepth [sensor_msgs/msg/CompressedImage]
+/image_raw/theora [theora_image_transport/msg/Packet]
+/imu/data [sensor_msgs/msg/Imu]
+/imu/data_raw [sensor_msgs/msg/Imu]
+/imu/data_unused [sensor_msgs/msg/Imu]
+/imu/mag [sensor_msgs/msg/MagneticField]
+/mil/match [mil_msgs/msg/MatchCommand]
+/mil/match_state [std_msgs/msg/String]
+/mil/oled [mil_msgs/msg/OledLine]
+/mil/state [mil_msgs/msg/MissionState]
+/mil/team_status [mil_msgs/msg/TeamStatus]
+/odom [nav_msgs/msg/Odometry]
+/odom/odom_raw [std_msgs/msg/Float32MultiArray]
+/parameter_events [rcl_interfaces/msg/ParameterEvent]
+/rosout [rcl_interfaces/msg/Log]
+/tf [tf2_msgs/msg/TFMessage]
+/tf_static [tf2_msgs/msg/TFMessage]
+/ugv/joint_states [sensor_msgs/msg/JointState]
+/ugv/robot_description [std_msgs/msg/String]
+/voltage [std_msgs/msg/Float32]
+
+--- /odom ---
+Type: nav_msgs/msg/Odometry
+
+Publisher count: 1
+
+Node name: ugv_base_node
+Node namespace: /
+Topic type: nav_msgs/msg/Odometry
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.ed.00.ea.4d.00.00.00.00.00.00.15.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: ugv_web_console
+Node namespace: /
+Topic type: nav_msgs/msg/Odometry
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.85.c3.8c.9a.76.ec.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
+--- /scan ---
+Unknown topic '/scan'
+
+--- /tf ---
+Type: tf2_msgs/msg/TFMessage
+
+Publisher count: 3
+
+Node name: robot_state_publisher
+Node namespace: /ugv
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.e5.00.11.4a.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: imu_filter_madgwick
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.eb.00.6d.09.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: ugv_base_node
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.ed.00.ea.4d.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 0
+
+
+--- /tf_static ---
+Type: tf2_msgs/msg/TFMessage
+
+Publisher count: 1
+
+Node name: robot_state_publisher
+Node namespace: /ugv
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.e5.00.11.4a.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: TRANSIENT_LOCAL
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 0
+
+
+--- /camera_info ---
+Type: sensor_msgs/msg/CameraInfo
+
+Publisher count: 1
+
+Node name: usb_cam
+Node namespace: /
+Topic type: sensor_msgs/msg/CameraInfo
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.f1.00.5d.8f.00.00.00.00.00.00.16.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 0
+
+
+--- /image_raw ---
+Type: sensor_msgs/msg/Image
+
+Publisher count: 1
+
+Node name: usb_cam
+Node namespace: /
+Topic type: sensor_msgs/msg/Image
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.f1.00.5d.8f.00.00.00.00.00.00.14.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: ugv_web_console
+Node namespace: /
+Topic type: sensor_msgs/msg/Image
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.85.c3.8c.9a.76.ec.00.00.00.00.00.00.1b.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
+--- /team/server/uav_image ---
+Unknown topic '/team/server/uav_image'
+
+--- /team/server/state ---
+Unknown topic '/team/server/state'
+
+--- /team/perception/field_map ---
+Unknown topic '/team/perception/field_map'
+
+--- /team/navigation/map ---
+Unknown topic '/team/navigation/map'
+
+--- /team/navigation/pose ---
+Unknown topic '/team/navigation/pose'
+
+--- /cmd_vel ---
+Type: geometry_msgs/msg/Twist
+
+Publisher count: 2
+
+Node name: mil_match_node
+Node namespace: /
+Topic type: geometry_msgs/msg/Twist
+Endpoint type: PUBLISHER
+GID: 01.0f.7f.01.ef.00.36.2d.00.00.00.00.00.00.11.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: ugv_web_console
+Node namespace: /
+Topic type: geometry_msgs/msg/Twist
+Endpoint type: PUBLISHER
+GID: 01.0f.85.c3.8c.9a.76.ec.00.00.00.00.00.00.11.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: mil_base_node
+Node namespace: /
+Topic type: geometry_msgs/msg/Twist
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.7f.01.e9.00.b4.f7.00.00.00.00.00.00.16.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+[INFO] [1794993714.203456808] [tf2_echo]: Waiting for transform base_link ->  base_lidar_link: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
+At time 0.0
+- Translation: [0.040, 0.000, 0.040]
+- Rotation: in Quaternion [0.000, 0.000, 0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.571]
+- Rotation: in RPY (degree) [0.000, -0.000, 90.000]
+- Matrix:
+ -0.000 -1.000  0.000  0.040
+  1.000 -0.000  0.000  0.000
+  0.000  0.000  1.000  0.040
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.040, 0.000, 0.040]
+- Rotation: in Quaternion [0.000, 0.000, 0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.571]
+- Rotation: in RPY (degree) [0.000, -0.000, 90.000]
+- Matrix:
+ -0.000 -1.000  0.000  0.040
+  1.000 -0.000  0.000  0.000
+  0.000  0.000  1.000  0.040
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.040, 0.000, 0.040]
+- Rotation: in Quaternion [0.000, 0.000, 0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.571]
+- Rotation: in RPY (degree) [0.000, -0.000, 90.000]
+- Matrix:
+ -0.000 -1.000  0.000  0.040
+  1.000 -0.000  0.000  0.000
+  0.000  0.000  1.000  0.040
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.040, 0.000, 0.040]
+- Rotation: in Quaternion [0.000, 0.000, 0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.571]
+- Rotation: in RPY (degree) [0.000, -0.000, 90.000]
+- Matrix:
+ -0.000 -1.000  0.000  0.040
+  1.000 -0.000  0.000  0.000
+  0.000  0.000  1.000  0.040
+  0.000  0.000  0.000  1.000
+[INFO] [1794993718.803492864] [rclcpp]: signal_handler(signum=15)

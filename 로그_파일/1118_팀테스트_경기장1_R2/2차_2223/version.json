@@ -1,0 +1,22 @@
+{
+ "started_at": "2026-11-18 22:22:58",
+ "team_node": "7fe831e4f5b0",
+ "packages": {
+  "llm_worker": "9f4652e1f743",
+  "navigation": "927738090931",
+  "perception": "f13c4d468528",
+  "server_bridge": "309f30cd3605",
+  "supervisor": "af346f6dbda0",
+  "team_interfaces": "546c75c43394"
+ },
+ "programs": [
+  "lidar",
+  "navigation_slam",
+  "navigation",
+  "perception",
+  "server_bridge",
+  "llm_worker"
+ ],
+ "version_file": "commit 8d6de0cded7d\nuncommitted_files 0\nbundled_at 2026-11-18 22:07:24",
+ "git": null
+}

@@ -1,0 +1,6 @@
+llm_worker	/check/source/개발/src/llm_worker	(ros.ament_python)
+navigation	/check/source/개발/src/navigation	(ros.ament_python)
+perception	/check/source/개발/src/perception	(ros.ament_python)
+server_bridge	/check/source/개발/src/server_bridge	(ros.ament_python)
+supervisor	/check/source/개발/src/supervisor	(ros.ament_python)
+team_interfaces	/check/source/개발/src/team_interfaces	(ros.ament_cmake)

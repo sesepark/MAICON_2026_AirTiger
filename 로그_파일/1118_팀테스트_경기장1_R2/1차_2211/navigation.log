@@ -1,0 +1,17 @@
+[INFO] [1795007494.910652297] [navigation]: 지도 갱신: 6.12 × 5.00 m, 박스 14개
+[INFO] [1795007498.534984282] [navigation]: 목표 normal (4.03, 3.62) 
+[INFO] [1795007558.566243571] [navigation]: 목표 끝: TIMED_OUT 제한 시간 60.0 s 초과
+[INFO] [1795007558.643171863] [navigation]: 목표 normal (4.03, 3.62) 
+[INFO] [1795007618.735970025] [navigation]: 목표 끝: TIMED_OUT 제한 시간 60.0 s 초과
+[INFO] [1795007618.844512442] [navigation]: 목표 normal (4.03, 3.62) 
+[INFO] [1795007678.883017150] [navigation]: 목표 끝: TIMED_OUT 제한 시간 60.0 s 초과
+[INFO] [1795007678.960930129] [navigation]: 목표 normal (4.03, 3.62) 
+[INFO] [1795007691.450757922] [navigation]: 목표 normal (0.60, 2.50) 
+[INFO] [1795007691.451859220] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795007708.668509156] [navigation]: 목표 normal (0.42, 2.50) 
+[INFO] [1795007708.672836936] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795007714.566961364] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795007714.568832081] [navigation]: 목표 끝: CANCELED 새 목표로 교체됨
+[INFO] [1795007774.530521083] [navigation]: 목표 끝: BLOCKED 제한 시간 60.0 s 동안 막힘 (49.9 s 째)
+[INFO] [1795007774.645679658] [navigation]: 목표 assault (0.17, 3.82) 
+[INFO] [1795007775.140251207] [navigation]: 목표 끝: CONTROL_LOST 제어 허용 꺼짐: report

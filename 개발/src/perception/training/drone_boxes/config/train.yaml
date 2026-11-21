@@ -1,0 +1,33 @@
+# 학습 설정 (train.py). model · name 말고는 Ultralytics train() 인자 그대로 — https://docs.ultralytics.com/modes/train/
+# 명령줄에서 덮어쓰기: python train.py --data <데이터셋> epochs=50 batch=8
+
+model: yolo11n-obb.pt      # 사전학습 가중치 (DOTA OBB). 처음 쓸 때 내려받는다 (서버에 인터넷 필요 — 없으면 .pt 를 같이 올리고 경로를 적는다)
+                           # 로봇(Jetson Orin Nano)에서 돌릴 것이라 n(작은) 모델부터. 모자라면 yolo11s-obb.pt
+
+# 그림 — map 그림은 612 × 500 px (1 cm/px). 상자 윗면이 40 × 40 px 로 늘 같은 크기다
+imgsz: 640
+epochs: 200
+patience: 60               # 검증 점수가 이만큼 에폭 동안 나아지지 않으면 멈춘다
+batch: 16                  # GPU 메모리가 모자라면 8. -1 이면 자동
+workers: 4
+cache: ram
+seed: 0
+deterministic: false
+plots: true
+
+# 학습 중 변형 (온라인). 조명 변형은 augment.py 가 미리 만들고, 여기서도 색을 조금 더 흔든다
+hsv_h: 0.015
+hsv_s: 0.5
+hsv_v: 0.45
+# 기하 — map 그림은 경기장 축에 맞춰져 있고 상자 크기가 정해져 있다 → 크기 · 회전 변형은 작게
+degrees: 5.0               # 상자가 조금 돌아가 놓인 경우
+translate: 0.05
+scale: 0.1                 # 크게 하면 「40 px = 상자」 라는 단서를 흐린다
+shear: 0.0
+perspective: 0.0
+fliplr: 0.5                # 좌우 · 위아래 뒤집기 (둘 다면 180° 회전) — 상자 · 줄무늬 블록은 뒤집어도 같은 물체라 데이터가 적을 때 크게 돕는다
+flipud: 0.5
+mosaic: 0.5                # 데이터가 적을 때 도움. 마지막 close_mosaic 에폭은 끈다
+close_mosaic: 20
+mixup: 0.0
+copy_paste: 0.0
