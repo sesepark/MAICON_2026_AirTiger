@@ -32,6 +32,14 @@
 - **주요 작업:** 경기 흐름·임무 판단(supervisor), 라이다 SLAM과 주행, 드론 화면·카메라 인식과 조준, 경기 서버·LLM 연동
 - **기술:** ROS 2 Humble (rclpy), Jetson Orin Nano 8GB, LiDAR ICP 정합, Ultralytics YOLO11 OBB, Anthropic/OpenAI 텍스트 LLM API
 
+## 언론 보도
+
+> 국방부는 2026년 11월 18~20일 경기도 화성시 YBM 연수원에서 **제5회 국방 AI 경진대회(MAICON)** 본선을 열었다. 올해 과제는 유·무인 복합전투체계(MUM-T)를 접목한 **무인지상차량(UGV)의 도심 전술작전**. 신청자 1,314명 중 온라인 코딩테스트를 통과한 50명이 5인 10개 팀으로 본선을 치렀다.
+>
+> 국방부 발표에 따르면 **"전장객체인식" 등 임무평가에서 우수한 성적**을 거둔 **에어타이거** 팀이 **최우수상(국방부 장관상)과 상금 2,000만 원**을 받았다.
+
+<sub>출처: 세계일보, 박수찬 기자, 「국방부, 제5회 국방 AI 경진대회 개최… 1314명 도전, 50명 본선 진출」, 2026-11-20 — [기사 보기](https://www.segye.com/newsView/20261120514567) · [대회 공식](https://maicon.kr/)</sub>
+
 ## 본선 성적
 
 <p align="center"><img src="docs/assets/mission_scores.png" width="680" alt="임무별 평균 득점률: 에어타이거와 다른 9팀 평균 비교"></p>
