@@ -9,6 +9,10 @@
 ![Jetson Orin Nano](https://img.shields.io/badge/Jetson-Orin_Nano_8GB-76B900?logo=nvidia&logoColor=white)
 ![YOLO OBB](https://img.shields.io/badge/Ultralytics-YOLO11_OBB-111F68)
 
+[![최우수상](https://img.shields.io/badge/🏆_최우수상-국방부_장관상-C9A227)](https://www.segye.com/newsView/20261120514567)
+[![언론 보도](https://img.shields.io/badge/📰_언론_보도-세계일보-333333)](https://www.segye.com/newsView/20261120514567)
+[![대회 공식](https://img.shields.io/badge/MAICON-maicon.kr-22314E)](https://maicon.kr/)
+
 <br>
 
 <table>
@@ -24,7 +28,7 @@
 &nbsp;
 <img src="docs/assets/leaderboard.jpg" height="235" alt="본선 최종 랭킹 리더보드, 에어타이거 1위">
 
-<sub>최우수상 · 국방부 장관상 (2026-11-20) &nbsp;|&nbsp; 본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub>
+<sub>최우수상 · 국방부 장관상 + 상금 2,000만 원 (2026-11-20 시상식, 화성 YBM 연수원) &nbsp;|&nbsp; 본선 최종 리더보드: 누적 502 / 600, 임무평가 66.9 / 80</sub>
 
 </div>
 
