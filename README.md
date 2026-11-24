@@ -54,6 +54,12 @@
 
 <p align="center"><sub>본선 50명 전원과 시상자 단체 기념 촬영 · 화성 YBM 연수원 (사진 사용 권리: 팀 보유)</sub></p>
 
+<p align="center">
+  <a href="https://youtu.be/lL7f1nS82jQ"><img src="https://i.ytimg.com/vi/lL7f1nS82jQ/hqdefault.jpg" width="440" alt="KFN 국방뉴스 방송 리포트: 국방 AI 경진대회서 무인차량 격돌 (클릭하면 영상 재생)"></a>
+</p>
+
+<p align="center"><sub>📺 <b>방송 보도</b> · KFN 국방뉴스(국방홍보원) 「"조종자가 없다"…국방 AI 경진대회서 무인차량 격돌」 → <a href="https://youtu.be/lL7f1nS82jQ">영상 보기</a></sub></p>
+
 <sub>출처: [세계일보](https://www.segye.com/newsView/20261120514567)(2026-11-20, 박수찬 기자) · [이뉴스투데이](http://www.enewstoday.co.kr/news/articleView.html?idxno=2495755)(2026-11-23, "대부분의 임무에서 최고점" 보도) · [파이낸셜뉴스](https://www.fnnews.com/news/202611231512458722)(2026-11-23) · [신아일보](https://www.shinailbo.co.kr/news/articleView.html?idxno=5086077) · [대회 공식 maicon.kr](https://maicon.kr/) &nbsp;|&nbsp; 신청자 수는 매체에 따라 1,314~1,413명으로 보도됨</sub>
 
 ## 본선 성적
